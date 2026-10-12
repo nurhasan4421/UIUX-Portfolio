@@ -1,5 +1,6 @@
 import React from "react";
 import { HeroSection } from "@/components/HeroSection";
+import { PortraitScrollPinSection } from "@/components/PortraitScrollPinSection";
 import { BottomFloatingNavbar } from "@/components/BottomFloatingNavbar";
 import { FloatingThemeToggle } from "@/components/FloatingThemeToggle";
 import { ScrollGradientText } from "@/components/ScrollGradientText";
@@ -22,11 +23,14 @@ export default function Home() {
       {/* Noise Texture for Cinematic Monochrome Look */}
       <div className="noise-overlay" aria-hidden="true" />
 
-      {/* Floating Day/Night Icon on Right Side Top (Always accessible on phone & desktop) */}
+      {/* Floating Hire Now + Day/Night Icon on Right Side Top */}
       <FloatingThemeToggle />
 
-      {/* 1. Hero Section (Bigger mobile heading, real photo cutout with scroll-linked color) */}
+      {/* 1. Hero Section (Headline, Bio pitch, Let's Connect CTA) */}
       <HeroSection />
+
+      {/* 2. Pinned Portrait Color Scrubbing Showcase (Pins in middle screen, scrubs B&W -> Full Color) */}
+      <PortraitScrollPinSection />
 
       {/* 2. Kinetic Scroll Motion Typography */}
       <ScrollGradientText

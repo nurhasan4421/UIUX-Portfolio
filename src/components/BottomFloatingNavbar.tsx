@@ -211,7 +211,7 @@ export function BottomFloatingNavbar() {
               </button>
             </div>
 
-            {/* Navigation Links inside Mini Card */}
+            {/* Navigation Links inside Mini Card (Clean Option Tabs without diagonal icons) */}
             <div style={{ display: "flex", flexDirection: "column", gap: "0.35rem" }}>
               {[
                 { label: "About & Philosophy", href: "#about", active: isAboutActive },
@@ -237,7 +237,7 @@ export function BottomFloatingNavbar() {
                   }}
                 >
                   <span>{link.label}</span>
-                  {link.active ? (
+                  {link.active && (
                     <span
                       style={{
                         width: "6px",
@@ -246,76 +246,18 @@ export function BottomFloatingNavbar() {
                         backgroundColor: "#10b981",
                       }}
                     />
-                  ) : (
-                    <ArrowUpRight size={14} color="var(--text-muted)" />
                   )}
                 </a>
               ))}
             </div>
 
-            {/* Quick Appearance Switcher */}
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                padding: "0.65rem 0.9rem",
-                borderRadius: "14px",
-                backgroundColor: "var(--bg-tertiary)",
-                border: "1px solid var(--border-subtle)",
-              }}
-            >
-              <span style={{ fontSize: "0.85rem", fontWeight: 600, color: "var(--text-secondary)" }}>
-                Theme Appearance
-              </span>
-
-              <button
-                type="button"
-                onClick={toggleTheme}
-                onTouchEnd={toggleTheme}
-                aria-label="Toggle theme appearance"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "0.4rem",
-                  padding: "0.4rem 0.85rem",
-                  borderRadius: "999px",
-                  backgroundColor: "var(--bg-card)",
-                  border: "1px solid var(--border-medium)",
-                  color: "var(--text-primary)",
-                  fontSize: "0.8rem",
-                  fontWeight: 700,
-                  cursor: "pointer",
-                  boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-                  touchAction: "manipulation",
-                  WebkitTapHighlightColor: "transparent",
-                }}
-              >
-                {theme === "dark" ? <Sun size={14} /> : <Moon size={14} />}
-                <span>{theme === "dark" ? "Day Mode" : "Night Mode"}</span>
-              </button>
-            </div>
-
-            {/* Mini Social Media Icons (WhatsApp, Mail, Facebook, LinkedIn, Instagram, YouTube, Dribbble) */}
+            {/* Mini Social Media Icons directly (Social channels text removed) */}
             <div
               style={{
                 borderTop: "1px solid var(--border-subtle)",
-                paddingTop: "1rem",
+                paddingTop: "0.85rem",
               }}
             >
-              <span
-                className="font-mono"
-                style={{
-                  fontSize: "0.72rem",
-                  color: "var(--text-muted)",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.06em",
-                  display: "block",
-                  marginBottom: "0.75rem",
-                }}
-              >
-                Connect on Social Channels
-              </span>
 
               <div
                 style={{
@@ -509,78 +451,38 @@ export function BottomFloatingNavbar() {
           <span>Works</span>
         </a>
 
-        {/* Desktop-only Direct Links (About, Services) */}
-        <div className="desktop-only-links" style={{ display: "flex", alignItems: "center", gap: "0.2rem" }}>
-          <a
-            href="#about"
-            onClick={() => setActiveSection("about")}
-            style={{
-              position: "relative",
-              padding: "0.55rem 1rem",
-              borderRadius: "999px",
-              fontSize: "0.9rem",
-              fontWeight: isAboutActive ? 800 : 500,
-              color: isAboutActive ? "var(--bg-primary)" : "var(--text-secondary)",
-              backgroundColor: isAboutActive ? "var(--text-primary)" : "transparent",
-              transition: "all 0.2s ease",
-              whiteSpace: "nowrap",
-            }}
-          >
-            About
-          </a>
-
-          <a
-            href="#services"
-            onClick={() => setActiveSection("services")}
-            style={{
-              position: "relative",
-              padding: "0.55rem 1rem",
-              borderRadius: "999px",
-              fontSize: "0.9rem",
-              fontWeight: isServicesActive ? 800 : 500,
-              color: isServicesActive ? "var(--bg-primary)" : "var(--text-secondary)",
-              backgroundColor: isServicesActive ? "var(--text-primary)" : "transparent",
-              transition: "all 0.2s ease",
-              whiteSpace: "nowrap",
-            }}
-          >
-            Services
-          </a>
-        </div>
-
-        {/* 3. Hire Now Button */}
+        {/* 3. Services Button (In place of Hire Now) */}
         <a
-          href="#contact"
-          onClick={() => setActiveSection("contact")}
+          href="#services"
+          onClick={() => setActiveSection("services")}
           style={{
+            position: "relative",
             display: "inline-flex",
             alignItems: "center",
             gap: "0.35rem",
-            padding: "0.55rem clamp(0.75rem, 2vw, 1.15rem)",
+            padding: "0.55rem clamp(0.75rem, 1.8vw, 1.15rem)",
             borderRadius: "999px",
-            backgroundColor: isContactActive ? "var(--text-primary)" : "var(--bg-card-hover)",
-            color: isContactActive ? "var(--bg-primary)" : "var(--text-primary)",
-            border: "1px solid var(--border-medium)",
-            fontSize: "clamp(0.8rem, 1.1vw, 0.88rem)",
-            fontWeight: 700,
+            fontSize: "clamp(0.82rem, 1.2vw, 0.92rem)",
+            fontWeight: isServicesActive ? 800 : 600,
+            color: isServicesActive ? "var(--bg-primary)" : "var(--text-primary)",
+            backgroundColor: isServicesActive ? "var(--text-primary)" : "transparent",
+            boxShadow: isServicesActive ? "0 4px 14px rgba(0,0,0,0.25)" : "none",
+            transition: "all 0.2s cubic-bezier(0.16, 1, 0.3, 1)",
             whiteSpace: "nowrap",
-            transition: "all 0.2s ease",
-          }}
-          onMouseEnter={(e) => {
-            if (!isContactActive) {
-              e.currentTarget.style.backgroundColor = "var(--text-primary)";
-              e.currentTarget.style.color = "var(--bg-primary)";
-            }
-          }}
-          onMouseLeave={(e) => {
-            if (!isContactActive) {
-              e.currentTarget.style.backgroundColor = "var(--bg-card-hover)";
-              e.currentTarget.style.color = "var(--text-primary)";
-            }
+            textDecoration: "none",
           }}
         >
-          <Sparkles size={13} />
-          <span>Hire Now</span>
+          {isServicesActive && (
+            <span
+              style={{
+                width: "6px",
+                height: "6px",
+                borderRadius: "50%",
+                backgroundColor: "#10b981",
+              }}
+            />
+          )}
+          <span>Services</span>
         </a>
 
         {/* 4. Live Chat Button (WhatsApp trigger) */}

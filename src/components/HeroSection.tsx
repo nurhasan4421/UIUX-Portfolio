@@ -3,7 +3,6 @@
 import React from "react";
 import { ArrowUpRight, MapPin } from "lucide-react";
 import { PERSONAL_INFO } from "@/data/portfolioData";
-import { ArtScratchPortrait } from "./ArtScratchPortrait";
 
 export function HeroSection() {
   return (
@@ -49,7 +48,7 @@ export function HeroSection() {
               color: "var(--text-secondary)",
             }}
           >
-            Available for Projects • Q4 2026
+            Available for Projects
           </span>
         </div>
 
@@ -154,77 +153,61 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Caption & 3D Real Photo Cutout Row */}
+      {/* Pitch & Primary Call to Action */}
       <div
         style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 340px), 1fr))",
-          gap: "clamp(1.5rem, 4vw, 4rem)",
-          alignItems: "center",
+          maxWidth: "720px",
           paddingTop: "1.25rem",
         }}
       >
-        {/* Left Column: Short Pitch & Action Buttons (dribbble/gmail links removed) */}
-        <div style={{ maxWidth: "580px" }}>
-          <p
-            style={{
-              fontSize: "clamp(1.02rem, 1.3vw, 1.18rem)",
-              lineHeight: 1.65,
-              color: "var(--text-secondary)",
-              fontWeight: 400,
-              marginBottom: "1.75rem",
-            }}
-          >
-            Hi, I&apos;m <strong>{PERSONAL_INFO.name}</strong>. Bridging high-craft aesthetic intuition with engineering rigor. Designing intuitive digital products, SaaS dashboards, and mobile experiences that solve real-world problems.
-          </p>
+        <p
+          style={{
+            fontSize: "clamp(1.05rem, 1.35vw, 1.25rem)",
+            lineHeight: 1.65,
+            color: "var(--text-secondary)",
+            fontWeight: 400,
+            marginBottom: "1.75rem",
+          }}
+        >
+          Hi, I&apos;m <strong>{PERSONAL_INFO.name}</strong>. Bridging high-craft aesthetic intuition with engineering rigor. Designing intuitive digital products, SaaS dashboards, and mobile experiences that solve real-world problems.
+        </p>
 
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "0.85rem",
-            }}
-          >
-            <a
-              href="#contact"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "0.5rem",
-                minHeight: "48px",
-                padding: "0 1.75rem",
-                borderRadius: "999px",
-                background: "var(--text-primary)",
-                color: "var(--bg-primary)",
-                fontWeight: 700,
-                fontSize: "0.95rem",
-                letterSpacing: "-0.01em",
-                transition: "all 0.2s cubic-bezier(0.16, 1, 0.3, 1)",
-                boxShadow: "0 8px 20px var(--glow-active)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-2px) scale(1.02)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0) scale(1)";
-              }}
-            >
-              Let&apos;s Connect
-              <ArrowUpRight size={17} />
-            </a>
-          </div>
-        </div>
-
-        {/* Right Column: Real Photo Cutout with Scroll-linked Color & 3D Hover */}
         <div
           style={{
             display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
+            flexWrap: "wrap",
+            gap: "0.85rem",
           }}
         >
-          <ArtScratchPortrait />
+          <a
+            href="#contact"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "0.5rem",
+              minHeight: "48px",
+              padding: "0 1.85rem",
+              borderRadius: "999px",
+              background: "var(--text-primary)",
+              color: "var(--bg-primary)",
+              fontWeight: 700,
+              fontSize: "0.95rem",
+              letterSpacing: "-0.01em",
+              transition: "all 0.2s cubic-bezier(0.16, 1, 0.3, 1)",
+              boxShadow: "0 8px 20px var(--glow-active)",
+              textDecoration: "none",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "translateY(-2px) scale(1.02)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "translateY(0) scale(1)";
+            }}
+          >
+            Let&apos;s Connect
+            <ArrowUpRight size={17} />
+          </a>
         </div>
       </div>
 

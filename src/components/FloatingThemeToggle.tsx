@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
-import { Sun, Moon } from "lucide-react";
+import { Sun, Moon, Sparkles } from "lucide-react";
 
 export function FloatingThemeToggle() {
   const [theme, setTheme] = useState<"dark" | "light">("dark");
@@ -75,7 +75,7 @@ export function FloatingThemeToggle() {
       e.stopPropagation();
     }
     const now = Date.now();
-    // Guard against iOS double-firing (touchend immediately followed by synthesized click ~300ms later)
+    // Guard against iOS double-firing (touchend followed by synthesized click)
     if (now - lastToggleRef.current < 350) return;
     lastToggleRef.current = now;
 
@@ -89,42 +89,91 @@ export function FloatingThemeToggle() {
     });
   };
 
+  const isDark = theme === "dark";
+
   if (!mounted) {
     return (
       <div
         style={{
           position: "fixed",
-          top: "max(1.2rem, calc(env(safe-area-inset-top, 0px) + 0.85rem))",
-          right: "max(1.2rem, calc(env(safe-area-inset-right, 0px) + 0.85rem))",
+          top: "max(1rem, calc(env(safe-area-inset-top, 0px) + 0.75rem))",
+          right: "max(1rem, calc(env(safe-area-inset-right, 0px) + 0.75rem))",
           zIndex: 10000,
+          display: "flex",
+          alignItems: "center",
+          gap: "0.45rem",
         }}
       >
         <div
           style={{
-            width: "48px",
-            height: "48px",
+            height: "36px",
+            width: "94px",
+            borderRadius: "999px",
+            backgroundColor: "rgba(20, 20, 22, 0.85)",
+          }}
+        />
+        <div
+          style={{
+            width: "36px",
+            height: "36px",
             borderRadius: "50%",
             backgroundColor: "rgba(20, 20, 22, 0.85)",
-            border: "1px solid rgba(255, 255, 255, 0.15)",
           }}
         />
       </div>
     );
   }
 
-  const isDark = theme === "dark";
-
   return (
     <div
       style={{
         position: "fixed",
-        top: "max(1.2rem, calc(env(safe-area-inset-top, 0px) + 0.85rem))",
-        right: "max(1.2rem, calc(env(safe-area-inset-right, 0px) + 0.85rem))",
+        top: "max(1rem, calc(env(safe-area-inset-top, 0px) + 0.75rem))",
+        right: "max(1rem, calc(env(safe-area-inset-right, 0px) + 0.75rem))",
         zIndex: 10000,
+        display: "flex",
+        alignItems: "center",
+        gap: "0.45rem",
         pointerEvents: "auto",
         touchAction: "manipulation",
       }}
     >
+      {/* 1. Floated Hire Now Button on Left Side of Day/Night Icon */}
+      <a
+        href="#contact"
+        aria-label="Hire Nur Hasan"
+        style={{
+          display: "inline-flex",
+          alignItems: "center",
+          gap: "0.35rem",
+          height: "36px",
+          padding: "0 0.9rem",
+          borderRadius: "999px",
+          backgroundColor: isDark ? "rgba(255, 255, 255, 0.95)" : "rgba(10, 10, 10, 0.92)",
+          color: isDark ? "#050505" : "#ffffff",
+          fontSize: "0.8rem",
+          fontWeight: 700,
+          letterSpacing: "-0.01em",
+          textDecoration: "none",
+          whiteSpace: "nowrap",
+          boxShadow: isDark
+            ? "0 6px 18px rgba(0, 0, 0, 0.35)"
+            : "0 6px 18px rgba(0, 0, 0, 0.15)",
+          transition: "transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease",
+          WebkitTapHighlightColor: "transparent",
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.transform = "scale(1.04)";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = "scale(1)";
+        }}
+      >
+        <Sparkles size={12} strokeWidth={2.4} />
+        <span>Hire Now</span>
+      </a>
+
+      {/* 2. Smaller Day/Night Toggle Button */}
       <button
         type="button"
         onClick={handleToggle}
@@ -133,27 +182,27 @@ export function FloatingThemeToggle() {
         title={isDark ? "Switch to day mode" : "Switch to night mode"}
         className="floating-theme-btn"
         style={{
-          width: "48px",
-          height: "48px",
+          width: "36px",
+          height: "36px",
           borderRadius: "50%",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           backgroundColor: isDark ? "rgba(24, 24, 27, 0.9)" : "rgba(255, 255, 255, 0.95)",
-          backdropFilter: "blur(24px) saturate(180%)",
-          WebkitBackdropFilter: "blur(24px) saturate(180%)",
-          border: isDark ? "1.5px solid rgba(255, 255, 255, 0.22)" : "1.5px solid rgba(0, 0, 0, 0.18)",
+          backdropFilter: "blur(20px) saturate(180%)",
+          WebkitBackdropFilter: "blur(20px) saturate(180%)",
+          border: isDark ? "1.5px solid rgba(255, 255, 255, 0.2)" : "1.5px solid rgba(0, 0, 0, 0.15)",
           color: isDark ? "#ffffff" : "#0a0a0a",
           boxShadow: isDark
-            ? "0 10px 25px rgba(0, 0, 0, 0.45)"
-            : "0 10px 25px rgba(0, 0, 0, 0.12)",
+            ? "0 6px 18px rgba(0, 0, 0, 0.35)"
+            : "0 6px 18px rgba(0, 0, 0, 0.12)",
           transition: "transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease",
         }}
       >
         {isDark ? (
-          <Sun size={21} strokeWidth={2.3} />
+          <Sun size={16} strokeWidth={2.2} />
         ) : (
-          <Moon size={21} strokeWidth={2.3} />
+          <Moon size={16} strokeWidth={2.2} />
         )}
       </button>
     </div>
