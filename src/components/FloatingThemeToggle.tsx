@@ -62,8 +62,8 @@ export function FloatingThemeToggle() {
         className="floating-top-controls"
         style={{
           position: "fixed",
-          top: "max(52px, calc(env(safe-area-inset-top, 0px) + 12px))",
-          right: "max(12px, calc(env(safe-area-inset-right, 0px) + 12px))",
+          top: "max(14px, calc(env(safe-area-inset-top, 0px) + 8px))",
+          right: "max(14px, calc(env(safe-area-inset-right, 0px) + 8px))",
           zIndex: 99999,
           display: "flex",
           alignItems: "center",
@@ -95,8 +95,8 @@ export function FloatingThemeToggle() {
       className="floating-top-controls"
       style={{
         position: "fixed",
-        top: "max(52px, calc(env(safe-area-inset-top, 0px) + 12px))",
-        right: "max(12px, calc(env(safe-area-inset-right, 0px) + 12px))",
+        top: "max(14px, calc(env(safe-area-inset-top, 0px) + 8px))",
+        right: "max(14px, calc(env(safe-area-inset-right, 0px) + 8px))",
         zIndex: 99999,
         display: "flex",
         alignItems: "center",

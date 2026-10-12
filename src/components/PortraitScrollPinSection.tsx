@@ -483,19 +483,21 @@ export function PortraitScrollPinSection() {
                 justifyContent: "center",
               }}
             >
-              {/* Radial Bloom Glow Behind Cutout */}
-              <div
-                style={{
-                  position: "absolute",
-                  inset: "8%",
-                  borderRadius: "50%",
-                  background: "radial-gradient(circle, var(--glow-active) 0%, transparent 70%)",
-                  filter: isMobile ? "blur(25px)" : "blur(50px)",
-                  opacity: 0.2 + colorBloomFactor * 0.6,
-                  transition: "none",
-                  pointerEvents: "none",
-                }}
-              />
+              {/* Radial Bloom Glow Behind Cutout (Only for mobile phone; completely removed on website view) */}
+              {isMobile && (
+                <div
+                  style={{
+                    position: "absolute",
+                    inset: "8%",
+                    borderRadius: "50%",
+                    background: "radial-gradient(circle, var(--glow-active) 0%, transparent 70%)",
+                    filter: "blur(25px)",
+                    opacity: 0.2 + colorBloomFactor * 0.6,
+                    transition: "none",
+                    pointerEvents: "none",
+                  }}
+                />
+              )}
 
               {/* Real Cutout Image Scrubbing B&W -> Full Color. Subtle Bottom Gradient MATCH ONLY FOR MOBILE PHONE, NOT WEB */}
               <div

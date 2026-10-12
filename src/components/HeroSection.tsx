@@ -333,7 +333,7 @@ export function HeroSection() {
       <div
         style={{
           position: isMobile ? "sticky" : "relative",
-          top: isMobile ? "max(5.6rem, calc(env(safe-area-inset-top, 0px) + 4rem))" : "auto",
+          top: isMobile ? "max(3.8rem, calc(env(safe-area-inset-top, 0px) + 2.8rem))" : "auto",
           zIndex: 4,
           paddingTop: isMobile ? "clamp(10vh, 14vh, 18vh)" : "clamp(1rem, 3vw, 2.5rem)",
           paddingBottom: isMobile ? "1rem" : "0",
