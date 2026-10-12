@@ -239,6 +239,7 @@ export function ExperienceSection() {
                   src="/images/whitedesk-white.png"
                   alt="White Desk Logo"
                   fill
+                  sizes="180px"
                   style={{
                     objectFit: "contain",
                     objectPosition: "left center",
@@ -250,6 +251,7 @@ export function ExperienceSection() {
                   src="/images/whitedesk-black.png"
                   alt="White Desk Logo"
                   fill
+                  sizes="180px"
                   style={{
                     objectFit: "contain",
                     objectPosition: "left center",
