@@ -33,24 +33,25 @@ export function FloatingThemeToggle() {
   const lastToggleTimeRef = useRef(0);
 
   const handleToggle = useCallback(
-    (e?: React.MouseEvent) => {
+    (e?: React.MouseEvent | React.TouchEvent) => {
       if (e) {
         e.stopPropagation();
       }
       const now = Date.now();
-      if (now - lastToggleTimeRef.current < 350) return;
+      if (now - lastToggleTimeRef.current < 250) return;
       lastToggleTimeRef.current = now;
 
-      const nextTheme: AppTheme = theme === "dark" ? "light" : "dark";
-      setTheme(nextTheme);
-      applyThemeToDOM(nextTheme);
-      broadcastThemeChange(nextTheme);
-      // Also broadcast legacy event for other listeners
-      try {
-        window.dispatchEvent(new CustomEvent("themechange", { detail: nextTheme }));
-      } catch (err) {}
+      setTheme((prev) => {
+        const nextTheme: AppTheme = prev === "dark" ? "light" : "dark";
+        applyThemeToDOM(nextTheme);
+        broadcastThemeChange(nextTheme);
+        try {
+          window.dispatchEvent(new CustomEvent("themechange", { detail: nextTheme }));
+        } catch (err) {}
+        return nextTheme;
+      });
     },
-    [theme]
+    []
   );
 
   const isDark = theme === "dark";
@@ -58,10 +59,11 @@ export function FloatingThemeToggle() {
   if (!mounted) {
     return (
       <div
+        className="floating-top-controls"
         style={{
           position: "fixed",
-          top: "max(0.85rem, calc(env(safe-area-inset-top, 0px) + 0.5rem))",
-          right: "max(0.85rem, calc(env(safe-area-inset-right, 0px) + 0.5rem))",
+          top: "max(52px, calc(env(safe-area-inset-top, 0px) + 12px))",
+          right: "max(12px, calc(env(safe-area-inset-right, 0px) + 12px))",
           zIndex: 99999,
           display: "flex",
           alignItems: "center",
@@ -70,16 +72,16 @@ export function FloatingThemeToggle() {
       >
         <div
           style={{
-            height: "38px",
-            width: "88px",
+            height: "40px",
+            width: "92px",
             borderRadius: "999px",
             backgroundColor: "rgba(20, 20, 22, 0.85)",
           }}
         />
         <div
           style={{
-            width: "40px",
-            height: "40px",
+            width: "42px",
+            height: "42px",
             borderRadius: "50%",
             backgroundColor: "rgba(20, 20, 22, 0.85)",
           }}
@@ -90,10 +92,11 @@ export function FloatingThemeToggle() {
 
   return (
     <div
+      className="floating-top-controls"
       style={{
         position: "fixed",
-        top: "max(0.75rem, calc(env(safe-area-inset-top, 0px) + 0.45rem))",
-        right: "max(0.75rem, calc(env(safe-area-inset-right, 0px) + 0.45rem))",
+        top: "max(52px, calc(env(safe-area-inset-top, 0px) + 12px))",
+        right: "max(12px, calc(env(safe-area-inset-right, 0px) + 12px))",
         zIndex: 99999,
         display: "flex",
         alignItems: "center",
@@ -107,6 +110,7 @@ export function FloatingThemeToggle() {
       <a
         href="#contact"
         aria-label="Hire Nur Hasan"
+        onTouchStart={(e) => e.stopPropagation()}
         onClick={(e) => {
           e.preventDefault();
           const el = document.getElementById("contact");
@@ -120,12 +124,13 @@ export function FloatingThemeToggle() {
           display: "inline-flex",
           alignItems: "center",
           justifyContent: "center",
-          height: "38px",
-          padding: "0 1.1rem",
+          height: "40px",
+          minHeight: "40px",
+          padding: "0 1.15rem",
           borderRadius: "999px",
           backgroundColor: isDark ? "#ffffff" : "#0a0a0a",
           color: isDark ? "#050505" : "#ffffff",
-          fontSize: "0.82rem",
+          fontSize: "0.84rem",
           fontWeight: 700,
           letterSpacing: "-0.01em",
           textDecoration: "none",
@@ -152,15 +157,16 @@ export function FloatingThemeToggle() {
       {/* 2. Day/Night Toggle Button (Mobile Touch Reliable & Fully Responsive) */}
       <button
         type="button"
+        onTouchStart={(e) => e.stopPropagation()}
         onClick={handleToggle}
         aria-label={isDark ? "Switch to day mode" : "Switch to night mode"}
         title={isDark ? "Switch to day mode" : "Switch to night mode"}
         className="floating-theme-btn"
         style={{
-          width: "40px",
-          height: "40px",
-          minWidth: "40px",
-          minHeight: "40px",
+          width: "42px",
+          height: "42px",
+          minWidth: "42px",
+          minHeight: "42px",
           borderRadius: "50%",
           display: "flex",
           alignItems: "center",
@@ -182,9 +188,9 @@ export function FloatingThemeToggle() {
         }}
       >
         {isDark ? (
-          <Sun size={17} strokeWidth={2.3} />
+          <Sun size={18} strokeWidth={2.3} />
         ) : (
-          <Moon size={17} strokeWidth={2.3} />
+          <Moon size={18} strokeWidth={2.3} />
         )}
       </button>
     </div>

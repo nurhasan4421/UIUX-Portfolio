@@ -321,7 +321,7 @@ export function HeroSection() {
         display: "flex",
         flexDirection: "column",
         justifyContent: isMobile ? "flex-start" : "center",
-        minHeight: isMobile ? "150vh" : "clamp(80vh, 88vh, 920px)",
+        minHeight: isMobile ? "105vh" : "clamp(80vh, 88vh, 920px)",
         padding: isMobile
           ? "0 clamp(1rem, 4vw, 2rem) 0"
           : "clamp(2rem, 4vw, 3rem) clamp(1rem, 5vw, 4rem)",
@@ -333,9 +333,9 @@ export function HeroSection() {
       <div
         style={{
           position: isMobile ? "sticky" : "relative",
-          top: isMobile ? "max(3.4rem, calc(env(safe-area-inset-top, 0px) + 2.75rem))" : "auto",
+          top: isMobile ? "max(5.8rem, calc(env(safe-area-inset-top, 0px) + 4.2rem))" : "auto",
           zIndex: 4,
-          paddingTop: isMobile ? "clamp(16vh, 20vh, 25vh)" : "clamp(1rem, 3vw, 2.5rem)",
+          paddingTop: isMobile ? "clamp(14vh, 18vh, 22vh)" : "clamp(1rem, 3vw, 2.5rem)",
           paddingBottom: isMobile ? "1rem" : "0",
           margin: isMobile ? "0" : "auto 0",
           display: "flex",
