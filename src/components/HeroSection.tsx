@@ -116,14 +116,31 @@ export function HeroSection() {
   // Active smooth gliding letter swap animation
   const [swapState, setSwapState] = useState<SwapAnimationState | null>(null);
   const [isMobile, setIsMobile] = useState(false);
-  const [isUiUxRed, setIsUiUxRed] = useState(false);
 
-  // Illuminate "UI/UX" in crimson red after 2 seconds
+  // UI/UX color state: cycles between "normal" (black/white), "red", and "grey" with zero glow
+  const [uiUxColor, setUiUxColor] = useState<"normal" | "red" | "grey">("normal");
+
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsUiUxRed(true);
+    let intervalId: NodeJS.Timeout | null = null;
+
+    // After 2 seconds, UI/UX turns red first
+    const initialTimer = setTimeout(() => {
+      setUiUxColor("red");
+
+      // Then smoothly cycles: grey -> normal -> red -> grey... (matching same color changing style as other words)
+      let step = 0;
+      const sequence: ("grey" | "normal" | "red")[] = ["grey", "normal", "red"];
+
+      intervalId = setInterval(() => {
+        setUiUxColor(sequence[step % sequence.length]);
+        step++;
+      }, 2800);
     }, 2000);
-    return () => clearTimeout(timer);
+
+    return () => {
+      clearTimeout(initialTimer);
+      if (intervalId) clearInterval(intervalId);
+    };
   }, []);
 
   useEffect(() => {
@@ -271,11 +288,19 @@ export function HeroSection() {
     }
 
     let letterColor = "inherit";
-    let letterTextShadow = "none";
+    let letterOpacity = isDimmed ? 0.3 : 1;
 
-    if (isUiUx && isUiUxRed) {
-      letterColor = "var(--accent-uiux, #ff3b30)";
-      letterTextShadow = "0 0 16px rgba(255, 59, 48, 0.45)";
+    if (isUiUx) {
+      if (uiUxColor === "red") {
+        letterColor = "var(--accent-uiux, #ff3b30)";
+        letterOpacity = 1;
+      } else if (uiUxColor === "grey") {
+        letterColor = "inherit";
+        letterOpacity = 0.3;
+      } else {
+        letterColor = "inherit";
+        letterOpacity = 1;
+      }
     } else if (isSwapping) {
       letterColor = "var(--text-primary)";
     }
@@ -291,13 +316,13 @@ export function HeroSection() {
           display: "inline-block",
           position: "relative",
           zIndex: isSwapping ? 30 : 1,
-          opacity: isDimmed ? 0.3 : 1,
+          opacity: letterOpacity,
           animation: customAnimation,
           color: letterColor,
-          textShadow: letterTextShadow,
+          textShadow: "none",
           transition: isSwapping
             ? "none"
-            : "color 0.8s cubic-bezier(0.16, 1, 0.3, 1), text-shadow 0.8s ease, opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
+            : "color 0.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1)",
           userSelect: "none",
           willChange: isSwapping ? "transform, opacity" : "auto",
         }}
