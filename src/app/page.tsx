@@ -1,6 +1,7 @@
 import React from "react";
 import { HeroSection } from "@/components/HeroSection";
 import { BottomFloatingNavbar } from "@/components/BottomFloatingNavbar";
+import { FloatingThemeToggle } from "@/components/FloatingThemeToggle";
 import { ScrollGradientText } from "@/components/ScrollGradientText";
 import { InfoCardsSection } from "@/components/InfoCardsSection";
 import { ProjectsSection } from "@/components/ProjectsSection";
@@ -15,13 +16,16 @@ export default function Home() {
       style={{
         minHeight: "100vh",
         position: "relative",
-        paddingBottom: "clamp(4.5rem, 8vh, 6.5rem)",
+        paddingBottom: "clamp(5rem, 9vh, 7rem)",
       }}
     >
       {/* Noise Texture for Cinematic Monochrome Look */}
       <div className="noise-overlay" aria-hidden="true" />
 
-      {/* 1. Hero Section (20% scaled font, short bio, 3D art sketch portrait on right) */}
+      {/* Floating Day/Night Icon on Right Side Top (Always accessible on phone & desktop) */}
+      <FloatingThemeToggle />
+
+      {/* 1. Hero Section (Bigger mobile heading, real photo cutout with scroll-linked color) */}
       <HeroSection />
 
       {/* 2. Kinetic Scroll Motion Typography */}
@@ -48,7 +52,7 @@ export default function Home() {
       {/* 8. Footer with Dhaka Local Time */}
       <Footer />
 
-      {/* 9. Apple Glass Bottom Floating Navbar (Figma style dock with Day/Night toggle) */}
+      {/* 9. Apple Glass Bottom Floating Phone Navbar (Avatar, Works, Hire Now, Live Chat, Hamburger Mini Card) */}
       <BottomFloatingNavbar />
     </main>
   );

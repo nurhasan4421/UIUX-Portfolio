@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ArrowDownRight, ArrowUpRight, MapPin, ExternalLink } from "lucide-react";
+import { ArrowDownRight, ArrowUpRight, MapPin } from "lucide-react";
 import { PERSONAL_INFO } from "@/data/portfolioData";
 import { ArtScratchPortrait } from "./ArtScratchPortrait";
 
@@ -43,7 +43,7 @@ export function HeroSection() {
           <span
             className="font-mono"
             style={{
-              fontSize: "0.78rem",
+              fontSize: "0.82rem",
               textTransform: "uppercase",
               letterSpacing: "0.06em",
               color: "var(--text-secondary)",
@@ -53,15 +53,15 @@ export function HeroSection() {
           </span>
         </div>
 
+        {/* Location & Degree (Hidden on mobile via CSS class) */}
         <div
+          className="font-mono hero-top-meta-desktop"
           style={{
-            display: "flex",
             alignItems: "center",
             gap: "1.25rem",
             fontSize: "0.8rem",
             color: "var(--text-muted)",
           }}
-          className="font-mono"
         >
           <span style={{ display: "flex", alignItems: "center", gap: "0.35rem" }}>
             <MapPin size={13} />
@@ -72,7 +72,7 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Main Typography Header (20% Smaller as Requested) */}
+      {/* Main Typography Header (Bigger on Mobile as Requested) */}
       <div
         style={{
           margin: "clamp(1rem, 3vw, 2.5rem) 0",
@@ -81,14 +81,14 @@ export function HeroSection() {
           gap: "clamp(0.4rem, 1vw, 0.75rem)",
         }}
       >
-        {/* Big 20% Scaled Headline */}
+        {/* Scaled & Mobile-Enhanced Headline */}
         <h1
           className="font-display"
           style={{
-            fontSize: "clamp(2rem, 9.2vw, 192px)",
+            fontSize: "clamp(2.75rem, 11vw, 192px)",
             fontWeight: 900,
-            lineHeight: 0.88,
-            letterSpacing: "-0.045em",
+            lineHeight: 0.9,
+            letterSpacing: "-0.04em",
             textTransform: "uppercase",
             color: "var(--text-primary)",
             margin: 0,
@@ -110,21 +110,21 @@ export function HeroSection() {
           BEAUTIFUL.
         </h1>
 
-        {/* Scaled Sub-headline */}
+        {/* Sub-headline */}
         <div
           style={{
             display: "flex",
             flexWrap: "wrap",
             alignItems: "baseline",
             justifyContent: "space-between",
-            gap: "1rem",
+            gap: "0.85rem",
             marginTop: "clamp(0.4rem, 1.2vw, 1rem)",
           }}
         >
           <h2
             className="font-display"
             style={{
-              fontSize: "clamp(1.35rem, 4.8vw, 94px)",
+              fontSize: "clamp(1.5rem, 5.5vw, 94px)",
               fontWeight: 800,
               lineHeight: 0.95,
               letterSpacing: "-0.035em",
@@ -154,60 +154,29 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Caption & 3D Art Scratch Portrait Row */}
+      {/* Caption & 3D Real Photo Cutout Row */}
       <div
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 340px), 1fr))",
-          gap: "clamp(2rem, 4vw, 4rem)",
+          gap: "clamp(1.5rem, 4vw, 4rem)",
           alignItems: "center",
-          paddingTop: "1.5rem",
+          paddingTop: "1.25rem",
         }}
       >
-        {/* Left Column: Short Pitch & Action Buttons */}
+        {/* Left Column: Short Pitch & Action Buttons (dribbble/gmail links removed) */}
         <div style={{ maxWidth: "580px" }}>
           <p
             style={{
-              fontSize: "clamp(1rem, 1.25vw, 1.15rem)",
+              fontSize: "clamp(1.02rem, 1.3vw, 1.18rem)",
               lineHeight: 1.65,
               color: "var(--text-secondary)",
               fontWeight: 400,
-              marginBottom: "1.25rem",
+              marginBottom: "1.75rem",
             }}
           >
             Hi, I&apos;m <strong>{PERSONAL_INFO.name}</strong>. Bridging high-craft aesthetic intuition with engineering rigor. Designing intuitive digital products, SaaS dashboards, and mobile experiences that solve real-world problems.
           </p>
-
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "1rem",
-              fontSize: "0.85rem",
-              color: "var(--text-muted)",
-              marginBottom: "1.75rem",
-              flexWrap: "wrap",
-            }}
-          >
-            <a
-              href={PERSONAL_INFO.dribbble}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "0.3rem",
-                color: "var(--text-primary)",
-                borderBottom: "1px solid var(--border-bold)",
-                paddingBottom: "2px",
-              }}
-            >
-              View 24+ Dribbble Works
-              <ExternalLink size={12} />
-            </a>
-            <span>•</span>
-            <span className="font-mono">{PERSONAL_INFO.email}</span>
-          </div>
 
           <div
             style={{
@@ -277,7 +246,7 @@ export function HeroSection() {
           </div>
         </div>
 
-        {/* Right Column: Beautiful Art Type Scratch Portrait with 3D Hover Effect */}
+        {/* Right Column: Real Photo Cutout with Scroll-linked Color & 3D Hover */}
         <div
           style={{
             display: "flex",
@@ -288,6 +257,17 @@ export function HeroSection() {
           <ArtScratchPortrait />
         </div>
       </div>
+
+      <style jsx global>{`
+        .hero-top-meta-desktop {
+          display: flex;
+        }
+        @media (max-width: 640px) {
+          .hero-top-meta-desktop {
+            display: none !important;
+          }
+        }
+      `}</style>
     </header>
   );
 }

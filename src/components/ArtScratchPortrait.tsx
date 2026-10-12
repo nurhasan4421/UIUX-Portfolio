@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 
 export function ArtScratchPortrait({ className = "" }: { className?: string }) {
@@ -8,6 +8,36 @@ export function ArtScratchPortrait({ className = "" }: { className?: string }) {
   const [transformStyle, setTransformStyle] = useState("");
   const [isHovered, setIsHovered] = useState(false);
   const [shadowStyle, setShadowStyle] = useState("");
+  const [grayscalePercent, setGrayscalePercent] = useState(100);
+
+  // Dynamic Scroll-linked B&W -> Color transition
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      // When at top (0-40px): 100% grayscale (pure B&W)
+      // As user scrolls down (40px - 320px): color smoothly reveals (0% grayscale)
+      // When scrolling back up: returns to 100% B&W
+      const start = 30;
+      const end = 300;
+
+      if (scrollY <= start) {
+        setGrayscalePercent(100);
+      } else if (scrollY >= end) {
+        setGrayscalePercent(0);
+      } else {
+        const factor = 1 - (scrollY - start) / (end - start);
+        setGrayscalePercent(Math.round(factor * 100));
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("touchmove", handleScroll, { passive: true });
+    handleScroll();
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("touchmove", handleScroll);
+    };
+  }, []);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
@@ -17,13 +47,13 @@ export function ArtScratchPortrait({ className = "" }: { className?: string }) {
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
 
-    const rotateX = ((y - centerY) / centerY) * -10;
-    const rotateY = ((x - centerX) / centerX) * 10;
+    const rotateX = ((y - centerY) / centerY) * -12;
+    const rotateY = ((x - centerX) / centerX) * 12;
     const shadowX = ((x - centerX) / centerX) * -15;
     const shadowY = ((y - centerY) / centerY) * -15;
 
     setTransformStyle(
-      `perspective(700px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.04, 1.04, 1.04)`
+      `perspective(700px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.05, 1.05, 1.05)`
     );
     setShadowStyle(`drop-shadow(${shadowX.toFixed(1)}px ${shadowY.toFixed(1)}px 30px var(--glow-active))`);
   };
@@ -45,18 +75,18 @@ export function ArtScratchPortrait({ className = "" }: { className?: string }) {
       className={`real-portrait-container ${className}`}
       style={{
         position: "relative",
-        width: "clamp(260px, 30vw, 360px)",
+        width: "clamp(260px, 34vw, 380px)",
         aspectRatio: "0.9 / 1",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         transform: transformStyle,
-        transition: isHovered ? "transform 0.08s ease-out" : "transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
+        transition: isHovered ? "transform 0.08s ease-out" : "transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
         cursor: "pointer",
         transformStyle: "preserve-3d",
       }}
     >
-      {/* Ambient Radial Glow Behind Cutout */}
+      {/* Radial Glow Behind Cutout */}
       <div
         style={{
           position: "absolute",
@@ -79,14 +109,14 @@ export function ArtScratchPortrait({ className = "" }: { className?: string }) {
           height: "100%",
           transform: "translateZ(30px)",
           filter: shadowStyle,
-          transition: "filter 0.2s ease",
+          transition: "filter 0.25s ease",
         }}
       >
         <Image
           src="/images/nurhasan-cutout.png"
           alt="Nur Hasan - UI/UX Product Designer"
           fill
-          sizes="(max-width: 768px) 280px, 380px"
+          sizes="(max-width: 768px) 300px, 400px"
           priority
           className="real-cutout-img"
           style={{
@@ -94,7 +124,8 @@ export function ArtScratchPortrait({ className = "" }: { className?: string }) {
             objectPosition: "bottom center",
             pointerEvents: "none",
             userSelect: "none",
-            transition: "filter 0.4s ease, transform 0.3s ease",
+            filter: `grayscale(${grayscalePercent}%) contrast(${100 + (grayscalePercent * 0.12)}%) brightness(${grayscalePercent > 50 ? 0.96 : 1.02})`,
+            transition: "filter 0.2s ease-out",
           }}
         />
       </div>
@@ -132,29 +163,13 @@ export function ArtScratchPortrait({ className = "" }: { className?: string }) {
               width: "6px",
               height: "6px",
               borderRadius: "50%",
-              backgroundColor: isHovered ? "#10b981" : "var(--text-muted)",
-              transition: "background-color 0.2s ease",
+              backgroundColor: grayscalePercent === 0 ? "#10b981" : "var(--text-muted)",
+              transition: "background-color 0.3s ease",
             }}
           />
-          {isHovered ? "3D TILT" : "NUR HASAN"}
+          {grayscalePercent === 0 ? "LIVE COLOR" : "B&W FOCUS"}
         </span>
       </div>
-
-      <style jsx global>{`
-        /* Dynamic Black & White for real photo cutout with Day/Night Theme */
-        .real-cutout-img {
-          filter: grayscale(100%) contrast(112%) brightness(0.96);
-        }
-
-        [data-theme="light"] .real-cutout-img {
-          filter: grayscale(100%) contrast(108%) brightness(1.02);
-        }
-
-        /* Subtle tactile color bloom on interactive hover */
-        .real-portrait-container:hover .real-cutout-img {
-          filter: grayscale(20%) contrast(108%) brightness(1);
-        }
-      `}</style>
     </div>
   );
 }
