@@ -9,75 +9,92 @@ interface LetterItem {
   letterKey: string; // Used to identify identical letters ('E', 'O', 'U', 'T', 'R')
 }
 
-// Initial structured letters for the headline lines
+// Initial structured letters for the catchy client-focused headline lines
 const INITIAL_LINE_1: LetterItem[] = [
-  // LET'S (word 0)
-  { id: "w0_L", char: "L", wordIdx: 0, letterKey: "L" },
-  { id: "w0_E", char: "E", wordIdx: 0, letterKey: "E" },
+  // CRAFTING (word 0)
+  { id: "w0_C", char: "C", wordIdx: 0, letterKey: "C" },
+  { id: "w0_R", char: "R", wordIdx: 0, letterKey: "R" },
+  { id: "w0_A", char: "A", wordIdx: 0, letterKey: "A" },
+  { id: "w0_F", char: "F", wordIdx: 0, letterKey: "F" },
   { id: "w0_T", char: "T", wordIdx: 0, letterKey: "T" },
-  { id: "w0_APO", char: "'", wordIdx: 0, letterKey: "'" },
-  { id: "w0_S", char: "S", wordIdx: 0, letterKey: "S" },
+  { id: "w0_I", char: "I", wordIdx: 0, letterKey: "I" },
+  { id: "w0_N", char: "N", wordIdx: 0, letterKey: "N" },
+  { id: "w0_G", char: "G", wordIdx: 0, letterKey: "G" },
   { id: "w0_sp", char: " ", wordIdx: 0, letterKey: " " },
-  // MAKE (word 1)
-  { id: "w1_M", char: "M", wordIdx: 1, letterKey: "M" },
+  // DIGITAL (word 1)
+  { id: "w1_D", char: "D", wordIdx: 1, letterKey: "D" },
+  { id: "w1_I1", char: "I", wordIdx: 1, letterKey: "I" },
+  { id: "w1_G", char: "G", wordIdx: 1, letterKey: "G" },
+  { id: "w1_I2", char: "I", wordIdx: 1, letterKey: "I" },
+  { id: "w1_T", char: "T", wordIdx: 1, letterKey: "T" },
   { id: "w1_A", char: "A", wordIdx: 1, letterKey: "A" },
-  { id: "w1_K", char: "K", wordIdx: 1, letterKey: "K" },
-  { id: "w1_E", char: "E", wordIdx: 1, letterKey: "E" },
+  { id: "w1_L", char: "L", wordIdx: 1, letterKey: "L" },
 ];
 
 const INITIAL_LINE_2: LetterItem[] = [
-  // YOUR (word 2)
-  { id: "w2_Y", char: "Y", wordIdx: 2, letterKey: "Y" },
-  { id: "w2_O", char: "O", wordIdx: 2, letterKey: "O" },
-  { id: "w2_U", char: "U", wordIdx: 2, letterKey: "U" },
+  // PRODUCTS (word 2)
+  { id: "w2_P", char: "P", wordIdx: 2, letterKey: "P" },
   { id: "w2_R", char: "R", wordIdx: 2, letterKey: "R" },
+  { id: "w2_O", char: "O", wordIdx: 2, letterKey: "O" },
+  { id: "w2_D", char: "D", wordIdx: 2, letterKey: "D" },
+  { id: "w2_U", char: "U", wordIdx: 2, letterKey: "U" },
+  { id: "w2_C", char: "C", wordIdx: 2, letterKey: "C" },
+  { id: "w2_T", char: "T", wordIdx: 2, letterKey: "T" },
+  { id: "w2_S", char: "S", wordIdx: 2, letterKey: "S" },
   { id: "w2_sp", char: " ", wordIdx: 2, letterKey: " " },
-  // PROJECT (word 3)
-  { id: "w3_P", char: "P", wordIdx: 3, letterKey: "P" },
-  { id: "w3_R", char: "R", wordIdx: 3, letterKey: "R" },
-  { id: "w3_O", char: "O", wordIdx: 3, letterKey: "O" },
-  { id: "w3_J", char: "J", wordIdx: 3, letterKey: "J" },
-  { id: "w3_E", char: "E", wordIdx: 3, letterKey: "E" },
-  { id: "w3_C", char: "C", wordIdx: 3, letterKey: "C" },
-  { id: "w3_T", char: "T", wordIdx: 3, letterKey: "T" },
+  // THAT (word 3)
+  { id: "w3_T1", char: "T", wordIdx: 3, letterKey: "T" },
+  { id: "w3_H", char: "H", wordIdx: 3, letterKey: "H" },
+  { id: "w3_A", char: "A", wordIdx: 3, letterKey: "A" },
+  { id: "w3_T2", char: "T", wordIdx: 3, letterKey: "T" },
 ];
 
 const INITIAL_LINE_3: LetterItem[] = [
-  // BEAUTIFUL. (word 4)
-  { id: "w4_B", char: "B", wordIdx: 4, letterKey: "B" },
+  // CONVERT (word 4)
+  { id: "w4_C", char: "C", wordIdx: 4, letterKey: "C" },
+  { id: "w4_O", char: "O", wordIdx: 4, letterKey: "O" },
+  { id: "w4_N", char: "N", wordIdx: 4, letterKey: "N" },
+  { id: "w4_V", char: "V", wordIdx: 4, letterKey: "V" },
   { id: "w4_E", char: "E", wordIdx: 4, letterKey: "E" },
-  { id: "w4_A", char: "A", wordIdx: 4, letterKey: "A" },
-  { id: "w4_U1", char: "U", wordIdx: 4, letterKey: "U" },
+  { id: "w4_R", char: "R", wordIdx: 4, letterKey: "R" },
   { id: "w4_T", char: "T", wordIdx: 4, letterKey: "T" },
-  { id: "w4_I", char: "I", wordIdx: 4, letterKey: "I" },
-  { id: "w4_F", char: "F", wordIdx: 4, letterKey: "F" },
-  { id: "w4_U2", char: "U", wordIdx: 4, letterKey: "U" },
-  { id: "w4_L", char: "L", wordIdx: 4, letterKey: "L" },
-  { id: "w4_DOT", char: ".", wordIdx: 4, letterKey: "." },
+  { id: "w4_sp1", char: " ", wordIdx: 4, letterKey: " " },
+  // & (word 5)
+  { id: "w5_AMP", char: "&", wordIdx: 5, letterKey: "&" },
+  { id: "w5_sp2", char: " ", wordIdx: 5, letterKey: " " },
+  // SCALE. (word 6)
+  { id: "w6_S", char: "S", wordIdx: 6, letterKey: "S" },
+  { id: "w6_C", char: "C", wordIdx: 6, letterKey: "C" },
+  { id: "w6_A", char: "A", wordIdx: 6, letterKey: "A" },
+  { id: "w6_L", char: "L", wordIdx: 6, letterKey: "L" },
+  { id: "w6_E", char: "E", wordIdx: 6, letterKey: "E" },
+  { id: "w6_DOT", char: ".", wordIdx: 6, letterKey: "." },
 ];
 
 const INITIAL_SUB_LINE: LetterItem[] = [
-  // I'M (word 5)
-  { id: "w5_I", char: "I", wordIdx: 5, letterKey: "I" },
-  { id: "w5_APO", char: "'", wordIdx: 5, letterKey: "'" },
-  { id: "w5_M", char: "M", wordIdx: 5, letterKey: "M" },
-  { id: "w5_sp1", char: " ", wordIdx: 5, letterKey: " " },
-  // UI/UX (word 6)
-  { id: "w6_U1", char: "U", wordIdx: 6, letterKey: "U" },
-  { id: "w6_I", char: "I", wordIdx: 6, letterKey: "I" },
-  { id: "w6_SL", char: "/", wordIdx: 6, letterKey: "/" },
-  { id: "w6_U2", char: "U", wordIdx: 6, letterKey: "U" },
-  { id: "w6_X", char: "X", wordIdx: 6, letterKey: "X" },
-  { id: "w6_sp2", char: " ", wordIdx: 6, letterKey: " " },
-  // DESIGNER (word 7)
-  { id: "w7_D", char: "D", wordIdx: 7, letterKey: "D" },
-  { id: "w7_E1", char: "E", wordIdx: 7, letterKey: "E" },
-  { id: "w7_S", char: "S", wordIdx: 7, letterKey: "S" },
+  // UI/UX (word 7)
+  { id: "w7_U1", char: "U", wordIdx: 7, letterKey: "U" },
   { id: "w7_I", char: "I", wordIdx: 7, letterKey: "I" },
-  { id: "w7_G", char: "G", wordIdx: 7, letterKey: "G" },
-  { id: "w7_N", char: "N", wordIdx: 7, letterKey: "N" },
-  { id: "w7_E2", char: "E", wordIdx: 7, letterKey: "E" },
-  { id: "w7_R", char: "R", wordIdx: 7, letterKey: "R" },
+  { id: "w7_SL", char: "/", wordIdx: 7, letterKey: "/" },
+  { id: "w7_U2", char: "U", wordIdx: 7, letterKey: "U" },
+  { id: "w7_X", char: "X", wordIdx: 7, letterKey: "X" },
+  { id: "w7_sp1", char: " ", wordIdx: 7, letterKey: " " },
+  // & (word 8)
+  { id: "w8_AMP", char: "&", wordIdx: 8, letterKey: "&" },
+  { id: "w8_sp2", char: " ", wordIdx: 8, letterKey: " " },
+  // CS (word 9)
+  { id: "w9_C", char: "C", wordIdx: 9, letterKey: "C" },
+  { id: "w9_S", char: "S", wordIdx: 9, letterKey: "S" },
+  { id: "w9_sp3", char: " ", wordIdx: 9, letterKey: " " },
+  // ENGINEER (word 10)
+  { id: "w10_E1", char: "E", wordIdx: 10, letterKey: "E" },
+  { id: "w10_N1", char: "N", wordIdx: 10, letterKey: "N" },
+  { id: "w10_G", char: "G", wordIdx: 10, letterKey: "G" },
+  { id: "w10_I", char: "I", wordIdx: 10, letterKey: "I" },
+  { id: "w10_N2", char: "N", wordIdx: 10, letterKey: "N" },
+  { id: "w10_E2", char: "E", wordIdx: 10, letterKey: "E" },
+  { id: "w10_E3", char: "E", wordIdx: 10, letterKey: "E" },
+  { id: "w10_R", char: "R", wordIdx: 10, letterKey: "R" },
 ];
 
 interface SwapAnimationState {
@@ -93,7 +110,7 @@ export function HeroSection() {
   const [line3, setLine3] = useState<LetterItem[]>(INITIAL_LINE_3);
   const [subLine, setSubLine] = useState<LetterItem[]>(INITIAL_SUB_LINE);
 
-  // Random word dimming: at most 2 words dimmed at a time (indices 0..7)
+  // Random word dimming: at most 2 words dimmed at a time (indices 0..10)
   const [dimmedWords, setDimmedWords] = useState<number[]>([]);
 
   // Active jumping letter swap animation
@@ -114,8 +131,8 @@ export function HeroSection() {
   // 1. Ambient Random Word Dimming (Max 2 words at a time)
   useEffect(() => {
     const dimInterval = setInterval(() => {
-      // Pick 1 or 2 distinct words from 0 to 7
-      const totalWords = 8;
+      // Pick 1 or 2 distinct words from 0 to 10
+      const totalWords = 11;
       const count = Math.random() > 0.4 ? 2 : 1;
       const first = Math.floor(Math.random() * totalWords);
       let second = Math.floor(Math.random() * totalWords);
@@ -285,7 +302,10 @@ export function HeroSection() {
         style={{
           display: "inline-flex",
           whiteSpace: "nowrap",
-          marginRight: "0.2em",
+          wordBreak: "keep-all",
+          overflowWrap: "normal",
+          flexShrink: 0,
+          marginRight: "0.22em",
         }}
       >
         {wordLetters.map(renderLetter)}
@@ -309,21 +329,21 @@ export function HeroSection() {
         boxSizing: "border-box",
       }}
     >
-      {/* Main Massive Typography Header (Placed in Middle on Load, then Scrolls to Top and Sticks until Picture Arrives) */}
+      {/* Main Massive Typography Header (Placed in Middle on Load, then Scrolls to Top and Sticks below top buttons until Picture Arrives) */}
       <div
         style={{
           position: isMobile ? "sticky" : "relative",
-          top: isMobile ? "max(0.6rem, calc(env(safe-area-inset-top, 0px) + 0.45rem))" : "auto",
+          top: isMobile ? "max(3.4rem, calc(env(safe-area-inset-top, 0px) + 2.75rem))" : "auto",
           zIndex: 4,
-          paddingTop: isMobile ? "clamp(18vh, 23vh, 28vh)" : "clamp(1rem, 3vw, 2.5rem)",
+          paddingTop: isMobile ? "clamp(16vh, 20vh, 25vh)" : "clamp(1rem, 3vw, 2.5rem)",
           paddingBottom: isMobile ? "1rem" : "0",
           margin: isMobile ? "0" : "auto 0",
           display: "flex",
           flexDirection: "column",
-          gap: "clamp(0.5rem, 1.5vw, 1.25rem)",
+          gap: "clamp(0.4rem, 1.2vw, 1rem)",
         }}
       >
-        {/* Massive Headline: LET'S MAKE / YOUR PROJECT / BEAUTIFUL. (2.5x Bigger on Mobile) */}
+        {/* Massive Headline: CRAFTING DIGITAL / PRODUCTS THAT / CONVERT & SCALE. */}
         <h1
           className="font-display"
           style={{
@@ -335,23 +355,24 @@ export function HeroSection() {
             color: "var(--text-primary)",
             margin: 0,
             wordBreak: "keep-all",
+            overflowWrap: "normal",
           }}
         >
-          {/* Line 1: LET'S MAKE */}
+          {/* Line 1: CRAFTING DIGITAL */}
           <div style={{ display: "flex", flexWrap: "wrap", rowGap: "0.08em" }}>{renderWordGroups(line1)}</div>
 
-          {/* Line 2: YOUR PROJECT */}
+          {/* Line 2: PRODUCTS THAT */}
           <div style={{ display: "flex", flexWrap: "wrap", rowGap: "0.08em" }}>{renderWordGroups(line2)}</div>
 
-          {/* Line 3: BEAUTIFUL. */}
+          {/* Line 3: CONVERT & SCALE. */}
           <div style={{ display: "flex", flexWrap: "wrap", rowGap: "0.08em" }}>{renderWordGroups(line3)}</div>
         </h1>
 
-        {/* Massive Sub-headline: I'M UI/UX DESIGNER */}
+        {/* Massive Sub-headline: UI/UX & CS ENGINEER */}
         <h2
           className="font-display"
           style={{
-            fontSize: "clamp(2rem, 8.5vw, 96px)",
+            fontSize: "clamp(1.8rem, 7.5vw, 86px)",
             fontWeight: 800,
             lineHeight: 0.9,
             letterSpacing: "-0.04em",
@@ -359,6 +380,7 @@ export function HeroSection() {
             color: "var(--text-primary)",
             margin: 0,
             wordBreak: "keep-all",
+            overflowWrap: "normal",
           }}
         >
           <div style={{ display: "flex", flexWrap: "wrap", rowGap: "0.08em" }}>{renderWordGroups(subLine)}</div>
@@ -426,14 +448,18 @@ export function HeroSection() {
             padding-bottom: 0 !important;
           }
           #hero h1 {
-            font-size: clamp(2.85rem, 11.2vw, 4.4rem) !important;
-            line-height: 0.88 !important;
-            letter-spacing: -0.045em !important;
-          }
-          #hero h2 {
-            font-size: clamp(2.1rem, 8.5vw, 3.2rem) !important;
+            font-size: clamp(2rem, 8.8vw, 3rem) !important;
             line-height: 0.9 !important;
             letter-spacing: -0.04em !important;
+            word-break: keep-all !important;
+            overflow-wrap: normal !important;
+          }
+          #hero h2 {
+            font-size: clamp(1.25rem, 5.2vw, 1.85rem) !important;
+            line-height: 0.95 !important;
+            letter-spacing: -0.035em !important;
+            word-break: keep-all !important;
+            overflow-wrap: normal !important;
           }
         }
       `}</style>

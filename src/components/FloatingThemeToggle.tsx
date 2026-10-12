@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import { Sun, Moon } from "lucide-react";
 import { AppTheme, getStoredTheme, applyThemeToDOM, broadcastThemeChange } from "@/utils/theme";
 
@@ -30,11 +30,17 @@ export function FloatingThemeToggle() {
     };
   }, []);
 
+  const lastToggleTimeRef = useRef(0);
+
   const handleToggle = useCallback(
     (e?: React.MouseEvent) => {
       if (e) {
         e.stopPropagation();
       }
+      const now = Date.now();
+      if (now - lastToggleTimeRef.current < 350) return;
+      lastToggleTimeRef.current = now;
+
       const nextTheme: AppTheme = theme === "dark" ? "light" : "dark";
       setTheme(nextTheme);
       applyThemeToDOM(nextTheme);
@@ -110,15 +116,6 @@ export function FloatingThemeToggle() {
             window.location.hash = "contact";
           }
         }}
-        onTouchEnd={(e) => {
-          e.preventDefault();
-          const el = document.getElementById("contact");
-          if (el) {
-            el.scrollIntoView({ behavior: "smooth" });
-          } else {
-            window.location.hash = "contact";
-          }
-        }}
         style={{
           display: "inline-flex",
           alignItems: "center",
@@ -156,10 +153,6 @@ export function FloatingThemeToggle() {
       <button
         type="button"
         onClick={handleToggle}
-        onTouchEnd={(e) => {
-          e.preventDefault();
-          handleToggle();
-        }}
         aria-label={isDark ? "Switch to day mode" : "Switch to night mode"}
         title={isDark ? "Switch to day mode" : "Switch to night mode"}
         className="floating-theme-btn"

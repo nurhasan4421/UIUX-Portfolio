@@ -90,8 +90,21 @@ export function PortraitScrollPinSection() {
       }
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("touchmove", handleScroll, { passive: true });
+    let rafId: number | null = null;
+    const updateScroll = () => {
+      rafId = null;
+      handleScroll();
+    };
+
+    const onScroll = () => {
+      if (rafId === null) {
+        rafId = window.requestAnimationFrame(updateScroll);
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("touchmove", onScroll, { passive: true });
+    document.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", () => {
       checkMobile();
       handleScroll();
@@ -100,8 +113,10 @@ export function PortraitScrollPinSection() {
     handleScroll();
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("touchmove", handleScroll);
+      if (rafId !== null) window.cancelAnimationFrame(rafId);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("touchmove", onScroll);
+      document.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", handleScroll);
     };
   }, []);
@@ -205,23 +220,24 @@ export function PortraitScrollPinSection() {
               maxWidth: isMobile ? "100%" : "640px",
               display: "flex",
               flexDirection: "column",
-              gap: isMobile ? "clamp(0.35rem, 1vh, 0.6rem)" : "1.75rem",
+              gap: isMobile ? "0px" : "1.75rem",
               zIndex: 10,
             }}
           >
-            {/* Category / Intro Tag */}
+            {/* 1. Category / Intro Tag */}
             <div
               className="font-mono"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
                 gap: "0.45rem",
-                fontSize: isMobile ? "0.76rem" : "clamp(0.72rem, 0.9vw, 0.82rem)",
+                fontSize: isMobile ? "0.74rem" : "clamp(0.72rem, 0.9vw, 0.82rem)",
                 letterSpacing: "0.08em",
                 textTransform: "uppercase",
                 opacity: Math.max(0.2, wordScrubProgress * 1.2),
                 color: colorBloomFactor > 0.4 ? "var(--text-primary)" : "var(--text-muted)",
                 transition: "color 0.25s ease, opacity 0.2s ease",
+                marginBottom: isMobile ? "10px" : "0",
               }}
             >
               <span
@@ -237,17 +253,18 @@ export function PortraitScrollPinSection() {
               <span>PRODUCT DESIGNER &amp; CS ENGINEER</span>
             </div>
 
-            {/* Apple-Style Typography Scrubbing: Styled like 'Design is not merely...' with high-craft bold font */}
+            {/* 2. Apple-Style Typography Scrubbing: Styled like 'Design is not merely...' with high-craft bold font */}
             <p
               className="font-display"
               style={{
                 fontSize: isMobile
-                  ? "clamp(1.18rem, 4.3vw, 1.48rem)"
+                  ? "clamp(1.02rem, 3.8vw, 1.22rem)"
                   : "clamp(1.4rem, 2.25vw, 2.05rem)",
-                lineHeight: isMobile ? 1.3 : 1.42,
+                lineHeight: isMobile ? 1.34 : 1.42,
                 letterSpacing: "-0.03em",
                 fontWeight: 800,
                 margin: 0,
+                marginBottom: isMobile ? "14px" : "0",
               }}
             >
               {PITCH_WORDS.map((item, index) => {
@@ -286,13 +303,14 @@ export function PortraitScrollPinSection() {
               })}
             </p>
 
-            {/* Mini Metrics: 24+ Dribbble Works & 100% Engineering Ready (Triggers number animation after hitting 'problems') */}
+            {/* 3. Mini Metrics: 24+ Dribbble Works & 100% Engineering Ready (Triggers number animation after hitting 'problems') */}
             <div
               style={{
                 display: "flex",
                 alignItems: "center",
                 gap: isMobile ? "1.35rem" : "2.5rem",
-                marginTop: isMobile ? "0.15rem" : "0.75rem",
+                marginTop: isMobile ? "0px" : "0.75rem",
+                marginBottom: isMobile ? "14px" : "0",
                 opacity: hitProblems ? 1 : 0,
                 transform: hitProblems ? "translateY(0)" : "translateY(12px)",
                 transition: "opacity 0.35s ease-out, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1)",
@@ -303,7 +321,7 @@ export function PortraitScrollPinSection() {
                 <div
                   className="font-display"
                   style={{
-                    fontSize: isMobile ? "1.55rem" : "1.85rem",
+                    fontSize: isMobile ? "1.45rem" : "1.85rem",
                     fontWeight: 900,
                     lineHeight: 1,
                     color: "var(--text-primary)",
@@ -315,7 +333,7 @@ export function PortraitScrollPinSection() {
                 <div
                   className="font-mono"
                   style={{
-                    fontSize: isMobile ? "0.7rem" : "clamp(0.68rem, 0.8vw, 0.76rem)",
+                    fontSize: isMobile ? "0.68rem" : "clamp(0.68rem, 0.8vw, 0.76rem)",
                     color: "var(--text-muted)",
                     textTransform: "uppercase",
                     letterSpacing: "0.07em",
@@ -329,7 +347,7 @@ export function PortraitScrollPinSection() {
               <div
                 style={{
                   width: "1px",
-                  height: isMobile ? "24px" : "28px",
+                  height: isMobile ? "22px" : "28px",
                   backgroundColor: "var(--border-medium)",
                 }}
               />
@@ -338,7 +356,7 @@ export function PortraitScrollPinSection() {
                 <div
                   className="font-display"
                   style={{
-                    fontSize: isMobile ? "1.55rem" : "1.85rem",
+                    fontSize: isMobile ? "1.45rem" : "1.85rem",
                     fontWeight: 900,
                     lineHeight: 1,
                     color: "var(--text-primary)",
@@ -350,7 +368,7 @@ export function PortraitScrollPinSection() {
                 <div
                   className="font-mono"
                   style={{
-                    fontSize: isMobile ? "0.7rem" : "clamp(0.68rem, 0.8vw, 0.76rem)",
+                    fontSize: isMobile ? "0.68rem" : "clamp(0.68rem, 0.8vw, 0.76rem)",
                     color: "var(--text-muted)",
                     textTransform: "uppercase",
                     letterSpacing: "0.07em",
@@ -362,13 +380,13 @@ export function PortraitScrollPinSection() {
               </div>
             </div>
 
-            {/* [Let's Connect] Call to Action Button (Reveals sharply when scrubbing finishes) */}
+            {/* 4. [Let's Connect] Call to Action Button (Reveals sharply when scrubbing finishes) */}
             <div
               style={{
                 display: "flex",
                 alignItems: "center",
                 gap: "1rem",
-                marginTop: isMobile ? "0.2rem" : "0.5rem",
+                marginTop: isMobile ? "0px" : "0.5rem",
                 opacity: ctaOpacity,
                 transform: `scale(${0.9 + ctaOpacity * 0.1}) translateY(${(1 - ctaOpacity) * 8}px)`,
                 pointerEvents: ctaReady ? "auto" : "none",
@@ -414,7 +432,7 @@ export function PortraitScrollPinSection() {
           </div>
 
           {/* ============================================================ */}
-          {/* PICTURE (Pins in Middle on Web, then Slides Right; On Mobile Sticks on Top) */}
+          {/* PICTURE (Pins in Middle on Web, then Slides Right; On Mobile Sticks on Top with Gradient Bottom) */}
           {/* ============================================================ */}
           <div
             style={{
@@ -432,12 +450,12 @@ export function PortraitScrollPinSection() {
               zIndex: 8,
             }}
           >
-            {/* Cutout Wrapper (More More Big on Mobile as requested) */}
+            {/* Cutout Wrapper with Gradient Bottom */}
             <div
               style={{
                 position: "relative",
-                width: isMobile ? "clamp(210px, 56vw, 280px)" : "clamp(320px, 32vw, 460px)",
-                height: isMobile ? "clamp(200px, 28vh, 270px)" : "clamp(460px, 66vh, 640px)",
+                width: isMobile ? "clamp(190px, 52vw, 250px)" : "clamp(320px, 32vw, 460px)",
+                height: isMobile ? "clamp(180px, 24vh, 230px)" : "clamp(460px, 66vh, 640px)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -457,7 +475,7 @@ export function PortraitScrollPinSection() {
                 }}
               />
 
-              {/* Real Cutout Image Scrubbing B&W -> Full Color */}
+              {/* Real Cutout Image Scrubbing B&W -> Full Color with Soft Gradient Bottom Fade */}
               <div
                 style={{
                   position: "relative",
@@ -466,6 +484,12 @@ export function PortraitScrollPinSection() {
                   filter: `drop-shadow(0 15px 25px rgba(0, 0, 0, ${
                     0.25 + colorBloomFactor * 0.25
                   }))`,
+                  WebkitMaskImage: isMobile
+                    ? "linear-gradient(to bottom, black 55%, transparent 95%)"
+                    : "linear-gradient(to bottom, black 75%, transparent 100%)",
+                  maskImage: isMobile
+                    ? "linear-gradient(to bottom, black 55%, transparent 95%)"
+                    : "linear-gradient(to bottom, black 75%, transparent 100%)",
                   transition: "none",
                 }}
               >
@@ -490,6 +514,20 @@ export function PortraitScrollPinSection() {
                     transition: "none",
                     userSelect: "none",
                     pointerEvents: "none",
+                  }}
+                />
+
+                {/* Bottom Gradient overlay matching site background color */}
+                <div
+                  style={{
+                    position: "absolute",
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    height: isMobile ? "35%" : "22%",
+                    background: "linear-gradient(to bottom, transparent 0%, var(--bg-primary) 100%)",
+                    pointerEvents: "none",
+                    zIndex: 4,
                   }}
                 />
               </div>
