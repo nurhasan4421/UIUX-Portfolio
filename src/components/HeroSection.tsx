@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ArrowDownRight, ArrowUpRight, MapPin } from "lucide-react";
+import { ArrowUpRight, MapPin } from "lucide-react";
 import { PERSONAL_INFO } from "@/data/portfolioData";
 import { ArtScratchPortrait } from "./ArtScratchPortrait";
 
@@ -212,36 +212,6 @@ export function HeroSection() {
             >
               Let&apos;s Connect
               <ArrowUpRight size={17} />
-            </a>
-
-            <a
-              href="#works"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "0.5rem",
-                minHeight: "48px",
-                padding: "0 1.5rem",
-                borderRadius: "999px",
-                background: "transparent",
-                color: "var(--text-primary)",
-                border: "1px solid var(--border-medium)",
-                fontWeight: 600,
-                fontSize: "0.95rem",
-                transition: "all 0.2s ease",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "var(--border-bold)";
-                e.currentTarget.style.background = "var(--bg-card)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "var(--border-medium)";
-                e.currentTarget.style.background = "transparent";
-              }}
-            >
-              Selected Works
-              <ArrowDownRight size={17} />
             </a>
           </div>
         </div>
