@@ -333,9 +333,9 @@ export function HeroSection() {
       <div
         style={{
           position: isMobile ? "sticky" : "relative",
-          top: isMobile ? "max(5.8rem, calc(env(safe-area-inset-top, 0px) + 4.2rem))" : "auto",
+          top: isMobile ? "max(5.6rem, calc(env(safe-area-inset-top, 0px) + 4rem))" : "auto",
           zIndex: 4,
-          paddingTop: isMobile ? "clamp(14vh, 18vh, 22vh)" : "clamp(1rem, 3vw, 2.5rem)",
+          paddingTop: isMobile ? "clamp(10vh, 14vh, 18vh)" : "clamp(1rem, 3vw, 2.5rem)",
           paddingBottom: isMobile ? "1rem" : "0",
           margin: isMobile ? "0" : "auto 0",
           display: "flex",
@@ -444,20 +444,20 @@ export function HeroSection() {
 
         @media (max-width: 640px) {
           #hero {
-            min-height: 150vh !important;
+            min-height: 105vh !important;
             padding-bottom: 0 !important;
           }
           #hero h1 {
-            font-size: clamp(2rem, 8.8vw, 3rem) !important;
-            line-height: 0.9 !important;
-            letter-spacing: -0.04em !important;
+            font-size: clamp(2.75rem, 11.4vw, 4.3rem) !important;
+            line-height: 0.87 !important;
+            letter-spacing: -0.045em !important;
             word-break: keep-all !important;
             overflow-wrap: normal !important;
           }
           #hero h2 {
-            font-size: clamp(1.25rem, 5.2vw, 1.85rem) !important;
-            line-height: 0.95 !important;
-            letter-spacing: -0.035em !important;
+            font-size: clamp(1.75rem, 7.4vw, 2.7rem) !important;
+            line-height: 0.9 !important;
+            letter-spacing: -0.04em !important;
             word-break: keep-all !important;
             overflow-wrap: normal !important;
           }
