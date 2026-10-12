@@ -6,7 +6,7 @@ import { Smartphone, Copy, Check, X, Wifi } from "lucide-react";
 export function NetworkTestingBar() {
   const [copied, setCopied] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
-  const mobileUrl = "http://192.168.0.54:3000";
+  const mobileUrl = "http://192.168.0.54:3001";
 
   const handleCopy = () => {
     navigator.clipboard.writeText(mobileUrl);

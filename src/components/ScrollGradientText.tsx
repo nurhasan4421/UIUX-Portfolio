@@ -15,7 +15,7 @@ export function ScrollGradientText({
   className = "",
 }: ScrollGradientTextProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [progress, setProgress] = useState(0.2);
+  const [progress, setProgress] = useState(0.25);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -81,7 +81,7 @@ export function ScrollGradientText({
         style={{
           fontSize: "clamp(1.75rem, 4.4vw, 4rem)",
           fontWeight: 800,
-          lineHeight: 1.25,
+          lineHeight: 1.3,
           letterSpacing: "-0.03em",
           margin: 0,
         }}
@@ -97,16 +97,11 @@ export function ScrollGradientText({
               style={{
                 display: "inline-block",
                 marginRight: "0.32em",
-                transition: "opacity 0.25s ease, transform 0.35s ease, filter 0.35s ease",
-                opacity: isIlluminated ? 0.35 + 0.65 * wordProgress : 0.2,
-                transform: isIlluminated ? "translateY(0)" : "translateY(3px)",
-                filter: isIlluminated ? "none" : "blur(0.5px)",
+                transition: "color 0.25s ease, opacity 0.25s ease, transform 0.25s ease",
+                opacity: isIlluminated ? 0.35 + 0.65 * wordProgress : 0.25,
+                transform: isIlluminated ? "translateY(0)" : "translateY(2px)",
                 color: isIlluminated ? "var(--text-primary)" : "var(--text-muted)",
-                background: isIlluminated
-                  ? `linear-gradient(135deg, var(--text-primary) 0%, rgba(255,255,255,${0.6 + 0.4 * wordProgress}) 100%)`
-                  : "none",
-                WebkitBackgroundClip: isIlluminated ? "text" : "none",
-                WebkitTextFillColor: isIlluminated ? "transparent" : "inherit",
+                textShadow: isIlluminated ? "0 0 20px var(--glow-active)" : "none",
               }}
             >
               {word}
