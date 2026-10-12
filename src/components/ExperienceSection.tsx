@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import { EXPERIENCE, TESTIMONIALS } from "@/data/portfolioData";
 import { Quote, Briefcase, MapPin, Building2, Sparkles } from "lucide-react";
+import { ScrollScrubHeadline } from "@/components/ScrollScrubHeadline";
 
 export function ExperienceSection() {
   return (
@@ -43,21 +44,10 @@ export function ExperienceSection() {
           >
             05 // TRACK RECORD &amp; EXPERIENCE
           </span>
-          <h2
-            className="font-display"
-            style={{
-              fontSize: "clamp(2rem, 5vw, 4.5rem)",
-              fontWeight: 800,
-              lineHeight: 1.05,
-              letterSpacing: "-0.035em",
-              color: "var(--text-primary)",
-              textTransform: "uppercase",
-            }}
-          >
-            EXPERIENCE &amp;
-            <br />
-            AGENCY CRAFT
-          </h2>
+          <ScrollScrubHeadline
+            lines={["EXPERIENCE &", "AGENCY CRAFT"]}
+            fontSize="clamp(2rem, 5vw, 4.5rem)"
+          />
         </div>
 
         <p

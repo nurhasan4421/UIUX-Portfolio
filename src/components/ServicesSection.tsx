@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { SERVICES } from "@/data/portfolioData";
 import { Check, ArrowRight, Sparkles } from "lucide-react";
+import { ScrollScrubHeadline } from "@/components/ScrollScrubHeadline";
 
 const PROCESS_STEPS = [
   {
@@ -72,21 +73,10 @@ export function ServicesSection() {
           >
             04 // CAPABILITIES &amp; PROCESS
           </span>
-          <h2
-            className="font-display"
-            style={{
-              fontSize: "clamp(2rem, 5vw, 4.5rem)",
-              fontWeight: 800,
-              lineHeight: 1.05,
-              letterSpacing: "-0.035em",
-              color: "var(--text-primary)",
-              textTransform: "uppercase",
-            }}
-          >
-            HOW I ELEVATE
-            <br />
-            DIGITAL PRODUCTS
-          </h2>
+          <ScrollScrubHeadline
+            lines={["HOW I ELEVATE", "DIGITAL PRODUCTS"]}
+            fontSize="clamp(2rem, 5vw, 4.5rem)"
+          />
         </div>
 
         <p

@@ -27,12 +27,13 @@ export function BottomFloatingNavbar() {
 
     const handleThemeChange = (e: Event) => {
       const customEvent = e as CustomEvent<"dark" | "light">;
-      if (customEvent.detail) {
+      if (customEvent.detail && (customEvent.detail === "dark" || customEvent.detail === "light")) {
         setTheme(customEvent.detail);
       }
     };
 
     window.addEventListener("themechange", handleThemeChange);
+    window.addEventListener("nurhasan_theme_change", handleThemeChange);
 
     const handleScroll = () => {
       const sections = ["hero", "works", "about", "philosophy", "services", "experience", "contact"];
@@ -54,20 +55,24 @@ export function BottomFloatingNavbar() {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("touchmove", handleScroll);
       window.removeEventListener("themechange", handleThemeChange);
+      window.removeEventListener("nurhasan_theme_change", handleThemeChange);
     };
   }, []);
 
-  const lastThemeToggleRef = useRef<number>(0);
-
-  const applyGlobalTheme = (newTheme: "dark" | "light") => {
+  const toggleTheme = (e?: React.SyntheticEvent | Event) => {
+    if (e) {
+      e.stopPropagation();
+    }
+    const nextTheme: "dark" | "light" = theme === "dark" ? "light" : "dark";
+    setTheme(nextTheme);
     try {
-      document.documentElement.setAttribute("data-theme", newTheme);
-      document.documentElement.dataset.theme = newTheme;
+      document.documentElement.setAttribute("data-theme", nextTheme);
+      document.documentElement.dataset.theme = nextTheme;
       if (document.body) {
-        document.body.setAttribute("data-theme", newTheme);
-        document.body.dataset.theme = newTheme;
+        document.body.setAttribute("data-theme", nextTheme);
+        document.body.dataset.theme = nextTheme;
       }
-      if (newTheme === "light") {
+      if (nextTheme === "light") {
         document.documentElement.classList.add("light");
         document.documentElement.classList.remove("dark");
         if (document.body) {
@@ -82,30 +87,11 @@ export function BottomFloatingNavbar() {
           document.body.classList.remove("light");
         }
       }
-      document.documentElement.style.colorScheme = newTheme;
-      try {
-        localStorage.setItem("nurhasan_theme", newTheme);
-      } catch (err) {}
-    } catch (e) {}
-  };
-
-  const toggleTheme = (e?: React.SyntheticEvent | Event) => {
-    if (e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-    const now = Date.now();
-    if (now - lastThemeToggleRef.current < 350) return;
-    lastThemeToggleRef.current = now;
-
-    setTheme((prevTheme) => {
-      const nextTheme = prevTheme === "dark" ? "light" : "dark";
-      applyGlobalTheme(nextTheme);
-      try {
-        window.dispatchEvent(new CustomEvent("themechange", { detail: nextTheme }));
-      } catch (err) {}
-      return nextTheme;
-    });
+      document.documentElement.style.colorScheme = nextTheme;
+      localStorage.setItem("nurhasan_theme", nextTheme);
+      window.dispatchEvent(new CustomEvent("nurhasan_theme_change", { detail: nextTheme }));
+      window.dispatchEvent(new CustomEvent("themechange", { detail: nextTheme }));
+    } catch (err) {}
   };
 
   const closeMenu = () => setMenuOpen(false);

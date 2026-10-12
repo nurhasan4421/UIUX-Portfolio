@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { PROJECTS, Project } from "@/data/portfolioData";
 import { ArrowUpRight, Play, ExternalLink } from "lucide-react";
+import { ScrollScrubHeadline } from "@/components/ScrollScrubHeadline";
 
 const CATEGORIES = ["All Works", "Mobile Apps", "Web & SaaS", "Fintech", "E-Commerce"];
 
@@ -55,21 +56,10 @@ export function ProjectsSection() {
           >
             Selected Works
           </span>
-          <h2
-            className="font-display"
-            style={{
-              fontSize: "clamp(1.85rem, 4.5vw, 4rem)",
-              fontWeight: 800,
-              lineHeight: 1.05,
-              letterSpacing: "-0.03em",
-              color: "var(--text-primary)",
-              textTransform: "uppercase",
-            }}
-          >
-            FEATURED CRAFT
-            <br />
-            &amp; CASE STUDIES
-          </h2>
+          <ScrollScrubHeadline
+            lines={["FEATURED CRAFT", "& CASE STUDIES"]}
+            fontSize="clamp(1.85rem, 4.5vw, 4rem)"
+          />
         </div>
 
         {/* Filter Pills with Horizontal Scroll on Phone */}

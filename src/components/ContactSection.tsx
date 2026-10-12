@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { PERSONAL_INFO } from "@/data/portfolioData";
 import { submitContactMessage } from "@/lib/supabase";
 import { Mail, MapPin, Copy, Check, Send, ExternalLink } from "lucide-react";
+import { ScrollScrubHeadline } from "@/components/ScrollScrubHeadline";
 
 export function ContactSection() {
   const [formData, setFormData] = useState({
@@ -77,32 +78,13 @@ export function ContactSection() {
           Initiate Collaboration
         </span>
 
-        <h2
-          className="font-display"
-          style={{
-            fontSize: "clamp(2rem, 6.5vw, 110px)",
-            fontWeight: 900,
-            lineHeight: 0.95,
-            letterSpacing: "-0.04em",
-            color: "var(--text-primary)",
-            textTransform: "uppercase",
-            margin: 0,
-          }}
-        >
-          LET&apos;S BUILD
-          <br />
-          SOMETHING
-          <br />
-          <span
-            style={{
-              background: "linear-gradient(180deg, var(--text-primary) 0%, var(--text-muted) 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-            }}
-          >
-            ICONIC TOGETHER.
-          </span>
-        </h2>
+        <ScrollScrubHeadline
+          lines={["LET'S BUILD", "SOMETHING", "ICONIC TOGETHER."]}
+          fontSize="clamp(2rem, 6.5vw, 110px)"
+          fontWeight={900}
+          lineHeight={0.95}
+          letterSpacing="-0.04em"
+        />
       </div>
 
       {/* Grid: Coordinates & Form */}

@@ -23,9 +23,11 @@ export function ScrollGradientText({
       const rect = containerRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
 
-      // Start illuminating when top reaches 90% of screen, complete when at 20%
-      const start = windowHeight * 0.9;
-      const end = windowHeight * 0.25;
+      // Slow, majestic scroll reveal across a wide scroll runway
+      // Starts as element enters comfortable viewing zone (85% of screen)
+      // Completes gradually as it scrolls through the center toward the top (5% of screen)
+      const start = windowHeight * 0.85;
+      const end = windowHeight * 0.02;
       const current = rect.top;
 
       let p = (start - current) / (start - end);
@@ -91,9 +93,9 @@ export function ScrollGradientText({
         }}
       >
         {words.map((word, index) => {
-          const wordThreshold = index / words.length;
-          const isIlluminated = progress >= wordThreshold;
-          const wordProgress = Math.max(0, Math.min(1, (progress - wordThreshold) * words.length * 1.5));
+          const wordThreshold = words.length > 1 ? index / (words.length - 0.2) : 0;
+          const wordProgress = Math.max(0, Math.min(1, (progress - wordThreshold) * words.length * 1.4));
+          const isIlluminated = wordProgress >= 0.7;
 
           return (
             <span
@@ -101,11 +103,11 @@ export function ScrollGradientText({
               style={{
                 display: "inline-block",
                 marginRight: "0.32em",
-                transition: "color 0.2s ease, opacity 0.2s ease, transform 0.2s ease",
-                opacity: isIlluminated ? 0.4 + 0.6 * wordProgress : 0.22,
+                transition: "none",
+                opacity: 0.16 + 0.84 * wordProgress,
                 transform: isIlluminated ? "translateY(0)" : "translateY(2px)",
                 color: isIlluminated ? "var(--text-primary)" : "var(--text-muted)",
-                textShadow: isIlluminated && wordProgress > 0.6 ? "0 0 16px var(--glow-active)" : "none",
+                textShadow: isIlluminated && wordProgress > 0.85 ? "0 0 16px var(--glow-active)" : "none",
               }}
             >
               {word}
@@ -147,7 +149,7 @@ export function ScrollGradientText({
             height: "100%",
             width: `${progress * 100}%`,
             background: "linear-gradient(90deg, transparent, var(--text-primary))",
-            transition: "width 0.05s linear",
+            transition: "none",
           }}
         />
       </div>

@@ -1,93 +1,51 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from "react";
-import { Sun, Moon, Sparkles } from "lucide-react";
+import React, { useEffect, useState, useCallback } from "react";
+import { Sun, Moon } from "lucide-react";
+import { AppTheme, getStoredTheme, applyThemeToDOM, broadcastThemeChange } from "@/utils/theme";
 
 export function FloatingThemeToggle() {
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const [theme, setTheme] = useState<AppTheme>("dark");
   const [mounted, setMounted] = useState(false);
-  const lastToggleRef = useRef<number>(0);
-
-  const applyTheme = (newTheme: "dark" | "light") => {
-    try {
-      document.documentElement.setAttribute("data-theme", newTheme);
-      document.documentElement.dataset.theme = newTheme;
-      if (document.body) {
-        document.body.setAttribute("data-theme", newTheme);
-        document.body.dataset.theme = newTheme;
-      }
-
-      if (newTheme === "light") {
-        document.documentElement.classList.add("light");
-        document.documentElement.classList.remove("dark");
-        if (document.body) {
-          document.body.classList.add("light");
-          document.body.classList.remove("dark");
-        }
-      } else {
-        document.documentElement.classList.add("dark");
-        document.documentElement.classList.remove("light");
-        if (document.body) {
-          document.body.classList.add("dark");
-          document.body.classList.remove("light");
-        }
-      }
-
-      document.documentElement.style.colorScheme = newTheme;
-
-      try {
-        localStorage.setItem("nurhasan_theme", newTheme);
-      } catch (e) {
-        // Safe fallback if localStorage is disabled or Safari private browsing
-      }
-    } catch (err) {
-      console.error("Failed to apply theme:", err);
-    }
-  };
 
   useEffect(() => {
     setMounted(true);
-    let initialTheme: "dark" | "light" = "dark";
-    try {
-      const stored = localStorage.getItem("nurhasan_theme");
-      if (stored === "light" || stored === "dark") {
-        initialTheme = stored;
-      }
-    } catch (e) {}
-
+    const initialTheme = getStoredTheme();
     setTheme(initialTheme);
-    applyTheme(initialTheme);
+    applyThemeToDOM(initialTheme);
 
     const handleThemeChange = (e: Event) => {
-      const customEvent = e as CustomEvent<"dark" | "light">;
-      if (customEvent.detail) {
+      const customEvent = e as CustomEvent<AppTheme>;
+      if (customEvent.detail && (customEvent.detail === "dark" || customEvent.detail === "light")) {
         setTheme(customEvent.detail);
       }
     };
 
+    window.addEventListener("nurhasan_theme_change", handleThemeChange);
     window.addEventListener("themechange", handleThemeChange);
-    return () => window.removeEventListener("themechange", handleThemeChange);
+
+    return () => {
+      window.removeEventListener("nurhasan_theme_change", handleThemeChange);
+      window.removeEventListener("themechange", handleThemeChange);
+    };
   }, []);
 
-  const handleToggle = (e?: React.SyntheticEvent | Event) => {
-    if (e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-    const now = Date.now();
-    // Guard against iOS double-firing (touchend followed by synthesized click)
-    if (now - lastToggleRef.current < 350) return;
-    lastToggleRef.current = now;
-
-    setTheme((prevTheme) => {
-      const nextTheme = prevTheme === "dark" ? "light" : "dark";
-      applyTheme(nextTheme);
+  const handleToggle = useCallback(
+    (e?: React.MouseEvent) => {
+      if (e) {
+        e.stopPropagation();
+      }
+      const nextTheme: AppTheme = theme === "dark" ? "light" : "dark";
+      setTheme(nextTheme);
+      applyThemeToDOM(nextTheme);
+      broadcastThemeChange(nextTheme);
+      // Also broadcast legacy event for other listeners
       try {
         window.dispatchEvent(new CustomEvent("themechange", { detail: nextTheme }));
       } catch (err) {}
-      return nextTheme;
-    });
-  };
+    },
+    [theme]
+  );
 
   const isDark = theme === "dark";
 
@@ -96,26 +54,26 @@ export function FloatingThemeToggle() {
       <div
         style={{
           position: "fixed",
-          top: "max(1rem, calc(env(safe-area-inset-top, 0px) + 0.75rem))",
-          right: "max(1rem, calc(env(safe-area-inset-right, 0px) + 0.75rem))",
-          zIndex: 10000,
+          top: "max(0.85rem, calc(env(safe-area-inset-top, 0px) + 0.5rem))",
+          right: "max(0.85rem, calc(env(safe-area-inset-right, 0px) + 0.5rem))",
+          zIndex: 99999,
           display: "flex",
           alignItems: "center",
-          gap: "0.45rem",
+          gap: "0.5rem",
         }}
       >
         <div
           style={{
-            height: "36px",
-            width: "94px",
+            height: "38px",
+            width: "88px",
             borderRadius: "999px",
             backgroundColor: "rgba(20, 20, 22, 0.85)",
           }}
         />
         <div
           style={{
-            width: "36px",
-            height: "36px",
+            width: "40px",
+            height: "40px",
             borderRadius: "50%",
             backgroundColor: "rgba(20, 20, 22, 0.85)",
           }}
@@ -128,39 +86,39 @@ export function FloatingThemeToggle() {
     <div
       style={{
         position: "fixed",
-        top: "max(1rem, calc(env(safe-area-inset-top, 0px) + 0.75rem))",
-        right: "max(1rem, calc(env(safe-area-inset-right, 0px) + 0.75rem))",
-        zIndex: 10000,
+        top: "max(0.85rem, calc(env(safe-area-inset-top, 0px) + 0.5rem))",
+        right: "max(0.85rem, calc(env(safe-area-inset-right, 0px) + 0.5rem))",
+        zIndex: 99999,
         display: "flex",
         alignItems: "center",
-        gap: "0.45rem",
+        gap: "0.5rem",
         pointerEvents: "auto",
-        touchAction: "manipulation",
       }}
     >
-      {/* 1. Floated Hire Now Button on Left Side of Day/Night Icon */}
+      {/* 1. Floated Hire Now Button on Left Side (AI icon removed as requested) */}
       <a
         href="#contact"
         aria-label="Hire Nur Hasan"
         style={{
           display: "inline-flex",
           alignItems: "center",
-          gap: "0.35rem",
-          height: "36px",
-          padding: "0 0.9rem",
+          justifyContent: "center",
+          height: "38px",
+          padding: "0 1.1rem",
           borderRadius: "999px",
-          backgroundColor: isDark ? "rgba(255, 255, 255, 0.95)" : "rgba(10, 10, 10, 0.92)",
+          backgroundColor: isDark ? "#ffffff" : "#0a0a0a",
           color: isDark ? "#050505" : "#ffffff",
-          fontSize: "0.8rem",
+          fontSize: "0.82rem",
           fontWeight: 700,
           letterSpacing: "-0.01em",
           textDecoration: "none",
           whiteSpace: "nowrap",
           boxShadow: isDark
-            ? "0 6px 18px rgba(0, 0, 0, 0.35)"
-            : "0 6px 18px rgba(0, 0, 0, 0.15)",
+            ? "0 4px 14px rgba(0, 0, 0, 0.45)"
+            : "0 4px 14px rgba(0, 0, 0, 0.15)",
           transition: "transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease",
           WebkitTapHighlightColor: "transparent",
+          userSelect: "none",
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.transform = "scale(1.04)";
@@ -169,40 +127,45 @@ export function FloatingThemeToggle() {
           e.currentTarget.style.transform = "scale(1)";
         }}
       >
-        <Sparkles size={12} strokeWidth={2.4} />
         <span>Hire Now</span>
       </a>
 
-      {/* 2. Smaller Day/Night Toggle Button */}
+      {/* 2. Day/Night Toggle Button (Mobile Touch Reliable & Fully Responsive) */}
       <button
         type="button"
         onClick={handleToggle}
-        onTouchEnd={handleToggle}
         aria-label={isDark ? "Switch to day mode" : "Switch to night mode"}
         title={isDark ? "Switch to day mode" : "Switch to night mode"}
         className="floating-theme-btn"
         style={{
-          width: "36px",
-          height: "36px",
+          width: "40px",
+          height: "40px",
+          minWidth: "40px",
+          minHeight: "40px",
           borderRadius: "50%",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: isDark ? "rgba(24, 24, 27, 0.9)" : "rgba(255, 255, 255, 0.95)",
+          backgroundColor: isDark ? "rgba(24, 24, 27, 0.95)" : "rgba(255, 255, 255, 0.95)",
           backdropFilter: "blur(20px) saturate(180%)",
           WebkitBackdropFilter: "blur(20px) saturate(180%)",
-          border: isDark ? "1.5px solid rgba(255, 255, 255, 0.2)" : "1.5px solid rgba(0, 0, 0, 0.15)",
+          border: isDark ? "1.5px solid rgba(255, 255, 255, 0.22)" : "1.5px solid rgba(0, 0, 0, 0.18)",
           color: isDark ? "#ffffff" : "#0a0a0a",
           boxShadow: isDark
-            ? "0 6px 18px rgba(0, 0, 0, 0.35)"
-            : "0 6px 18px rgba(0, 0, 0, 0.12)",
+            ? "0 6px 20px rgba(0, 0, 0, 0.5)"
+            : "0 6px 18px rgba(0, 0, 0, 0.14)",
           transition: "transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease",
+          cursor: "pointer",
+          pointerEvents: "auto",
+          touchAction: "manipulation",
+          WebkitTapHighlightColor: "transparent",
+          outline: "none",
         }}
       >
         {isDark ? (
-          <Sun size={16} strokeWidth={2.2} />
+          <Sun size={17} strokeWidth={2.3} />
         ) : (
-          <Moon size={16} strokeWidth={2.2} />
+          <Moon size={17} strokeWidth={2.3} />
         )}
       </button>
     </div>

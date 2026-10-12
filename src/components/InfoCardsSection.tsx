@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { PERSONAL_INFO, PHILOSOPHY_CARDS } from "@/data/portfolioData";
 import { ExternalLink, Award } from "lucide-react";
+import { ScrollScrubHeadline } from "@/components/ScrollScrubHeadline";
 
 export function InfoCardsSection() {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
@@ -43,21 +44,10 @@ export function InfoCardsSection() {
           >
             About &amp; Core Philosophy
           </span>
-          <h2
-            className="font-display"
-            style={{
-              fontSize: "clamp(1.85rem, 4.5vw, 4rem)",
-              fontWeight: 800,
-              lineHeight: 1.05,
-              letterSpacing: "-0.03em",
-              color: "var(--text-primary)",
-              textTransform: "uppercase",
-            }}
-          >
-            ENGINEERED AESTHETICS.
-            <br />
-            ZERO FLUFF.
-          </h2>
+          <ScrollScrubHeadline
+            lines={["ENGINEERED AESTHETICS.", "ZERO FLUFF."]}
+            fontSize="clamp(1.85rem, 4.5vw, 4rem)"
+          />
         </div>
 
         <p
