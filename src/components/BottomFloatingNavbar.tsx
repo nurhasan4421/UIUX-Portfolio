@@ -21,6 +21,17 @@ export function BottomFloatingNavbar() {
   const [activeSection, setActiveSection] = useState("hero");
   const [menuOpen, setMenuOpen] = useState(false);
   const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const isProgrammaticScrollRef = useRef(false);
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleNavClick = (sectionId: string, e?: React.MouseEvent) => {
+    setActiveSection(sectionId);
+    isProgrammaticScrollRef.current = true;
+    if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+    scrollTimeoutRef.current = setTimeout(() => {
+      isProgrammaticScrollRef.current = false;
+    }, 1200);
+  };
 
   useEffect(() => {
     const savedTheme = (localStorage.getItem("nurhasan_theme") as "dark" | "light") || "dark";
@@ -37,8 +48,17 @@ export function BottomFloatingNavbar() {
     window.addEventListener("nurhasan_theme_change", handleThemeChange);
 
     const handleScroll = () => {
-      const sections = ["hero", "works", "about", "philosophy", "services", "experience", "contact"];
+      if (isProgrammaticScrollRef.current) return;
+
+      // Section IDs in exact physical top-to-bottom DOM order
+      const sections = ["hero", "about", "philosophy", "works", "services", "experience", "contact"];
       const scrollPosition = window.scrollY + window.innerHeight * 0.35;
+
+      // Check if user reached bottom of page
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 60) {
+        setActiveSection("contact");
+        return;
+      }
 
       for (let i = sections.length - 1; i >= 0; i--) {
         const el = document.getElementById(sections[i]);
@@ -53,6 +73,7 @@ export function BottomFloatingNavbar() {
     window.addEventListener("touchmove", handleScroll, { passive: true });
     handleScroll();
     return () => {
+      if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("touchmove", handleScroll);
       window.removeEventListener("themechange", handleThemeChange);
@@ -209,7 +230,10 @@ export function BottomFloatingNavbar() {
                 <a
                   key={link.href}
                   href={link.href}
-                  onClick={closeMenu}
+                  onClick={(e) => {
+                    handleNavClick(link.href.replace("#", ""), e);
+                    closeMenu();
+                  }}
                   style={{
                     display: "flex",
                     alignItems: "center",
@@ -377,6 +401,7 @@ export function BottomFloatingNavbar() {
         {/* 1. Colorful Picture Avatar in NH spot */}
         <a
           href="#hero"
+          onClick={(e) => handleNavClick("hero", e)}
           aria-label="Home / Nur Hasan"
           title="Nur Hasan"
           style={{
@@ -404,10 +429,10 @@ export function BottomFloatingNavbar() {
           />
         </a>
 
-        {/* 2. Works Link (Deep active text color, light inactive text color, pure navbar link) */}
+        {/* 2. Works Link (Deep bold active text color, light inactive text color, pure navbar link) */}
         <a
           href="#works"
-          onClick={() => setActiveSection("works")}
+          onClick={(e) => handleNavClick("works", e)}
           style={{
             position: "relative",
             display: "inline-flex",
@@ -415,28 +440,35 @@ export function BottomFloatingNavbar() {
             padding: "0.45rem clamp(0.6rem, 1.4vw, 1rem)",
             borderRadius: "999px",
             fontSize: "clamp(0.82rem, 1.15vw, 0.92rem)",
-            fontWeight: isWorksActive ? 750 : 500,
+            fontWeight: isWorksActive ? 800 : 500,
             color: isWorksActive ? "var(--text-primary)" : "var(--text-muted)",
+            opacity: isWorksActive ? 1 : 0.72,
             backgroundColor: "transparent",
             boxShadow: "none",
-            transition: "color 0.2s ease, font-weight 0.2s ease",
+            transition: "color 0.2s ease, font-weight 0.2s ease, opacity 0.2s ease",
             whiteSpace: "nowrap",
             textDecoration: "none",
           }}
           onMouseEnter={(e) => {
-            if (!isWorksActive) e.currentTarget.style.color = "var(--text-secondary)";
+            if (!isWorksActive) {
+              e.currentTarget.style.color = "var(--text-primary)";
+              e.currentTarget.style.opacity = "1";
+            }
           }}
           onMouseLeave={(e) => {
-            if (!isWorksActive) e.currentTarget.style.color = "var(--text-muted)";
+            if (!isWorksActive) {
+              e.currentTarget.style.color = "var(--text-muted)";
+              e.currentTarget.style.opacity = "0.72";
+            }
           }}
         >
           <span>Works</span>
         </a>
 
-        {/* 3. Services Link (Deep active text color, light inactive text color, pure navbar link) */}
+        {/* 3. Services Link (Deep bold active text color, light inactive text color, pure navbar link) */}
         <a
           href="#services"
-          onClick={() => setActiveSection("services")}
+          onClick={(e) => handleNavClick("services", e)}
           style={{
             position: "relative",
             display: "inline-flex",
@@ -444,19 +476,26 @@ export function BottomFloatingNavbar() {
             padding: "0.45rem clamp(0.6rem, 1.4vw, 1rem)",
             borderRadius: "999px",
             fontSize: "clamp(0.82rem, 1.15vw, 0.92rem)",
-            fontWeight: isServicesActive ? 750 : 500,
+            fontWeight: isServicesActive ? 800 : 500,
             color: isServicesActive ? "var(--text-primary)" : "var(--text-muted)",
+            opacity: isServicesActive ? 1 : 0.72,
             backgroundColor: "transparent",
             boxShadow: "none",
-            transition: "color 0.2s ease, font-weight 0.2s ease",
+            transition: "color 0.2s ease, font-weight 0.2s ease, opacity 0.2s ease",
             whiteSpace: "nowrap",
             textDecoration: "none",
           }}
           onMouseEnter={(e) => {
-            if (!isServicesActive) e.currentTarget.style.color = "var(--text-secondary)";
+            if (!isServicesActive) {
+              e.currentTarget.style.color = "var(--text-primary)";
+              e.currentTarget.style.opacity = "1";
+            }
           }}
           onMouseLeave={(e) => {
-            if (!isServicesActive) e.currentTarget.style.color = "var(--text-muted)";
+            if (!isServicesActive) {
+              e.currentTarget.style.color = "var(--text-muted)";
+              e.currentTarget.style.opacity = "0.72";
+            }
           }}
         >
           <span>Services</span>
