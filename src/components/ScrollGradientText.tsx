@@ -129,30 +129,6 @@ export function ScrollGradientText({
           {subtext}
         </p>
       )}
-
-      {/* Bottom Kinetic Gradient Track */}
-      <div
-        style={{
-          marginTop: "2.5rem",
-          width: "100%",
-          height: "2px",
-          background: "var(--border-subtle)",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            height: "100%",
-            width: `${progress * 100}%`,
-            background: "linear-gradient(90deg, transparent, var(--text-primary))",
-            transition: "none",
-          }}
-        />
-      </div>
     </div>
   );
 }

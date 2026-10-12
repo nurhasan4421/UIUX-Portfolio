@@ -14,6 +14,9 @@ const nextConfig: NextConfig = {
   output: isGithubActions ? "export" : undefined,
   basePath: basePath || undefined,
   assetPrefix: assetPrefix || undefined,
+  env: {
+    NEXT_PUBLIC_BASE_PATH: basePath,
+  },
   devIndicators: false,
   images: {
     unoptimized: true,

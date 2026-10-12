@@ -5,6 +5,7 @@ import Image from "next/image";
 import { PERSONAL_INFO, PHILOSOPHY_CARDS } from "@/data/portfolioData";
 import { ExternalLink, Award } from "lucide-react";
 import { ScrollScrubHeadline } from "@/components/ScrollScrubHeadline";
+import { getAssetPath } from "@/utils/assetPath";
 
 export function InfoCardsSection() {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
@@ -149,7 +150,7 @@ export function InfoCardsSection() {
               }}
             >
               <Image
-                src="/images/nurhasan-portrait.jpg"
+                src={getAssetPath("/images/nurhasan-portrait.jpg")}
                 alt="Nur Hasan - UI/UX Designer"
                 fill
                 sizes="(max-width: 768px) 100vw, 380px"

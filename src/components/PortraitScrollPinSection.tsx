@@ -4,6 +4,7 @@ import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { PERSONAL_INFO } from "@/data/portfolioData";
+import { getAssetPath } from "@/utils/assetPath";
 
 interface WordItem {
   text: string;
@@ -469,7 +470,7 @@ export function PortraitScrollPinSection() {
                 }}
               >
                 <Image
-                  src="/images/nurhasan-cutout.png"
+                  src={getAssetPath("/images/nurhasan-cutout.png")}
                   alt="Nur Hasan — UI/UX Product Designer & CS Engineer"
                   fill
                   sizes="(max-width: 768px) 180px, 500px"
@@ -480,6 +481,12 @@ export function PortraitScrollPinSection() {
                     filter: `grayscale(${grayscalePercent}%) contrast(${
                       100 + grayscalePercent * 0.1
                     }%) brightness(${grayscalePercent > 50 ? 0.98 : 1.02})`,
+                    WebkitFilter: `grayscale(${grayscalePercent}%) contrast(${
+                      100 + grayscalePercent * 0.1
+                    }%) brightness(${grayscalePercent > 50 ? 0.98 : 1.02})`,
+                    transform: "translateZ(0)",
+                    WebkitTransform: "translateZ(0)",
+                    willChange: "filter",
                     transition: "none",
                     userSelect: "none",
                     pointerEvents: "none",

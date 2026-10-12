@@ -5,6 +5,7 @@ import Image from "next/image";
 import { EXPERIENCE, TESTIMONIALS } from "@/data/portfolioData";
 import { Quote, Briefcase, MapPin, Building2, Sparkles } from "lucide-react";
 import { ScrollScrubHeadline } from "@/components/ScrollScrubHeadline";
+import { getAssetPath } from "@/utils/assetPath";
 
 export function ExperienceSection() {
   return (
@@ -226,7 +227,7 @@ export function ExperienceSection() {
               >
                 {/* Dark mode version */}
                 <Image
-                  src="/images/whitedesk-white.png"
+                  src={getAssetPath("/images/whitedesk-white.png")}
                   alt="White Desk Logo"
                   fill
                   sizes="180px"
@@ -238,7 +239,7 @@ export function ExperienceSection() {
                 />
                 {/* Light mode version */}
                 <Image
-                  src="/images/whitedesk-black.png"
+                  src={getAssetPath("/images/whitedesk-black.png")}
                   alt="White Desk Logo"
                   fill
                   sizes="180px"

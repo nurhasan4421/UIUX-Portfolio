@@ -86,19 +86,39 @@ export function FloatingThemeToggle() {
     <div
       style={{
         position: "fixed",
-        top: "max(0.85rem, calc(env(safe-area-inset-top, 0px) + 0.5rem))",
-        right: "max(0.85rem, calc(env(safe-area-inset-right, 0px) + 0.5rem))",
+        top: "max(0.75rem, calc(env(safe-area-inset-top, 0px) + 0.45rem))",
+        right: "max(0.75rem, calc(env(safe-area-inset-right, 0px) + 0.45rem))",
         zIndex: 99999,
         display: "flex",
         alignItems: "center",
         gap: "0.5rem",
         pointerEvents: "auto",
+        WebkitTransform: "translateZ(0)",
+        transform: "translateZ(0)",
       }}
     >
-      {/* 1. Floated Hire Now Button on Left Side (AI icon removed as requested) */}
+      {/* 1. Floated Hire Now Button on Left Side */}
       <a
         href="#contact"
         aria-label="Hire Nur Hasan"
+        onClick={(e) => {
+          e.preventDefault();
+          const el = document.getElementById("contact");
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth" });
+          } else {
+            window.location.hash = "contact";
+          }
+        }}
+        onTouchEnd={(e) => {
+          e.preventDefault();
+          const el = document.getElementById("contact");
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth" });
+          } else {
+            window.location.hash = "contact";
+          }
+        }}
         style={{
           display: "inline-flex",
           alignItems: "center",
@@ -119,6 +139,8 @@ export function FloatingThemeToggle() {
           transition: "transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease",
           WebkitTapHighlightColor: "transparent",
           userSelect: "none",
+          touchAction: "manipulation",
+          cursor: "pointer",
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.transform = "scale(1.04)";
@@ -134,6 +156,10 @@ export function FloatingThemeToggle() {
       <button
         type="button"
         onClick={handleToggle}
+        onTouchEnd={(e) => {
+          e.preventDefault();
+          handleToggle();
+        }}
         aria-label={isDark ? "Switch to day mode" : "Switch to night mode"}
         title={isDark ? "Switch to day mode" : "Switch to night mode"}
         className="floating-theme-btn"

@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { ArrowDown } from "lucide-react";
 
 interface LetterItem {
   id: string;
@@ -99,6 +98,16 @@ export function HeroSection() {
 
   // Active jumping letter swap animation
   const [swapState, setSwapState] = useState<SwapAnimationState | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile, { passive: true });
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const letterRefs = useRef<Map<string, HTMLElement>>(new Map());
 
@@ -268,24 +277,27 @@ export function HeroSection() {
         position: "relative",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "space-between",
-        minHeight: "100dvh",
-        padding: "clamp(1.25rem, 3vw, 2.5rem) clamp(1rem, 5vw, 4rem) clamp(5.2rem, 11vh, 6.8rem)",
+        justifyContent: isMobile ? "flex-start" : "center",
+        minHeight: isMobile ? "108vh" : "clamp(80vh, 88vh, 920px)",
+        padding: isMobile
+          ? "0 clamp(1rem, 4vw, 2rem) 0"
+          : "clamp(2rem, 4vw, 3rem) clamp(1rem, 5vw, 4rem)",
         background: "radial-gradient(ellipse 90% 50% at 50% 0%, var(--glow-active), transparent 75%)",
-        overflow: "hidden",
         boxSizing: "border-box",
       }}
     >
-      {/* Top bar (Dhaka, Bangladesh / BSc in CS) REMOVED as requested */}
-
-      {/* Main Massive Typography Header (Massive on Mobile & Desktop + Kinetic Word Dimming & Letter Swapping) */}
+      {/* Main Massive Typography Header (Sticks to top on Mobile as requested) */}
       <div
         style={{
-          margin: "auto 0",
-          padding: "clamp(1rem, 3vw, 2.5rem) 0",
+          position: isMobile ? "sticky" : "relative",
+          top: isMobile ? "max(0.6rem, env(safe-area-inset-top, 0px))" : "auto",
+          zIndex: 4,
+          paddingTop: isMobile ? "clamp(3.6rem, 7.5vh, 4.4rem)" : "clamp(1rem, 3vw, 2.5rem)",
+          paddingBottom: isMobile ? "0.75rem" : "0",
+          margin: isMobile ? "0" : "auto 0",
           display: "flex",
           flexDirection: "column",
-          gap: "clamp(0.6rem, 1.5vw, 1.25rem)",
+          gap: "clamp(0.5rem, 1.5vw, 1.25rem)",
         }}
       >
         {/* Massive Headline: LET'S MAKE / YOUR PROJECT / BEAUTIFUL. */}
@@ -328,33 +340,6 @@ export function HeroSection() {
         >
           <div>{subLine.map(renderLetter)}</div>
         </h2>
-      </div>
-
-      {/* Subtle Scroll Hint leading into Pinned Portrait Color Scrubbing Story */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          paddingTop: "1rem",
-          borderTop: "1px solid var(--border-subtle)",
-          color: "var(--text-muted)",
-          fontSize: "clamp(0.72rem, 0.95vw, 0.82rem)",
-        }}
-      >
-        <span className="font-mono" style={{ letterSpacing: "0.06em", textTransform: "uppercase" }}>
-          SCROLL TO EXPLORE
-        </span>
-        <div
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "0.4rem",
-            animation: "subtleBounce 2.4s ease-in-out infinite",
-          }}
-        >
-          <ArrowDown size={14} />
-        </div>
       </div>
 
       {/* Dynamic Keyframe Injection for the Exact Arc Hop Trajectories */}

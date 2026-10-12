@@ -15,6 +15,7 @@ import {
   Moon,
 } from "lucide-react";
 import { PERSONAL_INFO } from "@/data/portfolioData";
+import { getAssetPath } from "@/utils/assetPath";
 
 export function BottomFloatingNavbar() {
   const [activeSection, setActiveSection] = useState("hero");
@@ -161,7 +162,7 @@ export function BottomFloatingNavbar() {
                   }}
                 >
                   <Image
-                    src="/images/nurhasan-cutout.png"
+                    src={getAssetPath("/images/nurhasan-cutout.png")}
                     alt="Nur Hasan"
                     fill
                     sizes="32px"
@@ -392,7 +393,7 @@ export function BottomFloatingNavbar() {
           }}
         >
           <Image
-            src="/images/nurhasan-cutout.png"
+            src={getAssetPath("/images/nurhasan-cutout.png")}
             alt="Nur Hasan"
             fill
             sizes="36px"
