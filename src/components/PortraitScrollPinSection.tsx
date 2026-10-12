@@ -453,7 +453,7 @@ export function PortraitScrollPinSection() {
           </div>
 
           {/* ============================================================ */}
-          {/* PICTURE (Pins in Middle on Web, at Top on Mobile: 80% Screen Width Wide) */}
+          {/* PICTURE (Pins in Middle on Web, at Top on Mobile: 100% Screen to Screen Wide) */}
           {/* ============================================================ */}
           <div
             style={{
@@ -462,7 +462,11 @@ export function PortraitScrollPinSection() {
               display: "flex",
               alignItems: "center",
               justifyContent: isMobile ? "center" : "flex-end",
-              width: isMobile ? "100%" : "auto",
+              width: isMobile ? "calc(100% + 2.5rem)" : "auto",
+              marginLeft: isMobile ? "-1.25rem" : "0",
+              marginRight: isMobile ? "-1.25rem" : "0",
+              maxWidth: isMobile ? "100vw" : "none",
+              overflow: isMobile ? "hidden" : "visible",
               transform: isMobile
                 ? "none"
                 : `translateX(${(1 - transitionProgress) * -22}vw)`,
@@ -471,13 +475,14 @@ export function PortraitScrollPinSection() {
               zIndex: 8,
             }}
           >
-            {/* Cutout Wrapper: 80% Screen Width Wide on Mobile, Subtle Gradient ONLY for Mobile */}
+            {/* Cutout Wrapper: 100% Wide Screen to Screen on Mobile */}
             <div
               style={{
                 position: "relative",
-                width: isMobile ? "min(80vw, 340px)" : "clamp(320px, 32vw, 460px)",
+                width: isMobile ? "100%" : "clamp(320px, 32vw, 460px)",
+                maxWidth: isMobile ? "100vw" : "none",
                 height: isMobile ? "auto" : "clamp(460px, 66vh, 640px)",
-                aspectRatio: isMobile ? "1 / 1.05" : "auto",
+                aspectRatio: isMobile ? "946 / 1024" : "auto",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -488,7 +493,7 @@ export function PortraitScrollPinSection() {
                 <div
                   style={{
                     position: "absolute",
-                    inset: "8%",
+                    inset: "4%",
                     borderRadius: "50%",
                     background: "radial-gradient(circle, var(--glow-active) 0%, transparent 70%)",
                     filter: "blur(25px)",
@@ -521,10 +526,10 @@ export function PortraitScrollPinSection() {
                   src={getAssetPath("/images/nurhasan-cutout.png")}
                   alt="Nur Hasan — UI/UX Product Designer & CS Engineer"
                   fill
-                  sizes="(max-width: 768px) 340px, 500px"
+                  sizes="(max-width: 768px) 100vw, 500px"
                   priority
                   style={{
-                    objectFit: "contain",
+                    objectFit: isMobile ? "contain" : "contain",
                     objectPosition: isMobile ? "center top" : "center bottom",
                     filter: `grayscale(${grayscalePercent}%) contrast(${
                       100 + grayscalePercent * 0.1

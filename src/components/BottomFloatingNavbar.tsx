@@ -404,7 +404,7 @@ export function BottomFloatingNavbar() {
           />
         </a>
 
-        {/* 2. Works Button (with prominent active UI stat) */}
+        {/* 2. Works Link (Deep active text color, light inactive text color, pure navbar link) */}
         <a
           href="#works"
           onClick={() => setActiveSection("works")}
@@ -412,33 +412,28 @@ export function BottomFloatingNavbar() {
             position: "relative",
             display: "inline-flex",
             alignItems: "center",
-            gap: "0.3rem",
-            padding: "0.48rem clamp(0.55rem, 1.4vw, 1.1rem)",
+            padding: "0.45rem clamp(0.6rem, 1.4vw, 1rem)",
             borderRadius: "999px",
-            fontSize: "clamp(0.78rem, 1.1vw, 0.92rem)",
-            fontWeight: isWorksActive ? 800 : 600,
-            color: isWorksActive ? "var(--bg-primary)" : "var(--text-primary)",
-            backgroundColor: isWorksActive ? "var(--text-primary)" : "transparent",
-            boxShadow: isWorksActive ? "0 4px 14px rgba(0,0,0,0.25)" : "none",
-            transition: "all 0.2s cubic-bezier(0.16, 1, 0.3, 1)",
+            fontSize: "clamp(0.82rem, 1.15vw, 0.92rem)",
+            fontWeight: isWorksActive ? 750 : 500,
+            color: isWorksActive ? "var(--text-primary)" : "var(--text-muted)",
+            backgroundColor: "transparent",
+            boxShadow: "none",
+            transition: "color 0.2s ease, font-weight 0.2s ease",
             whiteSpace: "nowrap",
             textDecoration: "none",
           }}
+          onMouseEnter={(e) => {
+            if (!isWorksActive) e.currentTarget.style.color = "var(--text-secondary)";
+          }}
+          onMouseLeave={(e) => {
+            if (!isWorksActive) e.currentTarget.style.color = "var(--text-muted)";
+          }}
         >
-          {isWorksActive && (
-            <span
-              style={{
-                width: "5px",
-                height: "5px",
-                borderRadius: "50%",
-                backgroundColor: "#10b981",
-              }}
-            />
-          )}
           <span>Works</span>
         </a>
 
-        {/* 3. Services Button (In place of Hire Now) */}
+        {/* 3. Services Link (Deep active text color, light inactive text color, pure navbar link) */}
         <a
           href="#services"
           onClick={() => setActiveSection("services")}
@@ -446,29 +441,24 @@ export function BottomFloatingNavbar() {
             position: "relative",
             display: "inline-flex",
             alignItems: "center",
-            gap: "0.3rem",
-            padding: "0.48rem clamp(0.55rem, 1.4vw, 1.1rem)",
+            padding: "0.45rem clamp(0.6rem, 1.4vw, 1rem)",
             borderRadius: "999px",
-            fontSize: "clamp(0.78rem, 1.1vw, 0.92rem)",
-            fontWeight: isServicesActive ? 800 : 600,
-            color: isServicesActive ? "var(--bg-primary)" : "var(--text-primary)",
-            backgroundColor: isServicesActive ? "var(--text-primary)" : "transparent",
-            boxShadow: isServicesActive ? "0 4px 14px rgba(0,0,0,0.25)" : "none",
-            transition: "all 0.2s cubic-bezier(0.16, 1, 0.3, 1)",
+            fontSize: "clamp(0.82rem, 1.15vw, 0.92rem)",
+            fontWeight: isServicesActive ? 750 : 500,
+            color: isServicesActive ? "var(--text-primary)" : "var(--text-muted)",
+            backgroundColor: "transparent",
+            boxShadow: "none",
+            transition: "color 0.2s ease, font-weight 0.2s ease",
             whiteSpace: "nowrap",
             textDecoration: "none",
           }}
+          onMouseEnter={(e) => {
+            if (!isServicesActive) e.currentTarget.style.color = "var(--text-secondary)";
+          }}
+          onMouseLeave={(e) => {
+            if (!isServicesActive) e.currentTarget.style.color = "var(--text-muted)";
+          }}
         >
-          {isServicesActive && (
-            <span
-              style={{
-                width: "5px",
-                height: "5px",
-                borderRadius: "50%",
-                backgroundColor: "#10b981",
-              }}
-            />
-          )}
           <span>Services</span>
         </a>
 
