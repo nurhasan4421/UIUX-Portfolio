@@ -261,3 +261,59 @@ nextjs-portal,
   display: none !important;
 }
 
+/* Capabilities 4-Card System with vertical dividers and zero border-radius */
+.capabilities-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border: 1px solid var(--border-subtle);
+  border-radius: 0;
+  margin-bottom: 5rem;
+  background-color: var(--bg-card);
+  overflow: hidden;
+}
+
+.capability-card {
+  border-radius: 0 !important;
+  border-right: 1px solid var(--border-subtle);
+  border-bottom: none;
+  background-color: var(--bg-card);
+  transition: background-color 0.25s ease, box-shadow 0.25s ease;
+  padding: clamp(1.5rem, 2.5vw, 2.25rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.capability-card:last-child {
+  border-right: none;
+}
+
+@media (max-width: 1024px) {
+  .capabilities-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .capability-card:nth-child(2) {
+    border-right: none;
+  }
+  .capability-card:nth-child(1),
+  .capability-card:nth-child(2) {
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .capability-card:nth-child(3) {
+    border-right: 1px solid var(--border-subtle);
+  }
+}
+
+@media (max-width: 640px) {
+  .capabilities-grid {
+    grid-template-columns: 1fr;
+  }
+  .capability-card {
+    border-right: none !important;
+    border-bottom: 1px solid var(--border-subtle) !important;
+  }
+  .capability-card:last-child {
+    border-bottom: none !important;
+  }
+}
+

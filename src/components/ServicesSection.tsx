@@ -54,9 +54,7 @@ export function ServicesSection() {
           alignItems: "flex-end",
           flexWrap: "wrap",
           gap: "2rem",
-          marginBottom: "clamp(2.5rem, 5vw, 4.5rem)",
-          borderBottom: "1px solid var(--border-divider)",
-          paddingBottom: "2rem",
+          marginBottom: "clamp(2rem, 4vw, 3.5rem)",
         }}
       >
         <div>
@@ -91,34 +89,21 @@ export function ServicesSection() {
         </p>
       </div>
 
-      {/* Services Grid */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
-          gap: "1.5rem",
-          marginBottom: "5rem",
-        }}
-      >
+      {/* Services Grid with Vertical Dividers & Zero Radius */}
+      <div className="capabilities-grid">
         {SERVICES.map((service) => {
           const isSelected = activeService === service.number;
 
           return (
             <div
               key={service.number}
-              onClick={() => setActiveService(service.number)}
+              className="capability-card"
+              onMouseEnter={() => setActiveService(service.number)}
+              onTouchStart={() => setActiveService(service.number)}
               style={{
-                borderRadius: "20px",
-                border: isSelected ? "1px solid var(--border-bold)" : "1px solid var(--border-medium)",
                 backgroundColor: isSelected ? "var(--bg-card-hover)" : "var(--bg-card)",
-                padding: "2.25rem",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                cursor: "pointer",
-                transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
-                transform: isSelected ? "translateY(-4px)" : "translateY(0)",
-                boxShadow: isSelected ? "0 15px 35px var(--glow-active)" : "none",
+                boxShadow: isSelected ? "inset 0 3px 0 0 var(--text-primary)" : "inset 0 0 0 0 transparent",
+                cursor: "default",
               }}
             >
               <div>

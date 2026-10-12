@@ -62,40 +62,72 @@ export function ProjectsSection() {
           />
         </div>
 
-        {/* Filter Pills with Horizontal Scroll on Phone */}
+        {/* Category Navbar Menu */}
         <div
           style={{
             display: "flex",
-            gap: "0.45rem",
             alignItems: "center",
             maxWidth: "100%",
             overflowX: "auto",
             scrollbarWidth: "none",
-            paddingBottom: "0.5rem",
+            borderBottom: "1px solid var(--border-subtle)",
+            gap: "clamp(0.75rem, 1.8vw, 1.75rem)",
           }}
         >
           {CATEGORIES.map((cat) => {
             const isActive = activeCategory === cat;
+            const count =
+              cat === "All Works"
+                ? PROJECTS.length
+                : cat === "Mobile Apps"
+                ? PROJECTS.filter((p) => p.category.includes("Mobile")).length
+                : cat === "Web & SaaS"
+                ? PROJECTS.filter((p) => p.category.includes("Web") || p.category.includes("SaaS")).length
+                : cat === "Fintech"
+                ? PROJECTS.filter((p) => p.category.includes("Fintech") || p.tools.includes("Fintech")).length
+                : PROJECTS.filter((p) => p.category.includes("E-Commerce") || p.title.includes("Commerce") || p.title.includes("Juice")).length;
+
             return (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
                 style={{
-                  minHeight: "40px",
-                  padding: "0 1.1rem",
-                  borderRadius: "999px",
-                  fontSize: "0.82rem",
-                  fontWeight: isActive ? 700 : 500,
-                  border: isActive ? "1px solid var(--text-primary)" : "1px solid var(--border-medium)",
-                  background: isActive ? "var(--text-primary)" : "var(--bg-card)",
-                  color: isActive ? "var(--bg-primary)" : "var(--text-secondary)",
-                  transition: "all 0.2s ease",
+                  background: "transparent",
+                  border: "none",
+                  borderBottom: isActive ? "2px solid var(--text-primary)" : "2px solid transparent",
+                  borderRadius: 0,
+                  padding: "0.6rem 0.2rem 0.65rem 0.2rem",
+                  fontSize: "clamp(0.82rem, 0.95vw, 0.9rem)",
+                  fontWeight: isActive ? 750 : 500,
+                  color: isActive ? "var(--text-primary)" : "var(--text-muted)",
+                  transition: "color 0.2s ease, border-color 0.2s ease",
                   cursor: "pointer",
                   whiteSpace: "nowrap",
                   flexShrink: 0,
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.45rem",
+                  marginBottom: "-1px",
+                }}
+                onMouseEnter={(e) => {
+                  if (!isActive) e.currentTarget.style.color = "var(--text-primary)";
+                }}
+                onMouseLeave={(e) => {
+                  if (!isActive) e.currentTarget.style.color = "var(--text-muted)";
                 }}
               >
-                {cat}
+                <span>{cat}</span>
+                <span
+                  className="font-mono"
+                  style={{
+                    fontSize: "0.72rem",
+                    color: isActive ? "var(--text-primary)" : "var(--text-muted)",
+                    opacity: isActive ? 0.9 : 0.6,
+                    fontWeight: 600,
+                  }}
+                >
+                  {String(count).padStart(2, "0")}
+                </span>
               </button>
             );
           })}

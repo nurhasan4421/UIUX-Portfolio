@@ -86,86 +86,92 @@ export function ExperienceSection() {
             CAREER TIMELINE
           </h3>
 
-          {EXPERIENCE.map((item, idx) => (
-            <div
-              key={idx}
-              style={{
-                borderRadius: "16px",
-                border: "1px solid var(--border-subtle)",
-                backgroundColor: "var(--bg-card)",
-                padding: "1.75rem",
-                transition: "all 0.25s ease",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "var(--border-bold)";
-                e.currentTarget.style.transform = "translateX(4px)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "var(--border-subtle)";
-                e.currentTarget.style.transform = "translateX(0)";
-              }}
-            >
+          {/* Single Card Container with Internal Dividers */}
+          <div
+            style={{
+              borderRadius: "16px",
+              border: "1px solid var(--border-subtle)",
+              backgroundColor: "var(--bg-card)",
+              overflow: "hidden",
+            }}
+          >
+            {EXPERIENCE.map((item, idx) => (
               <div
+                key={idx}
                 style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  marginBottom: "0.5rem",
+                  padding: "clamp(1.25rem, 2.5vw, 1.75rem)",
+                  borderBottom: idx < EXPERIENCE.length - 1 ? "1px solid var(--border-subtle)" : "none",
+                  transition: "background-color 0.25s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = "var(--bg-card-hover)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = "transparent";
                 }}
               >
-                <span className="font-mono" style={{ fontSize: "0.78rem", color: "var(--text-muted)" }}>
-                  {item.period}
-                </span>
-                <span
+                <div
                   style={{
                     display: "flex",
+                    justifyContent: "space-between",
                     alignItems: "center",
-                    gap: "0.3rem",
-                    fontSize: "0.78rem",
-                    color: "var(--text-muted)",
+                    marginBottom: "0.5rem",
                   }}
-                  className="font-mono"
                 >
-                  <MapPin size={12} />
-                  {item.location}
-                </span>
+                  <span className="font-mono" style={{ fontSize: "0.78rem", color: "var(--text-muted)" }}>
+                    {item.period}
+                  </span>
+                  <span
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "0.3rem",
+                      fontSize: "0.78rem",
+                      color: "var(--text-muted)",
+                    }}
+                    className="font-mono"
+                  >
+                    <MapPin size={12} />
+                    {item.location}
+                  </span>
+                </div>
+
+                <h4
+                  className="font-display"
+                  style={{
+                    fontSize: "1.25rem",
+                    fontWeight: 800,
+                    color: "var(--text-primary)",
+                    marginBottom: "0.25rem",
+                  }}
+                >
+                  {item.role}
+                </h4>
+
+                <p
+                  className="font-mono"
+                  style={{
+                    fontSize: "0.85rem",
+                    color: "var(--text-secondary)",
+                    marginBottom: "0.85rem",
+                    fontWeight: 600,
+                  }}
+                >
+                  @ {item.company}
+                </p>
+
+                <p
+                  style={{
+                    fontSize: "0.9rem",
+                    color: "var(--text-secondary)",
+                    lineHeight: 1.6,
+                  }}
+                >
+                  {item.description}
+                </p>
               </div>
-
-              <h4
-                className="font-display"
-                style={{
-                  fontSize: "1.25rem",
-                  fontWeight: 800,
-                  color: "var(--text-primary)",
-                  marginBottom: "0.25rem",
-                }}
-              >
-                {item.role}
-              </h4>
-
-              <p
-                className="font-mono"
-                style={{
-                  fontSize: "0.85rem",
-                  color: "var(--text-secondary)",
-                  marginBottom: "0.85rem",
-                  fontWeight: 600,
-                }}
-              >
-                @ {item.company}
-              </p>
-
-              <p
-                style={{
-                  fontSize: "0.9rem",
-                  color: "var(--text-secondary)",
-                  lineHeight: 1.6,
-                }}
-              >
-                {item.description}
-              </p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
         {/* Right: White Desk Agency Spotlight with user uploaded logo */}
@@ -301,7 +307,7 @@ export function ExperienceSection() {
       {/* Testimonials Bento Ribbon */}
       <div
         style={{
-          borderRadius: "24px",
+          borderRadius: 0,
           border: "1px solid var(--border-medium)",
           backgroundColor: "var(--bg-card)",
           padding: "clamp(2rem, 4vw, 3.5rem)",
