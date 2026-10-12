@@ -270,6 +270,29 @@ export function HeroSection() {
     );
   };
 
+  // Group letters into whole words so words NEVER split across lines
+  const renderWordGroups = (letters: LetterItem[]) => {
+    const wordsMap = new Map<number, LetterItem[]>();
+    letters.forEach((item) => {
+      const list = wordsMap.get(item.wordIdx) || [];
+      list.push(item);
+      wordsMap.set(item.wordIdx, list);
+    });
+
+    return Array.from(wordsMap.entries()).map(([wordIdx, wordLetters]) => (
+      <span
+        key={`word_${wordIdx}`}
+        style={{
+          display: "inline-flex",
+          whiteSpace: "nowrap",
+          marginRight: "0.2em",
+        }}
+      >
+        {wordLetters.map(renderLetter)}
+      </span>
+    ));
+  };
+
   return (
     <header
       id="hero"
@@ -278,7 +301,7 @@ export function HeroSection() {
         display: "flex",
         flexDirection: "column",
         justifyContent: isMobile ? "flex-start" : "center",
-        minHeight: isMobile ? "108vh" : "clamp(80vh, 88vh, 920px)",
+        minHeight: isMobile ? "150vh" : "clamp(80vh, 88vh, 920px)",
         padding: isMobile
           ? "0 clamp(1rem, 4vw, 2rem) 0"
           : "clamp(2rem, 4vw, 3rem) clamp(1rem, 5vw, 4rem)",
@@ -286,59 +309,59 @@ export function HeroSection() {
         boxSizing: "border-box",
       }}
     >
-      {/* Main Massive Typography Header (Sticks to top on Mobile as requested) */}
+      {/* Main Massive Typography Header (Placed in Middle on Load, then Scrolls to Top and Sticks until Picture Arrives) */}
       <div
         style={{
           position: isMobile ? "sticky" : "relative",
-          top: isMobile ? "max(0.6rem, env(safe-area-inset-top, 0px))" : "auto",
+          top: isMobile ? "max(0.6rem, calc(env(safe-area-inset-top, 0px) + 0.45rem))" : "auto",
           zIndex: 4,
-          paddingTop: isMobile ? "clamp(3.6rem, 7.5vh, 4.4rem)" : "clamp(1rem, 3vw, 2.5rem)",
-          paddingBottom: isMobile ? "0.75rem" : "0",
+          paddingTop: isMobile ? "clamp(18vh, 23vh, 28vh)" : "clamp(1rem, 3vw, 2.5rem)",
+          paddingBottom: isMobile ? "1rem" : "0",
           margin: isMobile ? "0" : "auto 0",
           display: "flex",
           flexDirection: "column",
           gap: "clamp(0.5rem, 1.5vw, 1.25rem)",
         }}
       >
-        {/* Massive Headline: LET'S MAKE / YOUR PROJECT / BEAUTIFUL. */}
+        {/* Massive Headline: LET'S MAKE / YOUR PROJECT / BEAUTIFUL. (2.5x Bigger on Mobile) */}
         <h1
           className="font-display"
           style={{
-            fontSize: "clamp(2.5rem, 10.8vw, 150px)",
+            fontSize: "clamp(2.8rem, 11.5vw, 150px)",
             fontWeight: 900,
-            lineHeight: 0.88,
+            lineHeight: 0.86,
             letterSpacing: "-0.045em",
             textTransform: "uppercase",
             color: "var(--text-primary)",
             margin: 0,
-            wordBreak: "break-word",
+            wordBreak: "keep-all",
           }}
         >
           {/* Line 1: LET'S MAKE */}
-          <div style={{ whiteSpace: "nowrap" }}>{line1.map(renderLetter)}</div>
+          <div style={{ display: "flex", flexWrap: "wrap", rowGap: "0.08em" }}>{renderWordGroups(line1)}</div>
 
           {/* Line 2: YOUR PROJECT */}
-          <div style={{ whiteSpace: "nowrap" }}>{line2.map(renderLetter)}</div>
+          <div style={{ display: "flex", flexWrap: "wrap", rowGap: "0.08em" }}>{renderWordGroups(line2)}</div>
 
           {/* Line 3: BEAUTIFUL. */}
-          <div style={{ whiteSpace: "nowrap" }}>{line3.map(renderLetter)}</div>
+          <div style={{ display: "flex", flexWrap: "wrap", rowGap: "0.08em" }}>{renderWordGroups(line3)}</div>
         </h1>
 
         {/* Massive Sub-headline: I'M UI/UX DESIGNER */}
         <h2
           className="font-display"
           style={{
-            fontSize: "clamp(1.9rem, 7.8vw, 96px)",
+            fontSize: "clamp(2rem, 8.5vw, 96px)",
             fontWeight: 800,
-            lineHeight: 0.92,
+            lineHeight: 0.9,
             letterSpacing: "-0.04em",
             textTransform: "uppercase",
             color: "var(--text-primary)",
             margin: 0,
-            wordBreak: "break-word",
+            wordBreak: "keep-all",
           }}
         >
-          <div>{subLine.map(renderLetter)}</div>
+          <div style={{ display: "flex", flexWrap: "wrap", rowGap: "0.08em" }}>{renderWordGroups(subLine)}</div>
         </h2>
       </div>
 
@@ -399,17 +422,17 @@ export function HeroSection() {
 
         @media (max-width: 640px) {
           #hero {
-            min-height: 100dvh !important;
-            padding-bottom: clamp(5.2rem, 11vh, 6.8rem) !important;
+            min-height: 150vh !important;
+            padding-bottom: 0 !important;
           }
           #hero h1 {
-            font-size: clamp(2.15rem, 9.8vw, 3.4rem) !important;
+            font-size: clamp(2.85rem, 11.2vw, 4.4rem) !important;
             line-height: 0.88 !important;
             letter-spacing: -0.045em !important;
           }
           #hero h2 {
-            font-size: clamp(1.65rem, 7.5vw, 2.6rem) !important;
-            line-height: 0.92 !important;
+            font-size: clamp(2.1rem, 8.5vw, 3.2rem) !important;
+            line-height: 0.9 !important;
             letter-spacing: -0.04em !important;
           }
         }

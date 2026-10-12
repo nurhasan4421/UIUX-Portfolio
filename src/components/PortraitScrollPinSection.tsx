@@ -111,8 +111,8 @@ export function PortraitScrollPinSection() {
   // Word scrubbing progress: mapped smoothly across scroll progress
   const wordScrubProgress = Math.max(0, Math.min(1, (transitionProgress - 0.04) / 0.88));
 
-  // Trigger metrics only after scroll reaches the word 'problems' (around 82% of scrubbing)
-  const hitProblems = wordScrubProgress >= 0.8;
+  // Trigger metrics only after scroll reaches the word 'problems' (around 72% of scrubbing)
+  const hitProblems = wordScrubProgress >= 0.72;
 
   const [countWorks, setCountWorks] = useState(0);
   const [countEng, setCountEng] = useState(0);
@@ -149,8 +149,8 @@ export function PortraitScrollPinSection() {
   }, [hitProblems]);
 
   // Connect CTA reveal timing: lights up right as the final words illuminate
-  const ctaReady = wordScrubProgress > 0.75;
-  const ctaOpacity = Math.max(0, Math.min(1, (wordScrubProgress - 0.65) / 0.3));
+  const ctaReady = wordScrubProgress > 0.68;
+  const ctaOpacity = Math.max(0, Math.min(1, (wordScrubProgress - 0.58) / 0.28));
 
   return (
     <section
@@ -205,7 +205,7 @@ export function PortraitScrollPinSection() {
               maxWidth: isMobile ? "100%" : "640px",
               display: "flex",
               flexDirection: "column",
-              gap: isMobile ? "clamp(0.3rem, 1vh, 0.65rem)" : "1.75rem",
+              gap: isMobile ? "clamp(0.35rem, 1vh, 0.6rem)" : "1.75rem",
               zIndex: 10,
             }}
           >
@@ -216,7 +216,7 @@ export function PortraitScrollPinSection() {
                 display: "inline-flex",
                 alignItems: "center",
                 gap: "0.45rem",
-                fontSize: isMobile ? "0.68rem" : "clamp(0.72rem, 0.9vw, 0.82rem)",
+                fontSize: isMobile ? "0.76rem" : "clamp(0.72rem, 0.9vw, 0.82rem)",
                 letterSpacing: "0.08em",
                 textTransform: "uppercase",
                 opacity: Math.max(0.2, wordScrubProgress * 1.2),
@@ -237,16 +237,16 @@ export function PortraitScrollPinSection() {
               <span>PRODUCT DESIGNER &amp; CS ENGINEER</span>
             </div>
 
-            {/* Apple-Style Typography Scrubbing: Word-by-Word Reveal with High Contrast */}
+            {/* Apple-Style Typography Scrubbing: Styled like 'Design is not merely...' with high-craft bold font */}
             <p
               className="font-display"
               style={{
                 fontSize: isMobile
-                  ? "clamp(0.85rem, 3.5vw, 1.05rem)"
+                  ? "clamp(1.18rem, 4.3vw, 1.48rem)"
                   : "clamp(1.4rem, 2.25vw, 2.05rem)",
-                lineHeight: isMobile ? 1.34 : 1.42,
-                letterSpacing: "-0.025em",
-                fontWeight: 600,
+                lineHeight: isMobile ? 1.3 : 1.42,
+                letterSpacing: "-0.03em",
+                fontWeight: 800,
                 margin: 0,
               }}
             >
@@ -263,10 +263,10 @@ export function PortraitScrollPinSection() {
                     key={index}
                     style={{
                       display: "inline-block",
-                      marginRight: "0.28em",
+                      marginRight: "0.26em",
                       opacity: 0.14 + 0.86 * wordProgress,
                       color: isIlluminated ? "var(--text-primary)" : "var(--text-muted)",
-                      fontWeight: item.isName ? 800 : item.isKey && isIlluminated ? 700 : 500,
+                      fontWeight: 800,
                       textDecoration: item.isName && isIlluminated ? "underline" : "none",
                       textDecorationColor:
                         item.isName && isIlluminated ? "var(--border-bold)" : "transparent",
@@ -291,7 +291,7 @@ export function PortraitScrollPinSection() {
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: isMobile ? "1.25rem" : "2.5rem",
+                gap: isMobile ? "1.35rem" : "2.5rem",
                 marginTop: isMobile ? "0.15rem" : "0.75rem",
                 opacity: hitProblems ? 1 : 0,
                 transform: hitProblems ? "translateY(0)" : "translateY(12px)",
@@ -303,11 +303,11 @@ export function PortraitScrollPinSection() {
                 <div
                   className="font-display"
                   style={{
-                    fontSize: isMobile ? "1.25rem" : "1.85rem",
+                    fontSize: isMobile ? "1.55rem" : "1.85rem",
                     fontWeight: 900,
                     lineHeight: 1,
                     color: "var(--text-primary)",
-                    letterSpacing: "-0.03em",
+                    letterSpacing: "-0.035em",
                   }}
                 >
                   {countWorks}+
@@ -315,10 +315,10 @@ export function PortraitScrollPinSection() {
                 <div
                   className="font-mono"
                   style={{
-                    fontSize: isMobile ? "0.64rem" : "clamp(0.68rem, 0.8vw, 0.76rem)",
+                    fontSize: isMobile ? "0.7rem" : "clamp(0.68rem, 0.8vw, 0.76rem)",
                     color: "var(--text-muted)",
                     textTransform: "uppercase",
-                    letterSpacing: "0.06em",
+                    letterSpacing: "0.07em",
                     marginTop: "0.15rem",
                   }}
                 >
@@ -329,7 +329,7 @@ export function PortraitScrollPinSection() {
               <div
                 style={{
                   width: "1px",
-                  height: isMobile ? "22px" : "28px",
+                  height: isMobile ? "24px" : "28px",
                   backgroundColor: "var(--border-medium)",
                 }}
               />
@@ -338,11 +338,11 @@ export function PortraitScrollPinSection() {
                 <div
                   className="font-display"
                   style={{
-                    fontSize: isMobile ? "1.25rem" : "1.85rem",
+                    fontSize: isMobile ? "1.55rem" : "1.85rem",
                     fontWeight: 900,
                     lineHeight: 1,
                     color: "var(--text-primary)",
-                    letterSpacing: "-0.03em",
+                    letterSpacing: "-0.035em",
                   }}
                 >
                   {countEng}%
@@ -350,10 +350,10 @@ export function PortraitScrollPinSection() {
                 <div
                   className="font-mono"
                   style={{
-                    fontSize: isMobile ? "0.64rem" : "clamp(0.68rem, 0.8vw, 0.76rem)",
+                    fontSize: isMobile ? "0.7rem" : "clamp(0.68rem, 0.8vw, 0.76rem)",
                     color: "var(--text-muted)",
                     textTransform: "uppercase",
-                    letterSpacing: "0.06em",
+                    letterSpacing: "0.07em",
                     marginTop: "0.15rem",
                   }}
                 >
@@ -389,7 +389,7 @@ export function PortraitScrollPinSection() {
                   background: "var(--text-primary)",
                   color: "var(--bg-primary)",
                   fontWeight: 700,
-                  fontSize: isMobile ? "0.82rem" : "0.98rem",
+                  fontSize: isMobile ? "0.85rem" : "0.98rem",
                   letterSpacing: "-0.01em",
                   textDecoration: "none",
                   boxShadow:
@@ -432,12 +432,12 @@ export function PortraitScrollPinSection() {
               zIndex: 8,
             }}
           >
-            {/* Cutout Wrapper */}
+            {/* Cutout Wrapper (More More Big on Mobile as requested) */}
             <div
               style={{
                 position: "relative",
-                width: isMobile ? "clamp(120px, 32vw, 160px)" : "clamp(320px, 32vw, 460px)",
-                height: isMobile ? "clamp(125px, 17vh, 165px)" : "clamp(460px, 66vh, 640px)",
+                width: isMobile ? "clamp(210px, 56vw, 280px)" : "clamp(320px, 32vw, 460px)",
+                height: isMobile ? "clamp(200px, 28vh, 270px)" : "clamp(460px, 66vh, 640px)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -473,7 +473,7 @@ export function PortraitScrollPinSection() {
                   src={getAssetPath("/images/nurhasan-cutout.png")}
                   alt="Nur Hasan — UI/UX Product Designer & CS Engineer"
                   fill
-                  sizes="(max-width: 768px) 180px, 500px"
+                  sizes="(max-width: 768px) 300px, 500px"
                   priority
                   style={{
                     objectFit: "contain",
