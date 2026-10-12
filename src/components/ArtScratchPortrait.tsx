@@ -7,6 +7,7 @@ export function ArtScratchPortrait({ className = "" }: { className?: string }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [transformStyle, setTransformStyle] = useState("");
   const [isHovered, setIsHovered] = useState(false);
+  const [shadowStyle, setShadowStyle] = useState("");
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
@@ -16,17 +17,21 @@ export function ArtScratchPortrait({ className = "" }: { className?: string }) {
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
 
-    const rotateX = ((y - centerY) / centerY) * -12;
-    const rotateY = ((x - centerX) / centerX) * 12;
+    const rotateX = ((y - centerY) / centerY) * -10;
+    const rotateY = ((x - centerX) / centerX) * 10;
+    const shadowX = ((x - centerX) / centerX) * -15;
+    const shadowY = ((y - centerY) / centerY) * -15;
 
     setTransformStyle(
-      `perspective(700px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.05, 1.05, 1.05)`
+      `perspective(700px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.04, 1.04, 1.04)`
     );
+    setShadowStyle(`drop-shadow(${shadowX.toFixed(1)}px ${shadowY.toFixed(1)}px 30px var(--glow-active))`);
   };
 
   const handleMouseLeave = () => {
     setIsHovered(false);
     setTransformStyle("perspective(700px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)");
+    setShadowStyle("");
   };
 
   return (
@@ -37,11 +42,11 @@ export function ArtScratchPortrait({ className = "" }: { className?: string }) {
         handleMouseMove(e);
       }}
       onMouseLeave={handleMouseLeave}
-      className={`art-portrait-container ${className}`}
+      className={`real-portrait-container ${className}`}
       style={{
         position: "relative",
-        width: "clamp(240px, 32vw, 360px)",
-        aspectRatio: "1/1",
+        width: "clamp(260px, 30vw, 360px)",
+        aspectRatio: "0.9 / 1",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -51,84 +56,103 @@ export function ArtScratchPortrait({ className = "" }: { className?: string }) {
         transformStyle: "preserve-3d",
       }}
     >
-      {/* Background Subtle Halo */}
+      {/* Ambient Radial Glow Behind Cutout */}
       <div
         style={{
           position: "absolute",
-          inset: "10%",
+          inset: "15%",
           borderRadius: "50%",
           background: "radial-gradient(circle, var(--glow-active) 0%, transparent 70%)",
-          filter: "blur(40px)",
+          filter: "blur(35px)",
           pointerEvents: "none",
           transform: "translateZ(-20px)",
+          transition: "opacity 0.3s ease",
+          opacity: isHovered ? 1 : 0.6,
         }}
       />
 
-      {/* The Artistic Scratch Portrait Body */}
+      {/* Real Photo PNG Cutout (No background) */}
       <div
         style={{
           position: "relative",
           width: "100%",
           height: "100%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
           transform: "translateZ(30px)",
+          filter: shadowStyle,
+          transition: "filter 0.2s ease",
         }}
       >
         <Image
-          src="/images/nurhasan-art-scratch.jpg"
-          alt="Nur Hasan - Artistic Sketch Portrait"
+          src="/images/nurhasan-cutout.png"
+          alt="Nur Hasan - UI/UX Product Designer"
           fill
-          sizes="(max-width: 768px) 260px, 360px"
+          sizes="(max-width: 768px) 280px, 380px"
           priority
-          className="art-scratch-img"
+          className="real-cutout-img"
           style={{
             objectFit: "contain",
+            objectPosition: "bottom center",
             pointerEvents: "none",
             userSelect: "none",
+            transition: "filter 0.4s ease, transform 0.3s ease",
           }}
         />
       </div>
 
-      {/* Interactive Micro Badge */}
+      {/* Floating 3D Badge Indicator */}
       <div
         style={{
           position: "absolute",
-          bottom: "0.25rem",
+          bottom: "0.5rem",
           right: "0.5rem",
-          transform: "translateZ(45px)",
+          transform: "translateZ(50px)",
           pointerEvents: "none",
         }}
       >
         <span
           className="font-mono"
           style={{
-            fontSize: "0.7rem",
+            fontSize: "0.72rem",
             textTransform: "uppercase",
             letterSpacing: "0.08em",
-            padding: "0.3rem 0.75rem",
+            padding: "0.35rem 0.8rem",
             borderRadius: "999px",
             backgroundColor: "var(--bg-glass-card)",
-            backdropFilter: "blur(12px)",
+            backdropFilter: "blur(14px)",
             border: "1px solid var(--border-medium)",
-            color: "var(--text-secondary)",
-            boxShadow: "0 6px 16px rgba(0,0,0,0.15)",
+            color: "var(--text-primary)",
+            boxShadow: "0 6px 18px rgba(0,0,0,0.18)",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "0.35rem",
           }}
         >
-          {isHovered ? "✦ 3D FOCUS" : "NUR HASAN"}
+          <span
+            style={{
+              width: "6px",
+              height: "6px",
+              borderRadius: "50%",
+              backgroundColor: isHovered ? "#10b981" : "var(--text-muted)",
+              transition: "background-color 0.2s ease",
+            }}
+          />
+          {isHovered ? "3D TILT" : "NUR HASAN"}
         </span>
       </div>
 
       <style jsx global>{`
-        /* Dynamic Theme Blending: pure sketch lines without background block */
-        [data-theme="dark"] .art-scratch-img {
-          filter: invert(1) contrast(120%) brightness(1.1);
-          mix-blend-mode: screen;
+        /* Dynamic Black & White for real photo cutout with Day/Night Theme */
+        .real-cutout-img {
+          filter: grayscale(100%) contrast(112%) brightness(0.96);
         }
-        [data-theme="light"] .art-scratch-img {
-          filter: contrast(125%) brightness(0.95);
-          mix-blend-mode: multiply;
+
+        [data-theme="light"] .real-cutout-img {
+          filter: grayscale(100%) contrast(108%) brightness(1.02);
+        }
+
+        /* Subtle tactile color bloom on interactive hover */
+        .real-portrait-container:hover .real-cutout-img {
+          filter: grayscale(20%) contrast(108%) brightness(1);
         }
       `}</style>
     </div>
