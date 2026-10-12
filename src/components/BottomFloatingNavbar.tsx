@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import {
   Menu,
@@ -11,14 +11,29 @@ import {
   ExternalLink,
   Sparkles,
   ArrowUpRight,
+  Sun,
+  Moon,
 } from "lucide-react";
 import { PERSONAL_INFO } from "@/data/portfolioData";
 
 export function BottomFloatingNavbar() {
   const [activeSection, setActiveSection] = useState("hero");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
 
   useEffect(() => {
+    const savedTheme = (localStorage.getItem("nurhasan_theme") as "dark" | "light") || "dark";
+    setTheme(savedTheme);
+
+    const handleThemeChange = (e: Event) => {
+      const customEvent = e as CustomEvent<"dark" | "light">;
+      if (customEvent.detail) {
+        setTheme(customEvent.detail);
+      }
+    };
+
+    window.addEventListener("themechange", handleThemeChange);
+
     const handleScroll = () => {
       const sections = ["hero", "works", "about", "philosophy", "services", "experience", "contact"];
       const scrollPosition = window.scrollY + window.innerHeight * 0.35;
@@ -38,8 +53,60 @@ export function BottomFloatingNavbar() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("touchmove", handleScroll);
+      window.removeEventListener("themechange", handleThemeChange);
     };
   }, []);
+
+  const lastThemeToggleRef = useRef<number>(0);
+
+  const applyGlobalTheme = (newTheme: "dark" | "light") => {
+    try {
+      document.documentElement.setAttribute("data-theme", newTheme);
+      document.documentElement.dataset.theme = newTheme;
+      if (document.body) {
+        document.body.setAttribute("data-theme", newTheme);
+        document.body.dataset.theme = newTheme;
+      }
+      if (newTheme === "light") {
+        document.documentElement.classList.add("light");
+        document.documentElement.classList.remove("dark");
+        if (document.body) {
+          document.body.classList.add("light");
+          document.body.classList.remove("dark");
+        }
+      } else {
+        document.documentElement.classList.add("dark");
+        document.documentElement.classList.remove("light");
+        if (document.body) {
+          document.body.classList.add("dark");
+          document.body.classList.remove("light");
+        }
+      }
+      document.documentElement.style.colorScheme = newTheme;
+      try {
+        localStorage.setItem("nurhasan_theme", newTheme);
+      } catch (err) {}
+    } catch (e) {}
+  };
+
+  const toggleTheme = (e?: React.SyntheticEvent | Event) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    const now = Date.now();
+    if (now - lastThemeToggleRef.current < 350) return;
+    lastThemeToggleRef.current = now;
+
+    setTheme((prevTheme) => {
+      const nextTheme = prevTheme === "dark" ? "light" : "dark";
+      applyGlobalTheme(nextTheme);
+      try {
+        window.dispatchEvent(new CustomEvent("themechange", { detail: nextTheme }));
+      } catch (err) {}
+      return nextTheme;
+    });
+  };
 
   const closeMenu = () => setMenuOpen(false);
 
@@ -184,6 +251,49 @@ export function BottomFloatingNavbar() {
                   )}
                 </a>
               ))}
+            </div>
+
+            {/* Quick Appearance Switcher */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                padding: "0.65rem 0.9rem",
+                borderRadius: "14px",
+                backgroundColor: "var(--bg-tertiary)",
+                border: "1px solid var(--border-subtle)",
+              }}
+            >
+              <span style={{ fontSize: "0.85rem", fontWeight: 600, color: "var(--text-secondary)" }}>
+                Theme Appearance
+              </span>
+
+              <button
+                type="button"
+                onClick={toggleTheme}
+                onTouchEnd={toggleTheme}
+                aria-label="Toggle theme appearance"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.4rem",
+                  padding: "0.4rem 0.85rem",
+                  borderRadius: "999px",
+                  backgroundColor: "var(--bg-card)",
+                  border: "1px solid var(--border-medium)",
+                  color: "var(--text-primary)",
+                  fontSize: "0.8rem",
+                  fontWeight: 700,
+                  cursor: "pointer",
+                  boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+                  touchAction: "manipulation",
+                  WebkitTapHighlightColor: "transparent",
+                }}
+              >
+                {theme === "dark" ? <Sun size={14} /> : <Moon size={14} />}
+                <span>{theme === "dark" ? "Day Mode" : "Night Mode"}</span>
+              </button>
             </div>
 
             {/* Mini Social Media Icons (WhatsApp, Mail, Facebook, LinkedIn, Instagram, YouTube, Dribbble) */}

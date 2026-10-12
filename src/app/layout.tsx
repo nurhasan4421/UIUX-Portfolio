@@ -31,6 +31,7 @@ export const viewport: Viewport = {
   themeColor: "#050505",
   width: "device-width",
   initialScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
@@ -42,6 +43,25 @@ export default function RootLayout({
     <html lang="en" data-theme="dark">
       <head>
         <link rel="icon" href="/favicon.ico" />
+        <meta httpEquiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+        <meta httpEquiv="Pragma" content="no-cache" />
+        <meta httpEquiv="Expires" content="0" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var t = localStorage.getItem('nurhasan_theme') || 'dark';
+                  document.documentElement.setAttribute('data-theme', t);
+                  if (t === 'light') {
+                    document.documentElement.classList.add('light');
+                  }
+                  document.documentElement.style.colorScheme = t;
+                } catch(e) {}
+              })();
+            `,
+          }}
+        />
       </head>
       <body>{children}</body>
     </html>
