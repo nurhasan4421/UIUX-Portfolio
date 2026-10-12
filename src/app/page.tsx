@@ -17,7 +17,7 @@ export default function Home() {
       style={{
         minHeight: "100vh",
         position: "relative",
-        paddingBottom: "clamp(5rem, 9vh, 7rem)",
+        paddingBottom: "clamp(6rem, 12vh, 8.5rem)",
       }}
     >
       {/* Noise Texture for Cinematic Monochrome Look */}

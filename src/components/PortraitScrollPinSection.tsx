@@ -166,14 +166,14 @@ export function PortraitScrollPinSection() {
         style={{
           position: "sticky",
           top: 0,
-          height: "100vh",
+          height: isMobile ? "100dvh" : "100vh",
           width: "100%",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           overflow: "hidden",
           padding: isMobile
-            ? "clamp(1rem, 2.5vh, 2rem) 1.25rem clamp(5rem, 10vh, 6.5rem)"
+            ? "clamp(0.5rem, 1.5vh, 1rem) 1.25rem clamp(5.2rem, 11vh, 6.8rem)"
             : "2rem clamp(1.5rem, 5vw, 5rem)",
           boxSizing: "border-box",
         }}
@@ -188,9 +188,10 @@ export function PortraitScrollPinSection() {
             display: "flex",
             flexDirection: isMobile ? "column" : "row",
             alignItems: "center",
-            justifyContent: isMobile ? "flex-start" : "space-between",
-            gap: isMobile ? "clamp(0.85rem, 2vh, 1.75rem)" : "clamp(2rem, 4vw, 5rem)",
-            paddingTop: isMobile ? "max(0.5rem, env(safe-area-inset-top, 0px))" : 0,
+            justifyContent: isMobile ? "center" : "space-between",
+            gap: isMobile ? "clamp(0.35rem, 1.2vh, 0.9rem)" : "clamp(2rem, 4vw, 5rem)",
+            paddingTop: isMobile ? "max(0.25rem, env(safe-area-inset-top, 0px))" : 0,
+            boxSizing: "border-box",
           }}
         >
           {/* ============================================================ */}
@@ -203,7 +204,7 @@ export function PortraitScrollPinSection() {
               maxWidth: isMobile ? "100%" : "640px",
               display: "flex",
               flexDirection: "column",
-              gap: isMobile ? "0.85rem" : "1.75rem",
+              gap: isMobile ? "clamp(0.3rem, 1vh, 0.65rem)" : "1.75rem",
               zIndex: 10,
             }}
           >
@@ -213,8 +214,8 @@ export function PortraitScrollPinSection() {
               style={{
                 display: "inline-flex",
                 alignItems: "center",
-                gap: "0.5rem",
-                fontSize: "clamp(0.72rem, 0.9vw, 0.82rem)",
+                gap: "0.45rem",
+                fontSize: isMobile ? "0.68rem" : "clamp(0.72rem, 0.9vw, 0.82rem)",
                 letterSpacing: "0.08em",
                 textTransform: "uppercase",
                 opacity: Math.max(0.2, wordScrubProgress * 1.2),
@@ -224,8 +225,8 @@ export function PortraitScrollPinSection() {
             >
               <span
                 style={{
-                  width: "6px",
-                  height: "6px",
+                  width: isMobile ? "5px" : "6px",
+                  height: isMobile ? "5px" : "6px",
                   borderRadius: "50%",
                   backgroundColor: colorBloomFactor > 0.5 ? "#10b981" : "var(--text-muted)",
                   boxShadow: colorBloomFactor > 0.5 ? "0 0 10px #10b981" : "none",
@@ -240,9 +241,9 @@ export function PortraitScrollPinSection() {
               className="font-display"
               style={{
                 fontSize: isMobile
-                  ? "clamp(1.05rem, 4.4vw, 1.3rem)"
+                  ? "clamp(0.85rem, 3.5vw, 1.05rem)"
                   : "clamp(1.4rem, 2.25vw, 2.05rem)",
-                lineHeight: isMobile ? 1.48 : 1.42,
+                lineHeight: isMobile ? 1.34 : 1.42,
                 letterSpacing: "-0.025em",
                 fontWeight: 600,
                 margin: 0,
@@ -289,8 +290,8 @@ export function PortraitScrollPinSection() {
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: isMobile ? "1.5rem" : "2.5rem",
-                marginTop: isMobile ? "0.35rem" : "0.75rem",
+                gap: isMobile ? "1.25rem" : "2.5rem",
+                marginTop: isMobile ? "0.15rem" : "0.75rem",
                 opacity: hitProblems ? 1 : 0,
                 transform: hitProblems ? "translateY(0)" : "translateY(12px)",
                 transition: "opacity 0.35s ease-out, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1)",
@@ -301,7 +302,7 @@ export function PortraitScrollPinSection() {
                 <div
                   className="font-display"
                   style={{
-                    fontSize: isMobile ? "1.45rem" : "1.85rem",
+                    fontSize: isMobile ? "1.25rem" : "1.85rem",
                     fontWeight: 900,
                     lineHeight: 1,
                     color: "var(--text-primary)",
@@ -313,11 +314,11 @@ export function PortraitScrollPinSection() {
                 <div
                   className="font-mono"
                   style={{
-                    fontSize: "clamp(0.68rem, 0.8vw, 0.76rem)",
+                    fontSize: isMobile ? "0.64rem" : "clamp(0.68rem, 0.8vw, 0.76rem)",
                     color: "var(--text-muted)",
                     textTransform: "uppercase",
                     letterSpacing: "0.06em",
-                    marginTop: "0.25rem",
+                    marginTop: "0.15rem",
                   }}
                 >
                   Dribbble Works
@@ -327,7 +328,7 @@ export function PortraitScrollPinSection() {
               <div
                 style={{
                   width: "1px",
-                  height: "28px",
+                  height: isMobile ? "22px" : "28px",
                   backgroundColor: "var(--border-medium)",
                 }}
               />
@@ -336,7 +337,7 @@ export function PortraitScrollPinSection() {
                 <div
                   className="font-display"
                   style={{
-                    fontSize: isMobile ? "1.45rem" : "1.85rem",
+                    fontSize: isMobile ? "1.25rem" : "1.85rem",
                     fontWeight: 900,
                     lineHeight: 1,
                     color: "var(--text-primary)",
@@ -348,11 +349,11 @@ export function PortraitScrollPinSection() {
                 <div
                   className="font-mono"
                   style={{
-                    fontSize: "clamp(0.68rem, 0.8vw, 0.76rem)",
+                    fontSize: isMobile ? "0.64rem" : "clamp(0.68rem, 0.8vw, 0.76rem)",
                     color: "var(--text-muted)",
                     textTransform: "uppercase",
                     letterSpacing: "0.06em",
-                    marginTop: "0.25rem",
+                    marginTop: "0.15rem",
                   }}
                 >
                   Engineering Ready
@@ -366,7 +367,7 @@ export function PortraitScrollPinSection() {
                 display: "flex",
                 alignItems: "center",
                 gap: "1rem",
-                marginTop: isMobile ? "0.25rem" : "0.5rem",
+                marginTop: isMobile ? "0.2rem" : "0.5rem",
                 opacity: ctaOpacity,
                 transform: `scale(${0.9 + ctaOpacity * 0.1}) translateY(${(1 - ctaOpacity) * 8}px)`,
                 pointerEvents: ctaReady ? "auto" : "none",
@@ -380,14 +381,14 @@ export function PortraitScrollPinSection() {
                   display: "inline-flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  gap: "0.5rem",
-                  minHeight: isMobile ? "44px" : "50px",
-                  padding: isMobile ? "0 1.5rem" : "0 2rem",
+                  gap: "0.45rem",
+                  minHeight: isMobile ? "38px" : "50px",
+                  padding: isMobile ? "0 1.35rem" : "0 2rem",
                   borderRadius: "999px",
                   background: "var(--text-primary)",
                   color: "var(--bg-primary)",
                   fontWeight: 700,
-                  fontSize: isMobile ? "0.88rem" : "0.98rem",
+                  fontSize: isMobile ? "0.82rem" : "0.98rem",
                   letterSpacing: "-0.01em",
                   textDecoration: "none",
                   boxShadow:
@@ -406,7 +407,7 @@ export function PortraitScrollPinSection() {
                 }}
               >
                 <span>Let&apos;s Connect</span>
-                <ArrowUpRight size={17} />
+                <ArrowUpRight size={isMobile ? 14 : 17} />
               </a>
             </div>
           </div>
@@ -434,8 +435,8 @@ export function PortraitScrollPinSection() {
             <div
               style={{
                 position: "relative",
-                width: isMobile ? "clamp(210px, 58vw, 300px)" : "clamp(320px, 32vw, 460px)",
-                height: isMobile ? "clamp(230px, 36vh, 340px)" : "clamp(460px, 66vh, 640px)",
+                width: isMobile ? "clamp(120px, 32vw, 160px)" : "clamp(320px, 32vw, 460px)",
+                height: isMobile ? "clamp(125px, 17vh, 165px)" : "clamp(460px, 66vh, 640px)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -448,7 +449,7 @@ export function PortraitScrollPinSection() {
                   inset: "8%",
                   borderRadius: "50%",
                   background: "radial-gradient(circle, var(--glow-active) 0%, transparent 70%)",
-                  filter: isMobile ? "blur(30px)" : "blur(50px)",
+                  filter: isMobile ? "blur(20px)" : "blur(50px)",
                   opacity: 0.2 + colorBloomFactor * 0.6,
                   transition: "none",
                   pointerEvents: "none",
@@ -461,7 +462,7 @@ export function PortraitScrollPinSection() {
                   position: "relative",
                   width: "100%",
                   height: "100%",
-                  filter: `drop-shadow(0 20px 35px rgba(0, 0, 0, ${
+                  filter: `drop-shadow(0 15px 25px rgba(0, 0, 0, ${
                     0.25 + colorBloomFactor * 0.25
                   }))`,
                   transition: "none",
@@ -471,7 +472,7 @@ export function PortraitScrollPinSection() {
                   src="/images/nurhasan-cutout.png"
                   alt="Nur Hasan — UI/UX Product Designer & CS Engineer"
                   fill
-                  sizes="(max-width: 768px) 300px, 500px"
+                  sizes="(max-width: 768px) 180px, 500px"
                   priority
                   style={{
                     objectFit: "contain",

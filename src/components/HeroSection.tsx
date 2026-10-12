@@ -269,10 +269,11 @@ export function HeroSection() {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        minHeight: "clamp(80vh, 88vh, 920px)",
-        padding: "clamp(1.5rem, 4vw, 3rem) clamp(1rem, 5vw, 4rem) clamp(2rem, 4vw, 3.5rem)",
+        minHeight: "100dvh",
+        padding: "clamp(1.25rem, 3vw, 2.5rem) clamp(1rem, 5vw, 4rem) clamp(5.2rem, 11vh, 6.8rem)",
         background: "radial-gradient(ellipse 90% 50% at 50% 0%, var(--glow-active), transparent 75%)",
         overflow: "hidden",
+        boxSizing: "border-box",
       }}
     >
       {/* Top bar (Dhaka, Bangladesh / BSc in CS) REMOVED as requested */}
@@ -412,9 +413,19 @@ export function HeroSection() {
         }
 
         @media (max-width: 640px) {
+          #hero {
+            min-height: 100dvh !important;
+            padding-bottom: clamp(5.2rem, 11vh, 6.8rem) !important;
+          }
           #hero h1 {
-            line-height: 0.86 !important;
-            letter-spacing: -0.05em !important;
+            font-size: clamp(2.15rem, 9.8vw, 3.4rem) !important;
+            line-height: 0.88 !important;
+            letter-spacing: -0.045em !important;
+          }
+          #hero h2 {
+            font-size: clamp(1.65rem, 7.5vw, 2.6rem) !important;
+            line-height: 0.92 !important;
+            letter-spacing: -0.04em !important;
           }
         }
       `}</style>

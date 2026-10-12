@@ -411,10 +411,10 @@ export function BottomFloatingNavbar() {
             position: "relative",
             display: "inline-flex",
             alignItems: "center",
-            gap: "0.35rem",
-            padding: "0.55rem clamp(0.75rem, 1.8vw, 1.15rem)",
+            gap: "0.3rem",
+            padding: "0.48rem clamp(0.55rem, 1.4vw, 1.1rem)",
             borderRadius: "999px",
-            fontSize: "clamp(0.82rem, 1.2vw, 0.92rem)",
+            fontSize: "clamp(0.78rem, 1.1vw, 0.92rem)",
             fontWeight: isWorksActive ? 800 : 600,
             color: isWorksActive ? "var(--bg-primary)" : "var(--text-primary)",
             backgroundColor: isWorksActive ? "var(--text-primary)" : "transparent",
@@ -427,8 +427,8 @@ export function BottomFloatingNavbar() {
           {isWorksActive && (
             <span
               style={{
-                width: "6px",
-                height: "6px",
+                width: "5px",
+                height: "5px",
                 borderRadius: "50%",
                 backgroundColor: "#10b981",
               }}
@@ -445,10 +445,10 @@ export function BottomFloatingNavbar() {
             position: "relative",
             display: "inline-flex",
             alignItems: "center",
-            gap: "0.35rem",
-            padding: "0.55rem clamp(0.75rem, 1.8vw, 1.15rem)",
+            gap: "0.3rem",
+            padding: "0.48rem clamp(0.55rem, 1.4vw, 1.1rem)",
             borderRadius: "999px",
-            fontSize: "clamp(0.82rem, 1.2vw, 0.92rem)",
+            fontSize: "clamp(0.78rem, 1.1vw, 0.92rem)",
             fontWeight: isServicesActive ? 800 : 600,
             color: isServicesActive ? "var(--bg-primary)" : "var(--text-primary)",
             backgroundColor: isServicesActive ? "var(--text-primary)" : "transparent",
@@ -461,8 +461,8 @@ export function BottomFloatingNavbar() {
           {isServicesActive && (
             <span
               style={{
-                width: "6px",
-                height: "6px",
+                width: "5px",
+                height: "5px",
                 borderRadius: "50%",
                 backgroundColor: "#10b981",
               }}
@@ -479,13 +479,13 @@ export function BottomFloatingNavbar() {
           style={{
             display: "inline-flex",
             alignItems: "center",
-            gap: "0.35rem",
-            padding: "0.55rem clamp(0.65rem, 1.8vw, 1rem)",
+            gap: "0.3rem",
+            padding: "0.48rem clamp(0.5rem, 1.3vw, 0.95rem)",
             borderRadius: "999px",
             backgroundColor: "rgba(16, 185, 129, 0.15)",
             border: "1px solid rgba(16, 185, 129, 0.35)",
             color: "#10b981",
-            fontSize: "clamp(0.78rem, 1.1vw, 0.85rem)",
+            fontSize: "clamp(0.75rem, 1.05vw, 0.85rem)",
             fontWeight: 700,
             whiteSpace: "nowrap",
             transition: "all 0.2s ease",
