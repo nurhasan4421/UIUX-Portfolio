@@ -31,18 +31,17 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
         aria-label="Toggle Night/Day mode"
         className={`theme-toggle-btn ${className}`}
         style={{
-          width: "42px",
-          height: "42px",
+          width: "38px",
+          height: "38px",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           borderRadius: "50%",
-          border: "1px solid var(--border-medium)",
-          background: "var(--bg-card)",
           color: "var(--text-primary)",
+          cursor: "pointer",
         }}
       >
-        <Moon size={18} strokeWidth={1.8} />
+        <Moon size={17} strokeWidth={2} />
       </button>
     );
   }
@@ -54,31 +53,30 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
       title={theme === "dark" ? "Switch to day mode" : "Switch to night mode"}
       className={`theme-toggle-btn ${className}`}
       style={{
-        width: "42px",
-        height: "42px",
+        width: "38px",
+        height: "38px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         borderRadius: "50%",
-        border: "1px solid var(--border-medium)",
-        background: "var(--bg-card)",
         color: "var(--text-primary)",
+        backgroundColor: "var(--bg-card-hover)",
         cursor: "pointer",
-        transition: "all 0.25s ease",
+        transition: "transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease",
+        border: "1px solid var(--border-subtle)",
+        flexShrink: 0,
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.borderColor = "var(--border-bold)";
-        e.currentTarget.style.transform = "scale(1.08)";
+        e.currentTarget.style.transform = "scale(1.1)";
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.borderColor = "var(--border-medium)";
         e.currentTarget.style.transform = "scale(1)";
       }}
     >
       {theme === "dark" ? (
-        <Sun size={18} strokeWidth={1.8} />
+        <Sun size={17} strokeWidth={2} />
       ) : (
-        <Moon size={18} strokeWidth={1.8} />
+        <Moon size={17} strokeWidth={2} />
       )}
     </button>
   );

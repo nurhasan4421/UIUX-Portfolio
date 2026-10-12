@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
-import { ArrowDownRight, ArrowUpRight, Sparkles, MapPin, Mail, ExternalLink } from "lucide-react";
+import { ArrowDownRight, ArrowUpRight, MapPin, ExternalLink } from "lucide-react";
 import { PERSONAL_INFO } from "@/data/portfolioData";
+import { ArtScratchPortrait } from "./ArtScratchPortrait";
 
 export function HeroSection() {
   return (
@@ -11,17 +11,14 @@ export function HeroSection() {
       id="hero"
       style={{
         position: "relative",
-        minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "space-between",
-        padding: "clamp(1.5rem, 4vw, 3.5rem) clamp(1rem, 5vw, 4rem)",
-        borderBottom: "1px solid var(--border-divider)",
-        background: "radial-gradient(ellipse 90% 60% at 50% 0%, var(--glow-active), transparent 80%)",
+        padding: "clamp(1.25rem, 3vw, 2.5rem) clamp(1rem, 5vw, 4rem) clamp(3rem, 6vw, 5rem)",
+        background: "radial-gradient(ellipse 90% 50% at 50% 0%, var(--glow-active), transparent 75%)",
         overflow: "hidden",
       }}
     >
-      {/* Top Meta Bar in Hero */}
+      {/* Top Meta Bar */}
       <div
         style={{
           display: "flex",
@@ -29,27 +26,26 @@ export function HeroSection() {
           alignItems: "center",
           flexWrap: "wrap",
           gap: "1rem",
-          paddingBottom: "2rem",
-          borderBottom: "1px solid var(--border-subtle)",
+          paddingBottom: "1.25rem",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: "0.85rem" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
           <span
             style={{
-              width: "10px",
-              height: "10px",
+              width: "8px",
+              height: "8px",
               borderRadius: "50%",
               backgroundColor: "#10b981",
-              boxShadow: "0 0 12px #10b981",
+              boxShadow: "0 0 10px #10b981",
               display: "inline-block",
             }}
           />
           <span
             className="font-mono"
             style={{
-              fontSize: "0.82rem",
+              fontSize: "0.78rem",
               textTransform: "uppercase",
-              letterSpacing: "0.08em",
+              letterSpacing: "0.06em",
               color: "var(--text-secondary)",
             }}
           >
@@ -61,35 +57,35 @@ export function HeroSection() {
           style={{
             display: "flex",
             alignItems: "center",
-            gap: "1.5rem",
-            fontSize: "0.85rem",
+            gap: "1.25rem",
+            fontSize: "0.8rem",
             color: "var(--text-muted)",
           }}
           className="font-mono"
         >
-          <span style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
-            <MapPin size={14} />
+          <span style={{ display: "flex", alignItems: "center", gap: "0.35rem" }}>
+            <MapPin size={13} />
             Dhaka, Bangladesh
           </span>
-          <span style={{ opacity: 0.4 }}>|</span>
-          <span>BSc in Computer Science & Eng.</span>
+          <span style={{ opacity: 0.3 }}>/</span>
+          <span>BSc in Computer Science</span>
         </div>
       </div>
 
-      {/* Main Massive Kinetic Typography Hero */}
+      {/* Main Typography Header (20% Smaller as Requested) */}
       <div
         style={{
-          margin: "clamp(2rem, 5vw, 4.5rem) 0",
+          margin: "clamp(1rem, 3vw, 2.5rem) 0",
           display: "flex",
           flexDirection: "column",
-          gap: "clamp(0.5rem, 2vw, 1.5rem)",
+          gap: "clamp(0.4rem, 1vw, 0.75rem)",
         }}
       >
-        {/* Massive 260px Heading */}
+        {/* Big 20% Scaled Headline */}
         <h1
           className="font-display"
           style={{
-            fontSize: "clamp(2.8rem, 12vw, 240px)",
+            fontSize: "clamp(2rem, 9.2vw, 192px)",
             fontWeight: 900,
             lineHeight: 0.88,
             letterSpacing: "-0.045em",
@@ -114,21 +110,21 @@ export function HeroSection() {
           BEAUTIFUL.
         </h1>
 
-        {/* 120px Sub-headline */}
+        {/* Scaled Sub-headline */}
         <div
           style={{
             display: "flex",
             flexWrap: "wrap",
             alignItems: "baseline",
             justifyContent: "space-between",
-            gap: "1.5rem",
-            marginTop: "clamp(0.75rem, 2vw, 1.5rem)",
+            gap: "1rem",
+            marginTop: "clamp(0.4rem, 1.2vw, 1rem)",
           }}
         >
           <h2
             className="font-display"
             style={{
-              fontSize: "clamp(1.75rem, 6.2vw, 115px)",
+              fontSize: "clamp(1.35rem, 4.8vw, 94px)",
               fontWeight: 800,
               lineHeight: 0.95,
               letterSpacing: "-0.035em",
@@ -144,12 +140,12 @@ export function HeroSection() {
           <div
             className="font-mono"
             style={{
-              fontSize: "clamp(0.85rem, 1.2vw, 1.1rem)",
+              fontSize: "clamp(0.75rem, 0.95vw, 0.9rem)",
               color: "var(--text-muted)",
               letterSpacing: "0.05em",
               textTransform: "uppercase",
               border: "1px solid var(--border-medium)",
-              padding: "0.45rem 1.1rem",
+              padding: "0.3rem 0.85rem",
               borderRadius: "999px",
             }}
           >
@@ -158,37 +154,39 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Bottom Hero Connect Statement & CTAs */}
+      {/* Caption & 3D Art Scratch Portrait Row */}
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-          gap: "2.5rem",
-          alignItems: "end",
-          paddingTop: "2rem",
-          borderTop: "1px solid var(--border-subtle)",
+          gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 340px), 1fr))",
+          gap: "clamp(2rem, 4vw, 4rem)",
+          alignItems: "center",
+          paddingTop: "1.5rem",
         }}
       >
-        {/* Short Connect Pitch */}
-        <div style={{ maxWidth: "560px" }}>
+        {/* Left Column: Short Pitch & Action Buttons */}
+        <div style={{ maxWidth: "580px" }}>
           <p
             style={{
-              fontSize: "clamp(1rem, 1.4vw, 1.25rem)",
-              lineHeight: 1.6,
+              fontSize: "clamp(1rem, 1.25vw, 1.15rem)",
+              lineHeight: 1.65,
               color: "var(--text-secondary)",
               fontWeight: 400,
+              marginBottom: "1.25rem",
             }}
           >
             Hi, I&apos;m <strong>{PERSONAL_INFO.name}</strong>. Bridging high-craft aesthetic intuition with engineering rigor. Designing intuitive digital products, SaaS dashboards, and mobile experiences that solve real-world problems.
           </p>
+
           <div
             style={{
-              marginTop: "0.75rem",
               display: "flex",
               alignItems: "center",
-              gap: "1.5rem",
-              fontSize: "0.9rem",
+              gap: "1rem",
+              fontSize: "0.85rem",
               color: "var(--text-muted)",
+              marginBottom: "1.75rem",
+              flexWrap: "wrap",
             }}
           >
             <a
@@ -198,36 +196,24 @@ export function HeroSection() {
               style={{
                 display: "inline-flex",
                 alignItems: "center",
-                gap: "0.35rem",
+                gap: "0.3rem",
                 color: "var(--text-primary)",
                 borderBottom: "1px solid var(--border-bold)",
                 paddingBottom: "2px",
-                transition: "var(--transition-smooth)",
               }}
             >
-              View 24+ Dribbble Shots
-              <ExternalLink size={13} />
+              View 24+ Dribbble Works
+              <ExternalLink size={12} />
             </a>
             <span>•</span>
             <span className="font-mono">{PERSONAL_INFO.email}</span>
           </div>
-        </div>
 
-        {/* Action CTAs & Scroll Pointer */}
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-start",
-            gap: "1.25rem",
-          }}
-        >
           <div
             style={{
               display: "flex",
               flexWrap: "wrap",
-              gap: "1rem",
-              width: "100%",
+              gap: "0.85rem",
             }}
           >
             <a
@@ -236,26 +222,27 @@ export function HeroSection() {
                 display: "inline-flex",
                 alignItems: "center",
                 justifyContent: "center",
-                gap: "0.6rem",
-                padding: "1rem 2.2rem",
+                gap: "0.5rem",
+                minHeight: "48px",
+                padding: "0 1.75rem",
                 borderRadius: "999px",
                 background: "var(--text-primary)",
                 color: "var(--bg-primary)",
                 fontWeight: 700,
-                fontSize: "1rem",
+                fontSize: "0.95rem",
                 letterSpacing: "-0.01em",
-                transition: "all 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
-                boxShadow: "0 10px 25px var(--glow-active)",
+                transition: "all 0.2s cubic-bezier(0.16, 1, 0.3, 1)",
+                boxShadow: "0 8px 20px var(--glow-active)",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-3px) scale(1.02)";
+                e.currentTarget.style.transform = "translateY(-2px) scale(1.02)";
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = "translateY(0) scale(1)";
               }}
             >
-              Let&apos;s Connect &amp; Talk
-              <ArrowUpRight size={18} />
+              Let&apos;s Connect
+              <ArrowUpRight size={17} />
             </a>
 
             <a
@@ -264,43 +251,41 @@ export function HeroSection() {
                 display: "inline-flex",
                 alignItems: "center",
                 justifyContent: "center",
-                gap: "0.6rem",
-                padding: "1rem 2rem",
+                gap: "0.5rem",
+                minHeight: "48px",
+                padding: "0 1.5rem",
                 borderRadius: "999px",
                 background: "transparent",
                 color: "var(--text-primary)",
                 border: "1px solid var(--border-medium)",
                 fontWeight: 600,
-                fontSize: "1rem",
-                transition: "all 0.25s ease",
+                fontSize: "0.95rem",
+                transition: "all 0.2s ease",
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.borderColor = "var(--border-bold)";
-                e.currentTarget.style.background = "var(--bg-tertiary)";
+                e.currentTarget.style.background = "var(--bg-card)";
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.borderColor = "var(--border-medium)";
                 e.currentTarget.style.background = "transparent";
               }}
             >
-              Explore Portfolio
-              <ArrowDownRight size={18} />
+              Selected Works
+              <ArrowDownRight size={17} />
             </a>
           </div>
+        </div>
 
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "0.5rem",
-              fontSize: "0.82rem",
-              color: "var(--text-muted)",
-            }}
-            className="font-mono"
-          >
-            <Sparkles size={14} />
-            <span>Scroll down to navigate portfolio below</span>
-          </div>
+        {/* Right Column: Beautiful Art Type Scratch Portrait with 3D Hover Effect */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <ArtScratchPortrait />
         </div>
       </div>
     </header>

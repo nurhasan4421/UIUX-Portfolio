@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { PROJECTS, Project } from "@/data/portfolioData";
-import { ArrowUpRight, Play, ExternalLink, Layers, Sparkles } from "lucide-react";
+import { ArrowUpRight, Play, ExternalLink } from "lucide-react";
 
 const CATEGORIES = ["All Works", "Mobile Apps", "Web & SaaS", "Fintech", "E-Commerce"];
 
@@ -24,8 +24,8 @@ export function ProjectsSection() {
     <section
       id="works"
       style={{
-        padding: "clamp(3.5rem, 8vw, 8rem) clamp(1rem, 5vw, 4rem)",
-        maxWidth: "1600px",
+        padding: "clamp(3rem, 7vw, 7rem) clamp(1rem, 5vw, 3.5rem)",
+        maxWidth: "1500px",
         margin: "0 auto",
         position: "relative",
       }}
@@ -37,33 +37,31 @@ export function ProjectsSection() {
           justifyContent: "space-between",
           alignItems: "flex-end",
           flexWrap: "wrap",
-          gap: "2rem",
+          gap: "1.5rem",
           marginBottom: "clamp(2rem, 4vw, 3.5rem)",
-          borderBottom: "1px solid var(--border-divider)",
-          paddingBottom: "2rem",
         }}
       >
         <div>
           <span
             className="font-mono"
             style={{
-              fontSize: "0.85rem",
+              fontSize: "0.8rem",
               textTransform: "uppercase",
-              letterSpacing: "0.1em",
+              letterSpacing: "0.08em",
               color: "var(--text-muted)",
               display: "block",
               marginBottom: "0.5rem",
             }}
           >
-            01 // SELECTED WORKS
+            Selected Works
           </span>
           <h2
             className="font-display"
             style={{
-              fontSize: "clamp(2rem, 5vw, 4.5rem)",
+              fontSize: "clamp(1.85rem, 4.5vw, 4rem)",
               fontWeight: 800,
               lineHeight: 1.05,
-              letterSpacing: "-0.035em",
+              letterSpacing: "-0.03em",
               color: "var(--text-primary)",
               textTransform: "uppercase",
             }}
@@ -74,13 +72,16 @@ export function ProjectsSection() {
           </h2>
         </div>
 
-        {/* Filter Pills */}
+        {/* Filter Pills with Horizontal Scroll on Phone */}
         <div
           style={{
             display: "flex",
-            flexWrap: "wrap",
-            gap: "0.5rem",
+            gap: "0.45rem",
             alignItems: "center",
+            maxWidth: "100%",
+            overflowX: "auto",
+            scrollbarWidth: "none",
+            paddingBottom: "0.5rem",
           }}
         >
           {CATEGORIES.map((cat) => {
@@ -90,15 +91,18 @@ export function ProjectsSection() {
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
                 style={{
-                  padding: "0.6rem 1.2rem",
+                  minHeight: "40px",
+                  padding: "0 1.1rem",
                   borderRadius: "999px",
-                  fontSize: "0.85rem",
+                  fontSize: "0.82rem",
                   fontWeight: isActive ? 700 : 500,
                   border: isActive ? "1px solid var(--text-primary)" : "1px solid var(--border-medium)",
                   background: isActive ? "var(--text-primary)" : "var(--bg-card)",
                   color: isActive ? "var(--bg-primary)" : "var(--text-secondary)",
                   transition: "all 0.2s ease",
                   cursor: "pointer",
+                  whiteSpace: "nowrap",
+                  flexShrink: 0,
                 }}
               >
                 {cat}
@@ -112,44 +116,44 @@ export function ProjectsSection() {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(380px, 1fr))",
-          gap: "clamp(1.5rem, 3vw, 2.75rem)",
+          gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 360px), 1fr))",
+          gap: "clamp(1.5rem, 3vw, 2.5rem)",
         }}
       >
-        {filteredProjects.map((project, idx) => {
+        {filteredProjects.map((project) => {
           return (
             <article
               key={project.id}
               style={{
-                borderRadius: "24px",
-                border: "1px solid var(--border-medium)",
+                borderRadius: "20px",
+                border: "1px solid var(--border-subtle)",
                 backgroundColor: "var(--bg-card)",
                 overflow: "hidden",
                 display: "flex",
                 flexDirection: "column",
-                transition: "all 0.35s cubic-bezier(0.16, 1, 0.3, 1)",
+                transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
                 position: "relative",
+                boxShadow: "0 10px 30px rgba(0,0,0,0.12)",
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.borderColor = "var(--border-bold)";
-                e.currentTarget.style.transform = "translateY(-6px)";
-                e.currentTarget.style.boxShadow = "0 20px 45px var(--glow-active)";
+                e.currentTarget.style.transform = "translateY(-4px)";
+                e.currentTarget.style.boxShadow = "0 18px 40px var(--glow-active)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "var(--border-medium)";
+                e.currentTarget.style.borderColor = "var(--border-subtle)";
                 e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "none";
+                e.currentTarget.style.boxShadow = "0 10px 30px rgba(0,0,0,0.12)";
               }}
             >
-              {/* Image / Thumbnail Container */}
+              {/* Image Thumbnail */}
               <div
                 style={{
                   position: "relative",
                   width: "100%",
-                  height: "360px",
+                  height: "clamp(220px, 28vw, 320px)",
                   backgroundColor: "var(--bg-tertiary)",
                   overflow: "hidden",
-                  borderBottom: "1px solid var(--border-subtle)",
                 }}
               >
                 <Image
@@ -159,32 +163,29 @@ export function ProjectsSection() {
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   style={{
                     objectFit: "cover",
-                    transition: "transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
+                    transition: "transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
                   }}
                   className="project-img-zoom"
                 />
 
-                {/* Badge Top Left */}
                 <div
                   style={{
                     position: "absolute",
-                    top: "1.25rem",
-                    left: "1.25rem",
+                    top: "1rem",
+                    left: "1rem",
                     zIndex: 2,
-                    display: "flex",
-                    gap: "0.5rem",
                   }}
                 >
                   <span
                     className="font-mono"
                     style={{
-                      fontSize: "0.72rem",
+                      fontSize: "0.7rem",
                       textTransform: "uppercase",
                       letterSpacing: "0.05em",
                       backgroundColor: "rgba(0, 0, 0, 0.75)",
-                      backdropFilter: "blur(10px)",
+                      backdropFilter: "blur(8px)",
                       color: "#ffffff",
-                      padding: "0.35rem 0.85rem",
+                      padding: "0.3rem 0.75rem",
                       borderRadius: "999px",
                       border: "1px solid rgba(255, 255, 255, 0.2)",
                     }}
@@ -193,19 +194,18 @@ export function ProjectsSection() {
                   </span>
                 </div>
 
-                {/* Video Play Button if video available */}
                 {project.video && (
                   <button
                     onClick={() => setSelectedVideo(project.video || null)}
-                    aria-label="Play video prototype"
-                    title="Play motion animation"
+                    aria-label="Play motion video"
+                    title="Play motion concept"
                     style={{
                       position: "absolute",
-                      bottom: "1.25rem",
-                      right: "1.25rem",
+                      bottom: "1rem",
+                      right: "1rem",
                       zIndex: 2,
-                      width: "48px",
-                      height: "48px",
+                      width: "44px",
+                      height: "44px",
                       borderRadius: "50%",
                       backgroundColor: "rgba(0, 0, 0, 0.8)",
                       border: "1px solid rgba(255, 255, 255, 0.4)",
@@ -213,22 +213,22 @@ export function ProjectsSection() {
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      backdropFilter: "blur(10px)",
+                      backdropFilter: "blur(8px)",
                       cursor: "pointer",
                       transition: "transform 0.2s ease",
                     }}
                     onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.1)")}
                     onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
                   >
-                    <Play size={18} fill="#ffffff" />
+                    <Play size={16} fill="#ffffff" />
                   </button>
                 )}
               </div>
 
-              {/* Project Card Body */}
+              {/* Project Card Content */}
               <div
                 style={{
-                  padding: "1.75rem clamp(1.25rem, 2vw, 2rem)",
+                  padding: "clamp(1.25rem, 2vw, 1.75rem)",
                   display: "flex",
                   flexDirection: "column",
                   flex: 1,
@@ -241,20 +241,20 @@ export function ProjectsSection() {
                       display: "flex",
                       justifyContent: "space-between",
                       alignItems: "baseline",
-                      marginBottom: "0.6rem",
+                      marginBottom: "0.5rem",
                     }}
                   >
                     <span
                       className="font-mono"
                       style={{
-                        fontSize: "0.78rem",
+                        fontSize: "0.75rem",
                         color: "var(--text-muted)",
                         textTransform: "uppercase",
                       }}
                     >
                       {project.category}
                     </span>
-                    <span className="font-mono" style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
+                    <span className="font-mono" style={{ fontSize: "0.78rem", color: "var(--text-muted)" }}>
                       {project.year}
                     </span>
                   </div>
@@ -262,11 +262,11 @@ export function ProjectsSection() {
                   <h3
                     className="font-display"
                     style={{
-                      fontSize: "1.45rem",
+                      fontSize: "1.35rem",
                       fontWeight: 800,
                       letterSpacing: "-0.02em",
                       color: "var(--text-primary)",
-                      marginBottom: "0.6rem",
+                      marginBottom: "0.5rem",
                     }}
                   >
                     {project.title}
@@ -274,24 +274,23 @@ export function ProjectsSection() {
 
                   <p
                     style={{
-                      fontSize: "0.92rem",
+                      fontSize: "0.9rem",
                       color: "var(--text-secondary)",
-                      lineHeight: 1.6,
-                      marginBottom: "1.25rem",
+                      lineHeight: 1.55,
+                      marginBottom: "1rem",
                     }}
                   >
                     {project.description}
                   </p>
                 </div>
 
-                {/* Card Footer: Tools & Dribbble Link */}
                 <div>
                   <div
                     style={{
                       display: "flex",
                       flexWrap: "wrap",
-                      gap: "0.4rem",
-                      marginBottom: "1.5rem",
+                      gap: "0.35rem",
+                      marginBottom: "1.25rem",
                     }}
                   >
                     {project.tools.map((t) => (
@@ -299,12 +298,11 @@ export function ProjectsSection() {
                         key={t}
                         className="font-mono"
                         style={{
-                          fontSize: "0.72rem",
-                          padding: "0.25rem 0.6rem",
+                          fontSize: "0.7rem",
+                          padding: "0.2rem 0.55rem",
                           borderRadius: "4px",
                           backgroundColor: "var(--bg-tertiary)",
                           color: "var(--text-secondary)",
-                          border: "1px solid var(--border-subtle)",
                         }}
                       >
                         {t}
@@ -317,7 +315,7 @@ export function ProjectsSection() {
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "space-between",
-                      paddingTop: "1rem",
+                      paddingTop: "0.85rem",
                       borderTop: "1px solid var(--border-subtle)",
                     }}
                   >
@@ -328,24 +326,18 @@ export function ProjectsSection() {
                       style={{
                         display: "inline-flex",
                         alignItems: "center",
-                        gap: "0.4rem",
-                        fontSize: "0.88rem",
+                        gap: "0.35rem",
+                        fontSize: "0.85rem",
                         fontWeight: 700,
                         color: "var(--text-primary)",
-                        transition: "all 0.2s ease",
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.opacity = "0.7";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.opacity = "1";
+                        minHeight: "36px",
                       }}
                     >
                       <span>Inspect on Dribbble</span>
-                      <ArrowUpRight size={16} />
+                      <ArrowUpRight size={15} />
                     </a>
 
-                    <span className="font-mono" style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>
+                    <span className="font-mono" style={{ fontSize: "0.72rem", color: "var(--text-muted)" }}>
                       Figma High-Fi
                     </span>
                   </div>
@@ -356,7 +348,7 @@ export function ProjectsSection() {
         })}
       </div>
 
-      {/* Video Modal Preview for Motion Demos */}
+      {/* Video Modal Preview */}
       {selectedVideo && (
         <div
           onClick={() => setSelectedVideo(null)}
@@ -369,7 +361,7 @@ export function ProjectsSection() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            padding: "2rem",
+            padding: "1.5rem",
           }}
         >
           <div
@@ -388,7 +380,7 @@ export function ProjectsSection() {
               src={selectedVideo}
               controls
               autoPlay
-              style={{ width: "100%", maxHeight: "80vh", display: "block" }}
+              style={{ width: "100%", maxHeight: "75vh", display: "block" }}
             />
             <button
               onClick={() => setSelectedVideo(null)}
@@ -401,7 +393,6 @@ export function ProjectsSection() {
                 padding: "0.4rem 0.8rem",
                 borderRadius: "999px",
                 fontSize: "0.85rem",
-                border: "1px solid rgba(255,255,255,0.3)",
                 cursor: "pointer",
               }}
             >
@@ -413,7 +404,7 @@ export function ProjectsSection() {
 
       <style jsx global>{`
         article:hover .project-img-zoom {
-          transform: scale(1.05);
+          transform: scale(1.04);
         }
       `}</style>
     </section>

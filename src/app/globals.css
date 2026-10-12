@@ -230,3 +230,10 @@ button {
     linear-gradient(to right, var(--border-subtle) 1px, transparent 1px),
     linear-gradient(to bottom, var(--border-subtle) 1px, transparent 1px);
 }
+
+/* Hide dev indicator badge on local dev */
+nextjs-portal,
+#__next-build-watcher {
+  display: none !important;
+}
+

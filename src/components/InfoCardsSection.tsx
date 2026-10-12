@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { PERSONAL_INFO, PHILOSOPHY_CARDS } from "@/data/portfolioData";
-import { CheckCircle2, Code2, Layers, Cpu, Sparkles, ExternalLink, GraduationCap, MapPin, Award } from "lucide-react";
+import { ExternalLink, Award } from "lucide-react";
 
 export function InfoCardsSection() {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
@@ -12,8 +12,8 @@ export function InfoCardsSection() {
     <section
       id="about"
       style={{
-        padding: "clamp(3.5rem, 8vw, 8rem) clamp(1rem, 5vw, 4rem)",
-        maxWidth: "1600px",
+        padding: "clamp(3rem, 7vw, 7rem) clamp(1rem, 5vw, 3.5rem)",
+        maxWidth: "1500px",
         margin: "0 auto",
         position: "relative",
       }}
@@ -25,33 +25,31 @@ export function InfoCardsSection() {
           justifyContent: "space-between",
           alignItems: "flex-end",
           flexWrap: "wrap",
-          gap: "2rem",
-          marginBottom: " clamp(2.5rem, 5vw, 4.5rem)",
-          borderBottom: "1px solid var(--border-divider)",
-          paddingBottom: "2rem",
+          gap: "1.5rem",
+          marginBottom: "clamp(2rem, 4vw, 4rem)",
         }}
       >
         <div>
           <span
             className="font-mono"
             style={{
-              fontSize: "0.85rem",
+              fontSize: "0.8rem",
               textTransform: "uppercase",
-              letterSpacing: "0.1em",
+              letterSpacing: "0.08em",
               color: "var(--text-muted)",
               display: "block",
               marginBottom: "0.5rem",
             }}
           >
-            02 // ABOUT &amp; PHILOSOPHY
+            About &amp; Core Philosophy
           </span>
           <h2
             className="font-display"
             style={{
-              fontSize: "clamp(2rem, 5vw, 4.5rem)",
+              fontSize: "clamp(1.85rem, 4.5vw, 4rem)",
               fontWeight: 800,
               lineHeight: 1.05,
-              letterSpacing: "-0.035em",
+              letterSpacing: "-0.03em",
               color: "var(--text-primary)",
               textTransform: "uppercase",
             }}
@@ -64,10 +62,10 @@ export function InfoCardsSection() {
 
         <p
           style={{
-            maxWidth: "460px",
+            maxWidth: "440px",
             color: "var(--text-secondary)",
-            fontSize: "clamp(0.95rem, 1.2vw, 1.1rem)",
-            lineHeight: 1.6,
+            fontSize: "clamp(0.92rem, 1.1vw, 1.05rem)",
+            lineHeight: 1.65,
           }}
         >
           Bridging human empathy with the precision of a Computer Science degree. Crafting digital products that feel intuitive on screen and run cleanly in production.
@@ -78,8 +76,8 @@ export function InfoCardsSection() {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
-          gap: "2rem",
+          gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 320px), 1fr))",
+          gap: "clamp(1.25rem, 2.5vw, 2rem)",
           alignItems: "stretch",
         }}
       >
@@ -87,79 +85,76 @@ export function InfoCardsSection() {
         <div
           className="animate-float-a"
           style={{
-            gridColumn: "span 1",
-            borderRadius: "24px",
-            border: "1px solid var(--border-medium)",
+            borderRadius: "20px",
+            border: "1px solid var(--border-subtle)",
             backgroundColor: "var(--bg-card)",
-            padding: "2.2rem",
+            padding: "clamp(1.5rem, 3vw, 2.2rem)",
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
             position: "relative",
             overflow: "hidden",
-            boxShadow: "0 20px 40px rgba(0,0,0,0.3)",
-            transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+            boxShadow: "0 14px 34px rgba(0,0,0,0.18)",
+            transition: "all 0.3s ease",
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.borderColor = "var(--border-bold)";
-            e.currentTarget.style.boxShadow = "0 25px 50px var(--glow-active)";
+            e.currentTarget.style.borderColor = "var(--border-medium)";
+            e.currentTarget.style.boxShadow = "0 20px 45px var(--glow-active)";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.borderColor = "var(--border-medium)";
-            e.currentTarget.style.boxShadow = "0 20px 40px rgba(0,0,0,0.3)";
+            e.currentTarget.style.borderColor = "var(--border-subtle)";
+            e.currentTarget.style.boxShadow = "0 14px 34px rgba(0,0,0,0.18)";
           }}
         >
-          {/* Portrait Image Header */}
           <div>
             <div
               style={{
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
-                marginBottom: "1.5rem",
+                marginBottom: "1.25rem",
               }}
             >
               <span
                 className="font-mono"
                 style={{
-                  fontSize: "0.78rem",
-                  letterSpacing: "0.08em",
+                  fontSize: "0.75rem",
+                  letterSpacing: "0.06em",
                   color: "var(--text-muted)",
                   textTransform: "uppercase",
                 }}
               >
-                [ PROFILE // DHAKA, BD ]
+                Profile // Dhaka, BD
               </span>
 
               <span
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
-                  gap: "0.4rem",
-                  fontSize: "0.75rem",
+                  gap: "0.35rem",
+                  fontSize: "0.72rem",
                   background: "var(--bg-tertiary)",
-                  border: "1px solid var(--border-subtle)",
-                  padding: "0.3rem 0.75rem",
+                  padding: "0.25rem 0.65rem",
                   borderRadius: "999px",
                   color: "var(--text-secondary)",
                 }}
                 className="font-mono"
               >
-                <Award size={13} />
+                <Award size={12} />
                 CS Graduate
               </span>
             </div>
 
-            {/* Profile Picture with Monochrome Framing */}
+            {/* Profile Picture */}
             <div
               style={{
                 position: "relative",
                 width: "100%",
-                height: "320px",
-                borderRadius: "16px",
+                height: "clamp(240px, 30vw, 300px)",
+                borderRadius: "14px",
                 overflow: "hidden",
                 border: "1px solid var(--border-subtle)",
-                marginBottom: "1.5rem",
+                marginBottom: "1.25rem",
                 backgroundColor: "var(--bg-tertiary)",
               }}
             >
@@ -167,17 +162,15 @@ export function InfoCardsSection() {
                 src="/images/nurhasan-portrait.jpg"
                 alt="Nur Hasan - UI/UX Designer"
                 fill
-                sizes="(max-width: 768px) 100vw, 400px"
+                sizes="(max-width: 768px) 100vw, 380px"
                 style={{
                   objectFit: "cover",
                   objectPosition: "center top",
-                  filter: "grayscale(10%) contrast(105%)",
-                  transition: "transform 0.5s ease, filter 0.5s ease",
+                  filter: "grayscale(15%) contrast(105%)",
                 }}
                 priority
               />
 
-              {/* Gradient Scrim on Portrait */}
               <div
                 style={{
                   position: "absolute",
@@ -199,8 +192,8 @@ export function InfoCardsSection() {
                 }}
               >
                 <div>
-                  <h3 style={{ fontSize: "1.2rem", fontWeight: 800, margin: 0 }}>Nur Hasan</h3>
-                  <p style={{ fontSize: "0.82rem", opacity: 0.85, margin: 0 }}>UI/UX Product Designer</p>
+                  <h3 style={{ fontSize: "1.15rem", fontWeight: 800, margin: 0 }}>Nur Hasan</h3>
+                  <p style={{ fontSize: "0.8rem", opacity: 0.85, margin: 0 }}>UI/UX Product Designer</p>
                 </div>
 
                 <a
@@ -208,8 +201,8 @@ export function InfoCardsSection() {
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
-                    width: "36px",
-                    height: "36px",
+                    width: "34px",
+                    height: "34px",
                     borderRadius: "50%",
                     backgroundColor: "rgba(255,255,255,0.2)",
                     backdropFilter: "blur(10px)",
@@ -220,14 +213,14 @@ export function InfoCardsSection() {
                   }}
                   title="View Dribbble"
                 >
-                  <ExternalLink size={16} />
+                  <ExternalLink size={15} />
                 </a>
               </div>
             </div>
 
             <p
               style={{
-                fontSize: "0.95rem",
+                fontSize: "0.92rem",
                 lineHeight: 1.6,
                 color: "var(--text-secondary)",
               }}
@@ -236,11 +229,10 @@ export function InfoCardsSection() {
             </p>
           </div>
 
-          {/* Quick Metrics Bar */}
           <div
             style={{
-              marginTop: "2rem",
-              paddingTop: "1.5rem",
+              marginTop: "1.5rem",
+              paddingTop: "1.25rem",
               borderTop: "1px solid var(--border-subtle)",
               display: "grid",
               gridTemplateColumns: "1fr 1fr",
@@ -248,18 +240,18 @@ export function InfoCardsSection() {
             }}
           >
             <div>
-              <span className="font-display" style={{ fontSize: "1.8rem", fontWeight: 800 }}>
+              <span className="font-display" style={{ fontSize: "1.6rem", fontWeight: 800 }}>
                 24+
               </span>
-              <p className="font-mono" style={{ fontSize: "0.78rem", color: "var(--text-muted)" }}>
+              <p className="font-mono" style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>
                 Dribbble Works
               </p>
             </div>
             <div>
-              <span className="font-display" style={{ fontSize: "1.8rem", fontWeight: 800 }}>
+              <span className="font-display" style={{ fontSize: "1.6rem", fontWeight: 800 }}>
                 100%
               </span>
-              <p className="font-mono" style={{ fontSize: "0.78rem", color: "var(--text-muted)" }}>
+              <p className="font-mono" style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>
                 Engineering Ready
               </p>
             </div>
@@ -272,9 +264,10 @@ export function InfoCardsSection() {
           style={{
             gridColumn: "span 2",
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-            gap: "1.5rem",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 280px), 1fr))",
+            gap: "1.25rem",
           }}
+          className="philosophy-grid"
         >
           {PHILOSOPHY_CARDS.map((card, idx) => {
             const isHovered = hoveredCard === card.id;
@@ -287,34 +280,33 @@ export function InfoCardsSection() {
                 onMouseEnter={() => setHoveredCard(card.id)}
                 onMouseLeave={() => setHoveredCard(null)}
                 style={{
-                  borderRadius: "20px",
-                  border: isHovered ? "1px solid var(--border-bold)" : "1px solid var(--border-medium)",
+                  borderRadius: "18px",
+                  border: isHovered ? "1px solid var(--border-bold)" : "1px solid var(--border-subtle)",
                   backgroundColor: isHovered ? "var(--bg-card-hover)" : "var(--bg-card)",
-                  padding: "2rem",
+                  padding: "clamp(1.5rem, 2.5vw, 2rem)",
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-between",
-                  transition: "all 0.35s cubic-bezier(0.16, 1, 0.3, 1)",
-                  transform: isHovered ? "translateY(-6px) scale(1.01)" : "translateY(0)",
-                  boxShadow: isHovered ? "0 20px 40px var(--glow-active)" : "none",
+                  transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+                  transform: isHovered ? "translateY(-4px)" : "translateY(0)",
+                  boxShadow: isHovered ? "0 18px 36px var(--glow-active)" : "0 8px 24px rgba(0,0,0,0.1)",
                   position: "relative",
                   overflow: "hidden",
                 }}
               >
-                {/* Top Number & Tag */}
                 <div>
                   <div
                     style={{
                       display: "flex",
                       justifyContent: "space-between",
                       alignItems: "center",
-                      marginBottom: "1.5rem",
+                      marginBottom: "1.25rem",
                     }}
                   >
                     <span
                       className="font-mono"
                       style={{
-                        fontSize: "1.1rem",
+                        fontSize: "1rem",
                         fontWeight: 700,
                         color: "var(--text-muted)",
                       }}
@@ -325,12 +317,11 @@ export function InfoCardsSection() {
                     <span
                       className="font-mono"
                       style={{
-                        fontSize: "0.72rem",
+                        fontSize: "0.7rem",
                         textTransform: "uppercase",
                         letterSpacing: "0.06em",
-                        padding: "0.3rem 0.7rem",
+                        padding: "0.25rem 0.65rem",
                         borderRadius: "999px",
-                        border: "1px solid var(--border-subtle)",
                         background: "var(--bg-tertiary)",
                         color: "var(--text-secondary)",
                       }}
@@ -342,10 +333,10 @@ export function InfoCardsSection() {
                   <h3
                     className="font-display"
                     style={{
-                      fontSize: "1.4rem",
+                      fontSize: "1.3rem",
                       fontWeight: 800,
                       letterSpacing: "-0.02em",
-                      marginBottom: "1rem",
+                      marginBottom: "0.75rem",
                       color: "var(--text-primary)",
                     }}
                   >
@@ -354,37 +345,27 @@ export function InfoCardsSection() {
 
                   <p
                     style={{
-                      fontSize: "0.92rem",
-                      lineHeight: 1.65,
+                      fontSize: "0.9rem",
+                      lineHeight: 1.6,
                       color: "var(--text-secondary)",
                     }}
                   >
                     {card.description}
                   </p>
                 </div>
-
-                {/* Subtle Interactive Footnote */}
-                <div
-                  style={{
-                    marginTop: "2rem",
-                    paddingTop: "1rem",
-                    borderTop: "1px solid var(--border-subtle)",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "0.5rem",
-                    fontSize: "0.8rem",
-                    color: "var(--text-muted)",
-                  }}
-                  className="font-mono"
-                >
-                  <CheckCircle2 size={14} color={isHovered ? "var(--text-primary)" : "var(--text-muted)"} />
-                  <span>Design Principle Verified</span>
-                </div>
               </div>
             );
           })}
         </div>
       </div>
+
+      <style jsx global>{`
+        @media (max-width: 900px) {
+          .philosophy-grid {
+            grid-column: span 1 !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

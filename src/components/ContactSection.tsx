@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { PERSONAL_INFO } from "@/data/portfolioData";
 import { submitContactMessage } from "@/lib/supabase";
-import { Mail, MapPin, Copy, Check, Send, Sparkles, ExternalLink, ArrowUpRight } from "lucide-react";
+import { Mail, MapPin, Copy, Check, Send, ExternalLink } from "lucide-react";
 
 export function ContactSection() {
   const [formData, setFormData] = useState({
@@ -49,40 +49,40 @@ export function ContactSection() {
     <section
       id="contact"
       style={{
-        padding: "clamp(3.5rem, 8vw, 8rem) clamp(1rem, 5vw, 4rem)",
-        maxWidth: "1600px",
+        padding: "clamp(3rem, 7vw, 7rem) clamp(1rem, 5vw, 3.5rem)",
+        maxWidth: "1500px",
         margin: "0 auto",
         position: "relative",
       }}
     >
-      {/* Giant CTA Header */}
+      {/* CTA Header */}
       <div
         style={{
-          borderBottom: "1px solid var(--border-divider)",
-          paddingBottom: "clamp(2rem, 4vw, 4rem)",
-          marginBottom: "clamp(2.5rem, 5vw, 4.5rem)",
+          borderBottom: "1px solid var(--border-subtle)",
+          paddingBottom: "clamp(2rem, 4vw, 3.5rem)",
+          marginBottom: "clamp(2rem, 4vw, 4rem)",
         }}
       >
         <span
           className="font-mono"
           style={{
-            fontSize: "0.85rem",
+            fontSize: "0.8rem",
             textTransform: "uppercase",
-            letterSpacing: "0.1em",
+            letterSpacing: "0.08em",
             color: "var(--text-muted)",
             display: "block",
-            marginBottom: "0.75rem",
+            marginBottom: "0.6rem",
           }}
         >
-          06 // INITIATE COLLABORATION
+          Initiate Collaboration
         </span>
 
         <h2
           className="font-display"
           style={{
-            fontSize: "clamp(2.4rem, 8vw, 130px)",
+            fontSize: "clamp(2rem, 6.5vw, 110px)",
             fontWeight: 900,
-            lineHeight: 0.92,
+            lineHeight: 0.95,
             letterSpacing: "-0.04em",
             color: "var(--text-primary)",
             textTransform: "uppercase",
@@ -105,25 +105,25 @@ export function ContactSection() {
         </h2>
       </div>
 
-      {/* Grid: Direct Contact Details & Interactive Form */}
+      {/* Grid: Coordinates & Form */}
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))",
-          gap: "clamp(2rem, 5vw, 5rem)",
+          gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 340px), 1fr))",
+          gap: "clamp(2rem, 4vw, 4rem)",
           alignItems: "start",
         }}
       >
-        {/* Left Column: Coordinates & Quick Info */}
+        {/* Left Column: Coordinates */}
         <div>
           <h3
             className="font-display"
             style={{
-              fontSize: "1.75rem",
+              fontSize: "1.5rem",
               fontWeight: 800,
               color: "var(--text-primary)",
               letterSpacing: "-0.02em",
-              marginBottom: "1rem",
+              marginBottom: "0.75rem",
             }}
           >
             Direct Channels
@@ -131,39 +131,44 @@ export function ContactSection() {
 
           <p
             style={{
-              fontSize: "1rem",
+              fontSize: "0.95rem",
               color: "var(--text-secondary)",
               lineHeight: 1.6,
-              marginBottom: "2.5rem",
+              marginBottom: "2rem",
             }}
           >
-            Have a project in mind, an early wireframe to review, or a product design role? Reach out directly. I respond within 24 hours.
+            Have a project in mind, an early wireframe to review, or a product design opportunity? Reach out directly. I respond within 24 hours.
           </p>
 
-          {/* Email Copy Card */}
+          {/* Email Copy Box */}
           <div
             style={{
               borderRadius: "16px",
-              border: "1px solid var(--border-medium)",
+              border: "1px solid var(--border-subtle)",
               backgroundColor: "var(--bg-card)",
-              padding: "1.5rem",
-              marginBottom: "1.5rem",
+              padding: "1.25rem",
+              marginBottom: "1.25rem",
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
+              gap: "0.75rem",
+              boxShadow: "0 6px 20px rgba(0,0,0,0.08)",
             }}
           >
-            <div>
-              <span className="font-mono" style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>
-                Primary Email
+            <div style={{ overflow: "hidden" }}>
+              <span className="font-mono" style={{ fontSize: "0.72rem", color: "var(--text-muted)" }}>
+                Email
               </span>
               <p
                 className="font-mono"
                 style={{
-                  fontSize: "1rem",
+                  fontSize: "clamp(0.85rem, 1.2vw, 0.95rem)",
                   fontWeight: 700,
                   color: "var(--text-primary)",
-                  margin: "0.2rem 0 0 0",
+                  margin: "0.15rem 0 0 0",
+                  whiteSpace: "nowrap",
+                  textOverflow: "ellipsis",
+                  overflow: "hidden",
                 }}
               >
                 {PERSONAL_INFO.email}
@@ -172,75 +177,66 @@ export function ContactSection() {
 
             <button
               onClick={handleCopyEmail}
-              aria-label="Copy Email address"
-              title="Copy to clipboard"
+              aria-label="Copy email"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
-                gap: "0.4rem",
-                padding: "0.6rem 1rem",
+                gap: "0.35rem",
+                minHeight: "40px",
+                padding: "0 0.9rem",
                 borderRadius: "8px",
-                border: "1px solid var(--border-medium)",
                 backgroundColor: "var(--bg-tertiary)",
                 color: "var(--text-primary)",
-                fontSize: "0.82rem",
+                fontSize: "0.8rem",
                 cursor: "pointer",
-                transition: "all 0.2s ease",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "var(--border-bold)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "var(--border-medium)";
+                border: "1px solid var(--border-subtle)",
+                flexShrink: 0,
               }}
             >
-              {copied ? <Check size={14} color="#10b981" /> : <Copy size={14} />}
-              <span>{copied ? "Copied!" : "Copy"}</span>
+              {copied ? <Check size={13} color="#10b981" /> : <Copy size={13} />}
+              <span>{copied ? "Copied" : "Copy"}</span>
             </button>
           </div>
 
-          {/* Location & Status Card */}
+          {/* Meta card */}
           <div
             style={{
               borderRadius: "16px",
-              border: "1px solid var(--border-medium)",
+              border: "1px solid var(--border-subtle)",
               backgroundColor: "var(--bg-card)",
-              padding: "1.5rem",
-              marginBottom: "2rem",
+              padding: "1.25rem",
               display: "flex",
               flexDirection: "column",
               gap: "1rem",
+              boxShadow: "0 6px 20px rgba(0,0,0,0.08)",
             }}
           >
             <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-              <MapPin size={18} color="var(--text-primary)" />
+              <MapPin size={16} color="var(--text-primary)" />
               <div>
-                <span className="font-mono" style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>
+                <span className="font-mono" style={{ fontSize: "0.72rem", color: "var(--text-muted)" }}>
                   Location &amp; Timezone
                 </span>
-                <p style={{ fontSize: "0.95rem", fontWeight: 700, margin: 0 }}>
+                <p style={{ fontSize: "0.9rem", fontWeight: 700, margin: 0 }}>
                   Dhaka, Bangladesh • GMT+6
                 </p>
               </div>
             </div>
 
             <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-              <ExternalLink size={18} color="var(--text-primary)" />
+              <ExternalLink size={16} color="var(--text-primary)" />
               <div>
-                <span className="font-mono" style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>
-                  Dribbble Portfolio
+                <span className="font-mono" style={{ fontSize: "0.72rem", color: "var(--text-muted)" }}>
+                  Dribbble
                 </span>
                 <a
                   href={PERSONAL_INFO.dribbble}
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
-                    fontSize: "0.95rem",
+                    fontSize: "0.9rem",
                     fontWeight: 700,
                     margin: 0,
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "0.3rem",
                     color: "var(--text-primary)",
                     textDecoration: "underline",
                   }}
@@ -252,75 +248,73 @@ export function ContactSection() {
           </div>
         </div>
 
-        {/* Right Column: Interactive Contact Form (Supabase connected) */}
+        {/* Right Column: Form */}
         <div
           style={{
-            borderRadius: "24px",
-            border: "1px solid var(--border-medium)",
+            borderRadius: "20px",
+            border: "1px solid var(--border-subtle)",
             backgroundColor: "var(--bg-card)",
-            padding: "clamp(1.75rem, 3.5vw, 3rem)",
-            boxShadow: "0 20px 45px rgba(0,0,0,0.3)",
+            padding: "clamp(1.5rem, 3vw, 2.5rem)",
+            boxShadow: "0 14px 34px rgba(0,0,0,0.16)",
           }}
         >
-          <div style={{ marginBottom: "1.75rem" }}>
+          <div style={{ marginBottom: "1.5rem" }}>
             <span
               className="font-mono"
               style={{
-                fontSize: "0.75rem",
+                fontSize: "0.72rem",
                 textTransform: "uppercase",
-                letterSpacing: "0.08em",
+                letterSpacing: "0.06em",
                 color: "var(--text-muted)",
               }}
             >
-              [ INQUIRY FORM // SUPABASE ENABLED ]
+              Inquiry Form
             </span>
             <h4
               className="font-display"
               style={{
-                fontSize: "1.35rem",
+                fontSize: "1.25rem",
                 fontWeight: 800,
                 color: "var(--text-primary)",
-                marginTop: "0.3rem",
+                marginTop: "0.25rem",
               }}
             >
               Start a Conversation
             </h4>
           </div>
 
-          <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+          <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1.1rem" }}>
             <div>
               <label
                 className="font-mono"
                 style={{
                   display: "block",
-                  fontSize: "0.78rem",
+                  fontSize: "0.75rem",
                   color: "var(--text-muted)",
-                  marginBottom: "0.5rem",
+                  marginBottom: "0.4rem",
                   textTransform: "uppercase",
                 }}
               >
-                Your Name *
+                Name *
               </label>
               <input
                 type="text"
                 required
-                placeholder="e.g. John Doe / Sarah Smith"
+                placeholder="John Doe"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 style={{
                   width: "100%",
-                  padding: "0.9rem 1.1rem",
+                  minHeight: "48px",
+                  padding: "0 1rem",
                   borderRadius: "10px",
                   border: "1px solid var(--border-medium)",
                   backgroundColor: "var(--bg-secondary)",
                   color: "var(--text-primary)",
-                  fontSize: "0.95rem",
+                  fontSize: "16px",
                   fontFamily: "inherit",
                   outline: "none",
-                  transition: "border-color 0.2s ease",
                 }}
-                onFocus={(e) => (e.target.style.borderColor = "var(--text-primary)")}
-                onBlur={(e) => (e.target.style.borderColor = "var(--border-medium)")}
               />
             </div>
 
@@ -329,13 +323,13 @@ export function ContactSection() {
                 className="font-mono"
                 style={{
                   display: "block",
-                  fontSize: "0.78rem",
+                  fontSize: "0.75rem",
                   color: "var(--text-muted)",
-                  marginBottom: "0.5rem",
+                  marginBottom: "0.4rem",
                   textTransform: "uppercase",
                 }}
               >
-                Your Email *
+                Email *
               </label>
               <input
                 type="email"
@@ -345,30 +339,28 @@ export function ContactSection() {
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 style={{
                   width: "100%",
-                  padding: "0.9rem 1.1rem",
+                  minHeight: "48px",
+                  padding: "0 1rem",
                   borderRadius: "10px",
                   border: "1px solid var(--border-medium)",
                   backgroundColor: "var(--bg-secondary)",
                   color: "var(--text-primary)",
-                  fontSize: "0.95rem",
+                  fontSize: "16px",
                   fontFamily: "inherit",
                   outline: "none",
-                  transition: "border-color 0.2s ease",
                 }}
-                onFocus={(e) => (e.target.style.borderColor = "var(--text-primary)")}
-                onBlur={(e) => (e.target.style.borderColor = "var(--border-medium)")}
               />
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))", gap: "1rem" }}>
               <div>
                 <label
                   className="font-mono"
                   style={{
                     display: "block",
-                    fontSize: "0.78rem",
+                    fontSize: "0.75rem",
                     color: "var(--text-muted)",
-                    marginBottom: "0.5rem",
+                    marginBottom: "0.4rem",
                     textTransform: "uppercase",
                   }}
                 >
@@ -379,22 +371,22 @@ export function ContactSection() {
                   onChange={(e) => setFormData({ ...formData, project_type: e.target.value })}
                   style={{
                     width: "100%",
-                    padding: "0.9rem 1.1rem",
+                    minHeight: "48px",
+                    padding: "0 0.75rem",
                     borderRadius: "10px",
                     border: "1px solid var(--border-medium)",
                     backgroundColor: "var(--bg-secondary)",
                     color: "var(--text-primary)",
-                    fontSize: "0.9rem",
+                    fontSize: "15px",
                     fontFamily: "inherit",
                     outline: "none",
-                    cursor: "pointer",
                   }}
                 >
                   <option value="Product UI/UX Design">Product UI/UX</option>
-                  <option value="Mobile App Design">Mobile App Design</option>
+                  <option value="Mobile App Design">Mobile App</option>
                   <option value="Design System & Tokens">Design System</option>
                   <option value="SaaS Dashboard">SaaS Dashboard</option>
-                  <option value="General Inquiry">Other Inquiry</option>
+                  <option value="General Inquiry">Other</option>
                 </select>
               </div>
 
@@ -403,34 +395,34 @@ export function ContactSection() {
                   className="font-mono"
                   style={{
                     display: "block",
-                    fontSize: "0.78rem",
+                    fontSize: "0.75rem",
                     color: "var(--text-muted)",
-                    marginBottom: "0.5rem",
+                    marginBottom: "0.4rem",
                     textTransform: "uppercase",
                   }}
                 >
-                  Estimated Budget
+                  Budget
                 </label>
                 <select
                   value={formData.budget}
                   onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
                   style={{
                     width: "100%",
-                    padding: "0.9rem 1.1rem",
+                    minHeight: "48px",
+                    padding: "0 0.75rem",
                     borderRadius: "10px",
                     border: "1px solid var(--border-medium)",
                     backgroundColor: "var(--bg-secondary)",
                     color: "var(--text-primary)",
-                    fontSize: "0.9rem",
+                    fontSize: "15px",
                     fontFamily: "inherit",
                     outline: "none",
-                    cursor: "pointer",
                   }}
                 >
                   <option value="$1k — $3k">$1,000 — $3,000</option>
                   <option value="$3k — $6k">$3,000 — $6,000</option>
                   <option value="$6k+">$6,000+</option>
-                  <option value="Discussion Required">To Be Discussed</option>
+                  <option value="Discussion Required">Negotiable</option>
                 </select>
               </div>
             </div>
@@ -440,9 +432,9 @@ export function ContactSection() {
                 className="font-mono"
                 style={{
                   display: "block",
-                  fontSize: "0.78rem",
+                  fontSize: "0.75rem",
                   color: "var(--text-muted)",
-                  marginBottom: "0.5rem",
+                  marginBottom: "0.4rem",
                   textTransform: "uppercase",
                 }}
               >
@@ -451,25 +443,22 @@ export function ContactSection() {
               <textarea
                 required
                 rows={4}
-                placeholder="Tell me about your vision, target users, timeline, or links to existing wireframes..."
+                placeholder="Share your goals, target users, or timeline..."
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 style={{
                   width: "100%",
-                  padding: "0.9rem 1.1rem",
+                  padding: "0.85rem 1rem",
                   borderRadius: "10px",
                   border: "1px solid var(--border-medium)",
                   backgroundColor: "var(--bg-secondary)",
                   color: "var(--text-primary)",
-                  fontSize: "0.95rem",
+                  fontSize: "16px",
                   fontFamily: "inherit",
                   outline: "none",
                   resize: "vertical",
                   lineHeight: 1.5,
-                  transition: "border-color 0.2s ease",
                 }}
-                onFocus={(e) => (e.target.style.borderColor = "var(--text-primary)")}
-                onBlur={(e) => (e.target.style.borderColor = "var(--border-medium)")}
               />
             </div>
 
@@ -478,39 +467,33 @@ export function ContactSection() {
               disabled={submitting}
               style={{
                 marginTop: "0.5rem",
-                padding: "1rem",
+                minHeight: "48px",
                 borderRadius: "999px",
                 backgroundColor: "var(--text-primary)",
                 color: "var(--bg-primary)",
-                fontSize: "1rem",
+                fontSize: "0.95rem",
                 fontWeight: 700,
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                gap: "0.6rem",
+                gap: "0.5rem",
                 cursor: submitting ? "not-allowed" : "pointer",
                 opacity: submitting ? 0.7 : 1,
-                transition: "all 0.2s ease",
-              }}
-              onMouseEnter={(e) => {
-                if (!submitting) e.currentTarget.style.transform = "scale(1.01)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "scale(1)";
+                border: "none",
               }}
             >
-              <Send size={16} />
-              <span>{submitting ? "Sending Inquiry..." : "Submit Project Inquiry"}</span>
+              <Send size={15} />
+              <span>{submitting ? "Sending..." : "Submit Inquiry"}</span>
             </button>
 
             {statusMessage && (
               <div
                 style={{
-                  padding: "0.85rem 1rem",
+                  padding: "0.75rem 1rem",
                   borderRadius: "8px",
                   backgroundColor: statusMessage.success ? "rgba(16, 185, 129, 0.1)" : "rgba(239, 68, 68, 0.1)",
                   border: `1px solid ${statusMessage.success ? "#10b981" : "#ef4444"}`,
-                  fontSize: "0.88rem",
+                  fontSize: "0.85rem",
                   color: statusMessage.success ? "#10b981" : "#ef4444",
                   textAlign: "center",
                 }}
