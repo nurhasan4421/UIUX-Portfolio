@@ -110,12 +110,21 @@ export function HeroSection() {
   const [line3, setLine3] = useState<LetterItem[]>(INITIAL_LINE_3);
   const [subLine, setSubLine] = useState<LetterItem[]>(INITIAL_SUB_LINE);
 
-  // Random word dimming: at most 2 words dimmed at a time (indices 0..10)
+  // Random word dimming: at most 2 words dimmed at a time (indices 0..10, excluding UI/UX)
   const [dimmedWords, setDimmedWords] = useState<number[]>([]);
 
-  // Active jumping letter swap animation
+  // Active smooth gliding letter swap animation
   const [swapState, setSwapState] = useState<SwapAnimationState | null>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [isUiUxRed, setIsUiUxRed] = useState(false);
+
+  // Illuminate "UI/UX" in crimson red after 2 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsUiUxRed(true);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -128,16 +137,16 @@ export function HeroSection() {
 
   const letterRefs = useRef<Map<string, HTMLElement>>(new Map());
 
-  // 1. Ambient Random Word Dimming (Max 2 words at a time)
+  // 1. Ambient Random Word Dimming (Excluding word 7 "UI/UX" so it stays vibrantly red)
   useEffect(() => {
     const dimInterval = setInterval(() => {
-      // Pick 1 or 2 distinct words from 0 to 10
-      const totalWords = 11;
+      // Pick 1 or 2 distinct words from non-UI/UX words
+      const eligibleWords = [0, 1, 2, 3, 4, 5, 6, 8, 9, 10];
       const count = Math.random() > 0.4 ? 2 : 1;
-      const first = Math.floor(Math.random() * totalWords);
-      let second = Math.floor(Math.random() * totalWords);
+      const first = eligibleWords[Math.floor(Math.random() * eligibleWords.length)];
+      let second = eligibleWords[Math.floor(Math.random() * eligibleWords.length)];
       while (second === first) {
-        second = Math.floor(Math.random() * totalWords);
+        second = eligibleWords[Math.floor(Math.random() * eligibleWords.length)];
       }
 
       const selected = count === 2 ? [first, second] : [first];
@@ -152,14 +161,16 @@ export function HeroSection() {
     return () => clearInterval(dimInterval);
   }, []);
 
-  // 2. Kinetic Letter Jumping and Position Swap (ALL letters that appear twice or more)
+  // 2. Kinetic Smooth Gliding Letter Position Exchange (Excluding UI/UX)
   useEffect(() => {
     const swapInterval = setInterval(() => {
       // If a swap is already animating, wait
       if (swapState) return;
 
-      // Collect all current letters across lines
-      const allLetters = [...line1, ...line2, ...line3, ...subLine];
+      // Collect all current letters across lines (excluding wordIdx 7 "UI/UX")
+      const allLetters = [...line1, ...line2, ...line3, ...subLine].filter(
+        (item) => item.wordIdx !== 7
+      );
 
       // Group all alphabet letters by character (case-insensitive)
       const letterGroups = new Map<string, LetterItem[]>();
@@ -203,7 +214,7 @@ export function HeroSection() {
       const dx = rectB.left - rectA.left;
       const dy = rectB.top - rectA.top;
 
-      // Trigger the jump animation
+      // Trigger the smooth gliding animation (no jumping)
       setSwapState({
         idA: itemA.id,
         idB: itemB.id,
@@ -211,7 +222,7 @@ export function HeroSection() {
         dy,
       });
 
-      // Complete swap in data and reset transform after jump trajectory finishes (950ms)
+      // Complete swap in data and reset transform after glide trajectory finishes (1000ms)
       setTimeout(() => {
         // Swap IDs in lines so they officially replace their places
         const swapInLine = (arr: LetterItem[]) =>
@@ -227,13 +238,13 @@ export function HeroSection() {
         setSubLine((prev) => swapInLine(prev));
 
         setSwapState(null);
-      }, 950);
+      }, 1000);
     }, 4200);
 
     return () => clearInterval(swapInterval);
   }, [line1, line2, line3, subLine, swapState]);
 
-  // Helper to render letter with kinetic jump and word dimming
+  // Helper to render letter with kinetic glide, UI/UX red state, and word dimming
   const renderLetter = (item: LetterItem) => {
     if (item.char === " ") {
       return (
@@ -243,20 +254,30 @@ export function HeroSection() {
       );
     }
 
-    const isDimmed = dimmedWords.includes(item.wordIdx);
+    const isUiUx = item.wordIdx === 7;
+    const isDimmed = !isUiUx && dimmedWords.includes(item.wordIdx);
     const isSwappingA = swapState?.idA === item.id;
     const isSwappingB = swapState?.idB === item.id;
 
-    let jumpTransform = "none";
-    let isJumping = false;
+    let isSwapping = false;
     let customAnimation = "none";
 
     if (isSwappingA && swapState) {
-      isJumping = true;
-      customAnimation = `jumpMotionA 0.95s cubic-bezier(0.34, 1.45, 0.64, 1) forwards`;
+      isSwapping = true;
+      customAnimation = `smoothGlideA 1.0s cubic-bezier(0.65, 0, 0.35, 1) forwards`;
     } else if (isSwappingB && swapState) {
-      isJumping = true;
-      customAnimation = `jumpMotionB 0.95s cubic-bezier(0.34, 1.45, 0.64, 1) forwards`;
+      isSwapping = true;
+      customAnimation = `smoothGlideB 1.0s cubic-bezier(0.65, 0, 0.35, 1) forwards`;
+    }
+
+    let letterColor = "inherit";
+    let letterTextShadow = "none";
+
+    if (isUiUx && isUiUxRed) {
+      letterColor = "var(--accent-uiux, #ff3b30)";
+      letterTextShadow = "0 0 16px rgba(255, 59, 48, 0.45)";
+    } else if (isSwapping) {
+      letterColor = "var(--text-primary)";
     }
 
     return (
@@ -269,17 +290,16 @@ export function HeroSection() {
         style={{
           display: "inline-block",
           position: "relative",
-          zIndex: isJumping ? 30 : 1,
+          zIndex: isSwapping ? 30 : 1,
           opacity: isDimmed ? 0.3 : 1,
-          transform: jumpTransform,
           animation: customAnimation,
-          color: isJumping ? "var(--text-primary)" : "inherit",
-          textShadow: isJumping ? "0 0 18px var(--text-primary)" : "none",
-          transition: isJumping
+          color: letterColor,
+          textShadow: letterTextShadow,
+          transition: isSwapping
             ? "none"
-            : "opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease",
+            : "color 0.8s cubic-bezier(0.16, 1, 0.3, 1), text-shadow 0.8s ease, opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
           userSelect: "none",
-          willChange: isJumping ? "transform, opacity" : "auto",
+          willChange: isSwapping ? "transform, opacity" : "auto",
         }}
       >
         {item.char}
@@ -387,7 +407,7 @@ export function HeroSection() {
         </h2>
       </div>
 
-      {/* Dynamic Keyframe Injection for the Exact Arc Hop Trajectories */}
+      {/* Dynamic Keyframe Injection for the Exact Smooth Glide Trajectories */}
       <style jsx global>{`
         @keyframes subtleBounce {
           0%,
@@ -399,46 +419,26 @@ export function HeroSection() {
           }
         }
 
-        /* Kinetic Arc Hop Jump Swap Animation for Identical Letters (O, U, E, T, R) */
-        @keyframes jumpMotionA {
+        /* Kinetic Smooth Glide Letter Position Exchange (Straight glide, zero jump, zero rotation, zero scale pop) */
+        @keyframes smoothGlideA {
           0% {
-            transform: translate(0, 0) scale(1) rotate(0deg);
-          }
-          32% {
-            transform: translate(${swapState ? swapState.dx * 0.32 : 0}px, ${
-              swapState ? swapState.dy * 0.32 - 28 : -28
-            }px) scale(1.25) rotate(14deg);
-          }
-          68% {
-            transform: translate(${swapState ? swapState.dx * 0.75 : 0}px, ${
-              swapState ? swapState.dy * 0.75 - 12 : -12
-            }px) scale(1.12) rotate(-8deg);
+            transform: translate(0, 0);
           }
           100% {
             transform: translate(${swapState ? swapState.dx : 0}px, ${
               swapState ? swapState.dy : 0
-            }px) scale(1) rotate(0deg);
+            }px);
           }
         }
 
-        @keyframes jumpMotionB {
+        @keyframes smoothGlideB {
           0% {
-            transform: translate(0, 0) scale(1) rotate(0deg);
-          }
-          32% {
-            transform: translate(${swapState ? -swapState.dx * 0.32 : 0}px, ${
-              swapState ? -swapState.dy * 0.32 - 28 : -28
-            }px) scale(1.25) rotate(-14deg);
-          }
-          68% {
-            transform: translate(${swapState ? -swapState.dx * 0.75 : 0}px, ${
-              swapState ? -swapState.dy * 0.75 - 12 : -12
-            }px) scale(1.12) rotate(8deg);
+            transform: translate(0, 0);
           }
           100% {
             transform: translate(${swapState ? -swapState.dx : 0}px, ${
               swapState ? -swapState.dy : 0
-            }px) scale(1) rotate(0deg);
+            }px);
           }
         }
 
