@@ -60,6 +60,119 @@ export function FloatingThemeToggle() {
 
   if (!mounted) {
     return (
+      <>
+        <div
+          style={{
+            position: "fixed",
+            top: "max(14px, calc(env(safe-area-inset-top, 0px) + 8px))",
+            left: "max(16px, calc(env(safe-area-inset-left, 0px) + 16px))",
+            zIndex: 99999,
+            height: "40px",
+            width: "110px",
+          }}
+        />
+        <div
+          className="floating-top-controls"
+          style={{
+            position: "fixed",
+            top: "max(14px, calc(env(safe-area-inset-top, 0px) + 8px))",
+            right: "max(14px, calc(env(safe-area-inset-right, 0px) + 8px))",
+            zIndex: 99999,
+            display: "flex",
+            alignItems: "center",
+            gap: "0.5rem",
+          }}
+        >
+          <div
+            style={{
+              height: "40px",
+              width: "92px",
+              borderRadius: "999px",
+              backgroundColor: "rgba(20, 20, 22, 0.85)",
+            }}
+          />
+          <div
+            style={{
+              width: "42px",
+              height: "42px",
+              borderRadius: "50%",
+              backgroundColor: "rgba(20, 20, 22, 0.85)",
+            }}
+          />
+        </div>
+      </>
+    );
+  }
+
+  return (
+    <>
+      {/* Normal Website Logo on the Far Left Side of the Screen */}
+      <a
+        href="#hero"
+        aria-label="White Desk"
+        title="White Desk"
+        onTouchStart={(e) => e.stopPropagation()}
+        onClick={(e) => {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }}
+        style={{
+          position: "fixed",
+          top: "max(14px, calc(env(safe-area-inset-top, 0px) + 8px))",
+          left: "max(16px, calc(env(safe-area-inset-left, 0px) + 16px))",
+          zIndex: 99999,
+          display: "inline-flex",
+          alignItems: "center",
+          height: "40px",
+          background: "transparent",
+          border: "none",
+          borderRadius: 0,
+          padding: 0,
+          cursor: "pointer",
+          pointerEvents: "auto",
+          transition: "opacity 0.2s ease, transform 0.2s ease",
+          WebkitTransform: "translateZ(0)",
+          transform: "translateZ(0)",
+          textDecoration: "none",
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.opacity = "0.75";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.opacity = "1";
+        }}
+      >
+        <Image
+          src={getAssetPath("/images/whitedesk-white.png")}
+          alt="White Desk"
+          width={112}
+          height={24}
+          style={{
+            objectFit: "contain",
+            height: "22px",
+            width: "auto",
+            display: "block",
+          }}
+          className="whitedesk-logo-dark"
+          priority
+        />
+        <Image
+          src={getAssetPath("/images/whitedesk-black.png")}
+          alt="White Desk"
+          width={112}
+          height={24}
+          style={{
+            objectFit: "contain",
+            height: "22px",
+            width: "auto",
+            display: "block",
+          }}
+          className="whitedesk-logo-light"
+          priority
+        />
+      </a>
+
+      {/* Floating Top Right Controls (Hire Now + Day/Night Toggle) */}
       <div
         className="floating-top-controls"
         style={{
@@ -70,157 +183,58 @@ export function FloatingThemeToggle() {
           display: "flex",
           alignItems: "center",
           gap: "0.5rem",
+          pointerEvents: "auto",
+          WebkitTransform: "translateZ(0)",
+          transform: "translateZ(0)",
         }}
       >
-        <div
+        {/* 1. Floated Hire Now Button */}
+        <a
+          href="#contact"
+          aria-label="Hire Nur Hasan"
+          onTouchStart={(e) => e.stopPropagation()}
+          onClick={(e) => {
+            e.preventDefault();
+            const el = document.getElementById("contact");
+            if (el) {
+              el.scrollIntoView({ behavior: "smooth" });
+            } else {
+              window.location.hash = "contact";
+            }
+          }}
           style={{
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
             height: "40px",
-            width: "92px",
+            minHeight: "40px",
+            padding: "0 1.15rem",
             borderRadius: "999px",
-            backgroundColor: "rgba(20, 20, 22, 0.85)",
+            backgroundColor: isDark ? "#ffffff" : "#0a0a0a",
+            color: isDark ? "#050505" : "#ffffff",
+            fontSize: "0.84rem",
+            fontWeight: 700,
+            letterSpacing: "-0.01em",
+            textDecoration: "none",
+            whiteSpace: "nowrap",
+            boxShadow: isDark
+              ? "0 4px 14px rgba(0, 0, 0, 0.45)"
+              : "0 4px 14px rgba(0, 0, 0, 0.15)",
+            transition: "transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease",
+            WebkitTapHighlightColor: "transparent",
+            userSelect: "none",
+            touchAction: "manipulation",
+            cursor: "pointer",
           }}
-        />
-        <div
-          style={{
-            width: "42px",
-            height: "42px",
-            borderRadius: "50%",
-            backgroundColor: "rgba(20, 20, 22, 0.85)",
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = "scale(1.04)";
           }}
-        />
-      </div>
-    );
-  }
-
-  return (
-    <div
-      className="floating-top-controls"
-      style={{
-        position: "fixed",
-        top: "max(14px, calc(env(safe-area-inset-top, 0px) + 8px))",
-        right: "max(14px, calc(env(safe-area-inset-right, 0px) + 8px))",
-        zIndex: 99999,
-        display: "flex",
-        alignItems: "center",
-        gap: "0.5rem",
-        pointerEvents: "auto",
-        WebkitTransform: "translateZ(0)",
-        transform: "translateZ(0)",
-      }}
-    >
-      {/* 0. White Desk Logo on Left Side of Hire Now Button */}
-      <a
-        href="#experience"
-        aria-label="White Desk Agency"
-        title="White Desk Design Studio"
-        onTouchStart={(e) => e.stopPropagation()}
-        onClick={(e) => {
-          e.preventDefault();
-          const el = document.getElementById("experience");
-          if (el) {
-            el.scrollIntoView({ behavior: "smooth" });
-          } else {
-            window.location.hash = "experience";
-          }
-        }}
-        style={{
-          display: "inline-flex",
-          alignItems: "center",
-          justifyContent: "center",
-          height: "40px",
-          minHeight: "40px",
-          padding: "0 0.85rem",
-          borderRadius: "999px",
-          backgroundColor: isDark ? "rgba(18, 18, 20, 0.88)" : "rgba(255, 255, 255, 0.92)",
-          border: isDark ? "1px solid rgba(255, 255, 255, 0.12)" : "1px solid rgba(0, 0, 0, 0.12)",
-          backdropFilter: "blur(14px)",
-          WebkitBackdropFilter: "blur(14px)",
-          textDecoration: "none",
-          boxShadow: isDark
-            ? "0 4px 14px rgba(0, 0, 0, 0.4)"
-            : "0 4px 14px rgba(0, 0, 0, 0.08)",
-          transition: "transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease",
-          WebkitTapHighlightColor: "transparent",
-          userSelect: "none",
-          touchAction: "manipulation",
-          cursor: "pointer",
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.transform = "scale(1.04)";
-          e.currentTarget.style.borderColor = isDark ? "rgba(255, 255, 255, 0.35)" : "rgba(0, 0, 0, 0.35)";
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.transform = "scale(1)";
-          e.currentTarget.style.borderColor = isDark ? "rgba(255, 255, 255, 0.12)" : "rgba(0, 0, 0, 0.12)";
-        }}
-      >
-        <Image
-          src={getAssetPath("/images/whitedesk-white.png")}
-          alt="White Desk Logo"
-          width={86}
-          height={18}
-          style={{ objectFit: "contain", height: "16px", width: "auto" }}
-          className="whitedesk-logo-dark"
-          priority
-        />
-        <Image
-          src={getAssetPath("/images/whitedesk-black.png")}
-          alt="White Desk Logo"
-          width={86}
-          height={18}
-          style={{ objectFit: "contain", height: "16px", width: "auto" }}
-          className="whitedesk-logo-light"
-          priority
-        />
-      </a>
-
-      {/* 1. Floated Hire Now Button on Left Side */}
-      <a
-        href="#contact"
-        aria-label="Hire Nur Hasan"
-        onTouchStart={(e) => e.stopPropagation()}
-        onClick={(e) => {
-          e.preventDefault();
-          const el = document.getElementById("contact");
-          if (el) {
-            el.scrollIntoView({ behavior: "smooth" });
-          } else {
-            window.location.hash = "contact";
-          }
-        }}
-        style={{
-          display: "inline-flex",
-          alignItems: "center",
-          justifyContent: "center",
-          height: "40px",
-          minHeight: "40px",
-          padding: "0 1.15rem",
-          borderRadius: "999px",
-          backgroundColor: isDark ? "#ffffff" : "#0a0a0a",
-          color: isDark ? "#050505" : "#ffffff",
-          fontSize: "0.84rem",
-          fontWeight: 700,
-          letterSpacing: "-0.01em",
-          textDecoration: "none",
-          whiteSpace: "nowrap",
-          boxShadow: isDark
-            ? "0 4px 14px rgba(0, 0, 0, 0.45)"
-            : "0 4px 14px rgba(0, 0, 0, 0.15)",
-          transition: "transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease",
-          WebkitTapHighlightColor: "transparent",
-          userSelect: "none",
-          touchAction: "manipulation",
-          cursor: "pointer",
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.transform = "scale(1.04)";
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.transform = "scale(1)";
-        }}
-      >
-        <span>Hire Now</span>
-      </a>
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = "scale(1)";
+          }}
+        >
+          <span>Hire Now</span>
+        </a>
 
       {/* 2. Day/Night Toggle Button (Mobile Touch Reliable & Fully Responsive) */}
       <button
@@ -262,5 +276,6 @@ export function FloatingThemeToggle() {
         )}
       </button>
     </div>
+    </>
   );
 }
