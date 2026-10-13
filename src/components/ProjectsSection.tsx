@@ -6,8 +6,20 @@ import { PROJECTS, Project } from "@/data/portfolioData";
 import { ArrowUpRight, Play, ExternalLink } from "lucide-react";
 import { ScrollScrubHeadline } from "@/components/ScrollScrubHeadline";
 
+const CATEGORIES = ["All Works", "Mobile Apps", "Web & SaaS", "Fintech", "E-Commerce"];
+
 export function ProjectsSection() {
+  const [activeCategory, setActiveCategory] = useState("All Works");
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+
+  const filteredProjects = PROJECTS.filter((project) => {
+    if (activeCategory === "All Works") return true;
+    if (activeCategory === "Mobile Apps") return project.category.includes("Mobile");
+    if (activeCategory === "Web & SaaS") return project.category.includes("Web") || project.category.includes("SaaS");
+    if (activeCategory === "Fintech") return project.category.includes("Fintech") || project.tools.includes("Fintech");
+    if (activeCategory === "E-Commerce") return project.category.includes("E-Commerce") || project.title.includes("Commerce") || project.title.includes("Juice");
+    return true;
+  });
 
   return (
     <section
@@ -50,21 +62,54 @@ export function ProjectsSection() {
           />
         </div>
 
-        <p
+        {/* Clean Category Navbar - No Pills, No Counts, No Underline */}
+        <div
           style={{
-            maxWidth: "460px",
-            color: "var(--text-secondary)",
-            fontSize: "clamp(0.92rem, 1.1vw, 1.05rem)",
-            lineHeight: 1.6,
+            display: "flex",
+            alignItems: "center",
+            gap: "clamp(0.85rem, 1.8vw, 1.6rem)",
+            maxWidth: "100%",
+            overflowX: "auto",
+            scrollbarWidth: "none",
+            padding: "0.25rem 0",
           }}
         >
-          Selected digital products engineered for conversion, fluid kinetic interaction, and measurable product clarity.
-        </p>
+          {CATEGORIES.map((cat) => {
+            const isActive = activeCategory === cat;
+            return (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                style={{
+                  background: "transparent",
+                  border: "none",
+                  borderRadius: 0,
+                  padding: "0.35rem 0",
+                  fontSize: "clamp(0.85rem, 0.95vw, 0.95rem)",
+                  fontWeight: isActive ? 750 : 500,
+                  color: isActive ? "var(--text-primary)" : "var(--text-muted)",
+                  transition: "color 0.2s ease",
+                  cursor: "pointer",
+                  whiteSpace: "nowrap",
+                  flexShrink: 0,
+                }}
+                onMouseEnter={(e) => {
+                  if (!isActive) e.currentTarget.style.color = "var(--text-primary)";
+                }}
+                onMouseLeave={(e) => {
+                  if (!isActive) e.currentTarget.style.color = "var(--text-muted)";
+                }}
+              >
+                {cat}
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {/* Projects Grid with 8/12/16px Gap & Fresh Minimal Card Design */}
       <div className="projects-fresh-grid">
-        {PROJECTS.map((project) => {
+        {filteredProjects.map((project) => {
           return (
             <a
               key={project.id}
