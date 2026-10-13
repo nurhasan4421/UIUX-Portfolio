@@ -1,8 +1,10 @@
 "use client";
 
 import React, { useEffect, useState, useCallback, useRef } from "react";
+import Image from "next/image";
 import { Sun, Moon } from "lucide-react";
 import { AppTheme, getStoredTheme, applyThemeToDOM, broadcastThemeChange } from "@/utils/theme";
+import { getAssetPath } from "@/utils/assetPath";
 
 export function FloatingThemeToggle() {
   const [theme, setTheme] = useState<AppTheme>("dark");
@@ -106,6 +108,72 @@ export function FloatingThemeToggle() {
         transform: "translateZ(0)",
       }}
     >
+      {/* 0. White Desk Logo on Left Side of Hire Now Button */}
+      <a
+        href="#experience"
+        aria-label="White Desk Agency"
+        title="White Desk Design Studio"
+        onTouchStart={(e) => e.stopPropagation()}
+        onClick={(e) => {
+          e.preventDefault();
+          const el = document.getElementById("experience");
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth" });
+          } else {
+            window.location.hash = "experience";
+          }
+        }}
+        style={{
+          display: "inline-flex",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "40px",
+          minHeight: "40px",
+          padding: "0 0.85rem",
+          borderRadius: "999px",
+          backgroundColor: isDark ? "rgba(18, 18, 20, 0.88)" : "rgba(255, 255, 255, 0.92)",
+          border: isDark ? "1px solid rgba(255, 255, 255, 0.12)" : "1px solid rgba(0, 0, 0, 0.12)",
+          backdropFilter: "blur(14px)",
+          WebkitBackdropFilter: "blur(14px)",
+          textDecoration: "none",
+          boxShadow: isDark
+            ? "0 4px 14px rgba(0, 0, 0, 0.4)"
+            : "0 4px 14px rgba(0, 0, 0, 0.08)",
+          transition: "transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease",
+          WebkitTapHighlightColor: "transparent",
+          userSelect: "none",
+          touchAction: "manipulation",
+          cursor: "pointer",
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.transform = "scale(1.04)";
+          e.currentTarget.style.borderColor = isDark ? "rgba(255, 255, 255, 0.35)" : "rgba(0, 0, 0, 0.35)";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = "scale(1)";
+          e.currentTarget.style.borderColor = isDark ? "rgba(255, 255, 255, 0.12)" : "rgba(0, 0, 0, 0.12)";
+        }}
+      >
+        <Image
+          src={getAssetPath("/images/whitedesk-white.png")}
+          alt="White Desk Logo"
+          width={86}
+          height={18}
+          style={{ objectFit: "contain", height: "16px", width: "auto" }}
+          className="whitedesk-logo-dark"
+          priority
+        />
+        <Image
+          src={getAssetPath("/images/whitedesk-black.png")}
+          alt="White Desk Logo"
+          width={86}
+          height={18}
+          style={{ objectFit: "contain", height: "16px", width: "auto" }}
+          className="whitedesk-logo-light"
+          priority
+        />
+      </a>
+
       {/* 1. Floated Hire Now Button on Left Side */}
       <a
         href="#contact"

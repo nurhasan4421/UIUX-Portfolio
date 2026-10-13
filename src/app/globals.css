@@ -261,6 +261,31 @@ nextjs-portal,
   display: none !important;
 }
 
+/* White Desk Logo theme switching */
+[data-theme="dark"] .whitedesk-logo-light,
+html[data-theme="dark"] .whitedesk-logo-light,
+body:not([data-theme="light"]) .whitedesk-logo-light {
+  display: none !important;
+}
+
+[data-theme="dark"] .whitedesk-logo-dark,
+html[data-theme="dark"] .whitedesk-logo-dark,
+body:not([data-theme="light"]) .whitedesk-logo-dark {
+  display: block !important;
+}
+
+[data-theme="light"] .whitedesk-logo-dark,
+html[data-theme="light"] .whitedesk-logo-dark,
+body[data-theme="light"] .whitedesk-logo-dark {
+  display: none !important;
+}
+
+[data-theme="light"] .whitedesk-logo-light,
+html[data-theme="light"] .whitedesk-logo-light,
+body[data-theme="light"] .whitedesk-logo-light {
+  display: block !important;
+}
+
 /* Capabilities 4-Card System with vertical dividers and zero border-radius */
 .capabilities-grid {
   display: grid;
