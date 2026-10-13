@@ -6,20 +6,8 @@ import { PROJECTS, Project } from "@/data/portfolioData";
 import { ArrowUpRight, Play, ExternalLink } from "lucide-react";
 import { ScrollScrubHeadline } from "@/components/ScrollScrubHeadline";
 
-const CATEGORIES = ["All Works", "Mobile Apps", "Web & SaaS", "Fintech", "E-Commerce"];
-
 export function ProjectsSection() {
-  const [activeCategory, setActiveCategory] = useState("All Works");
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
-
-  const filteredProjects = PROJECTS.filter((project) => {
-    if (activeCategory === "All Works") return true;
-    if (activeCategory === "Mobile Apps") return project.category.includes("Mobile");
-    if (activeCategory === "Web & SaaS") return project.category.includes("Web") || project.category.includes("SaaS");
-    if (activeCategory === "Fintech") return project.category.includes("Fintech") || project.tools.includes("Fintech");
-    if (activeCategory === "E-Commerce") return project.category.includes("E-Commerce") || project.title.includes("Commerce") || project.title.includes("Juice");
-    return true;
-  });
 
   return (
     <section
@@ -62,81 +50,21 @@ export function ProjectsSection() {
           />
         </div>
 
-        {/* Category Navbar Menu */}
-        <div
+        <p
           style={{
-            display: "flex",
-            alignItems: "center",
-            maxWidth: "100%",
-            overflowX: "auto",
-            scrollbarWidth: "none",
-            borderBottom: "1px solid var(--border-subtle)",
-            gap: "clamp(0.75rem, 1.8vw, 1.75rem)",
+            maxWidth: "460px",
+            color: "var(--text-secondary)",
+            fontSize: "clamp(0.92rem, 1.1vw, 1.05rem)",
+            lineHeight: 1.6,
           }}
         >
-          {CATEGORIES.map((cat) => {
-            const isActive = activeCategory === cat;
-            const count =
-              cat === "All Works"
-                ? PROJECTS.length
-                : cat === "Mobile Apps"
-                ? PROJECTS.filter((p) => p.category.includes("Mobile")).length
-                : cat === "Web & SaaS"
-                ? PROJECTS.filter((p) => p.category.includes("Web") || p.category.includes("SaaS")).length
-                : cat === "Fintech"
-                ? PROJECTS.filter((p) => p.category.includes("Fintech") || p.tools.includes("Fintech")).length
-                : PROJECTS.filter((p) => p.category.includes("E-Commerce") || p.title.includes("Commerce") || p.title.includes("Juice")).length;
-
-            return (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                style={{
-                  background: "transparent",
-                  border: "none",
-                  borderBottom: isActive ? "2px solid var(--text-primary)" : "2px solid transparent",
-                  borderRadius: 0,
-                  padding: "0.6rem 0.2rem 0.65rem 0.2rem",
-                  fontSize: "clamp(0.82rem, 0.95vw, 0.9rem)",
-                  fontWeight: isActive ? 750 : 500,
-                  color: isActive ? "var(--text-primary)" : "var(--text-muted)",
-                  transition: "color 0.2s ease, border-color 0.2s ease",
-                  cursor: "pointer",
-                  whiteSpace: "nowrap",
-                  flexShrink: 0,
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "0.45rem",
-                  marginBottom: "-1px",
-                }}
-                onMouseEnter={(e) => {
-                  if (!isActive) e.currentTarget.style.color = "var(--text-primary)";
-                }}
-                onMouseLeave={(e) => {
-                  if (!isActive) e.currentTarget.style.color = "var(--text-muted)";
-                }}
-              >
-                <span>{cat}</span>
-                <span
-                  className="font-mono"
-                  style={{
-                    fontSize: "0.72rem",
-                    color: isActive ? "var(--text-primary)" : "var(--text-muted)",
-                    opacity: isActive ? 0.9 : 0.6,
-                    fontWeight: 600,
-                  }}
-                >
-                  {String(count).padStart(2, "0")}
-                </span>
-              </button>
-            );
-          })}
-        </div>
+          Selected digital products engineered for conversion, fluid kinetic interaction, and measurable product clarity.
+        </p>
       </div>
 
       {/* Projects Grid with 8/12/16px Gap & Fresh Minimal Card Design */}
       <div className="projects-fresh-grid">
-        {filteredProjects.map((project) => {
+        {PROJECTS.map((project) => {
           return (
             <a
               key={project.id}
