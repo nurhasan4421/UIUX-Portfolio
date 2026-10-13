@@ -134,77 +134,25 @@ export function ProjectsSection() {
         </div>
       </div>
 
-      {/* Projects Grid with Capabilities & Process Style */}
-      <div className="projects-capabilities-grid">
-        {filteredProjects.map((project, idx) => {
+      {/* Projects Grid with 8/12/16px Gap & Fresh Minimal Card Design */}
+      <div className="projects-fresh-grid">
+        {filteredProjects.map((project) => {
           return (
-            <article key={project.id} className="project-capability-card">
-              {/* Card Top Header */}
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  padding: "1.1rem 1.4rem",
-                }}
-              >
-                <div style={{ display: "flex", alignItems: "center", gap: "0.65rem" }}>
-                  <span
-                    className="font-mono project-number-accent"
-                    style={{
-                      fontSize: "1.15rem",
-                      fontWeight: 800,
-                      color: "var(--text-muted)",
-                      transition: "color 0.25s ease",
-                    }}
-                  >
-                    {String(idx + 1).padStart(2, "0")}
-                  </span>
-                  <span
-                    className="font-mono"
-                    style={{
-                      fontSize: "0.72rem",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.06em",
-                      color: "var(--text-muted)",
-                    }}
-                  >
-                    // {project.category}
-                  </span>
-                </div>
-
-                <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
-                  <span
-                    className="font-mono"
-                    style={{
-                      fontSize: "0.75rem",
-                      color: "var(--text-muted)",
-                    }}
-                  >
-                    {project.year}
-                  </span>
-                  <span
-                    className="project-status-dot"
-                    style={{
-                      width: "8px",
-                      height: "8px",
-                      borderRadius: "50%",
-                      backgroundColor: "var(--border-bold)",
-                      transition: "background-color 0.25s ease",
-                    }}
-                  />
-                </div>
-              </div>
-
-              {/* Image Thumbnail with zero radius and dividers */}
+            <a
+              key={project.id}
+              href={project.dribbbleUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="project-fresh-card"
+            >
+              {/* Image Thumbnail with zero radius */}
               <div
                 style={{
                   position: "relative",
                   width: "100%",
-                  height: "clamp(200px, 22vw, 270px)",
+                  height: "clamp(210px, 24vw, 290px)",
                   backgroundColor: "var(--bg-tertiary)",
                   overflow: "hidden",
-                  borderTop: "1px solid var(--border-subtle)",
                   borderBottom: "1px solid var(--border-subtle)",
                 }}
               >
@@ -248,7 +196,11 @@ export function ProjectsSection() {
 
                 {project.video && (
                   <button
-                    onClick={() => setSelectedVideo(project.video || null)}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setSelectedVideo(project.video || null);
+                    }}
                     aria-label="Play motion video"
                     title="Play motion concept"
                     style={{
@@ -283,123 +235,53 @@ export function ProjectsSection() {
                 )}
               </div>
 
-              {/* Card Content & Deliverables */}
+              {/* Fresh Card Content */}
               <div
                 style={{
                   padding: "clamp(1.25rem, 2vw, 1.75rem)",
                   display: "flex",
                   flexDirection: "column",
                   flex: 1,
-                  justifyContent: "space-between",
                 }}
               >
-                <div>
-                  <h3
-                    className="font-display"
-                    style={{
-                      fontSize: "1.35rem",
-                      fontWeight: 800,
-                      letterSpacing: "-0.02em",
-                      color: "var(--text-primary)",
-                      marginBottom: "0.6rem",
-                    }}
-                  >
-                    {project.title}
-                  </h3>
-
-                  <p
-                    style={{
-                      fontSize: "0.9rem",
-                      color: "var(--text-secondary)",
-                      lineHeight: 1.6,
-                      marginBottom: "1.5rem",
-                    }}
-                  >
-                    {project.description}
-                  </p>
-                </div>
-
-                {/* Key Deliverables & Spec (matching Capabilities & Process!) */}
-                <div
+                <span
+                  className="font-mono"
                   style={{
-                    borderTop: "1px solid var(--border-subtle)",
-                    paddingTop: "1.25rem",
+                    fontSize: "0.74rem",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.08em",
+                    color: "var(--text-muted)",
+                    marginBottom: "0.5rem",
+                    display: "block",
                   }}
                 >
-                  <p
-                    className="font-mono"
-                    style={{
-                      fontSize: "0.74rem",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.06em",
-                      color: "var(--text-muted)",
-                      marginBottom: "0.75rem",
-                    }}
-                  >
-                    Key Deliverables &amp; Stack
-                  </p>
+                  {project.category}
+                </span>
 
-                  <div
-                    style={{
-                      display: "flex",
-                      flexWrap: "wrap",
-                      gap: "0.35rem",
-                      marginBottom: "1.25rem",
-                    }}
-                  >
-                    {project.tools.map((t) => (
-                      <span
-                        key={t}
-                        className="font-mono"
-                        style={{
-                          fontSize: "0.7rem",
-                          padding: "0.22rem 0.55rem",
-                          borderRadius: 0,
-                          border: "1px solid var(--border-subtle)",
-                          backgroundColor: "var(--bg-tertiary)",
-                          color: "var(--text-secondary)",
-                        }}
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
+                <h3
+                  className="font-display"
+                  style={{
+                    fontSize: "1.35rem",
+                    fontWeight: 800,
+                    letterSpacing: "-0.02em",
+                    color: "var(--text-primary)",
+                    marginBottom: "0.6rem",
+                  }}
+                >
+                  {project.title}
+                </h3>
 
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      paddingTop: "0.85rem",
-                      borderTop: "1px solid var(--border-subtle)",
-                    }}
-                  >
-                    <a
-                      href={project.dribbbleUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: "0.4rem",
-                        fontSize: "0.85rem",
-                        fontWeight: 700,
-                        color: "var(--text-primary)",
-                        minHeight: "36px",
-                        textDecoration: "none",
-                      }}
-                    >
-                      <span>Inspect Case Study</span>
-                      <ArrowUpRight size={15} />
-                    </a>
-
-                    <span className="font-mono" style={{ fontSize: "0.72rem", color: "var(--text-muted)" }}>
-                      Figma High-Fi
-                    </span>
-                  </div>
-                </div>
+                <p
+                  style={{
+                    fontSize: "0.92rem",
+                    color: "var(--text-secondary)",
+                    lineHeight: 1.6,
+                  }}
+                >
+                  {project.description}
+                </p>
               </div>
-            </article>
+            </a>
           );
         })}
       </div>

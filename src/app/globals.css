@@ -317,55 +317,48 @@ nextjs-portal,
   }
 }
 
-/* Selected Works Projects Grid styled like Capabilities & Process */
-.projects-capabilities-grid {
+/* Selected Works Fresh Minimal Cards with 8/12/16px gap */
+.projects-fresh-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
-  border-top: 1px solid var(--border-subtle);
-  border-left: 1px solid var(--border-subtle);
-  border-radius: 0;
-  background-color: var(--bg-card);
-  overflow: hidden;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
+  gap: 16px;
 }
 
-.project-capability-card {
+.project-fresh-card {
   border-radius: 0 !important;
-  border-right: 1px solid var(--border-subtle);
-  border-bottom: 1px solid var(--border-subtle);
+  border: 1px solid var(--border-subtle);
   background-color: var(--bg-card);
-  transition: background-color 0.25s ease, box-shadow 0.25s ease;
+  transition: background-color 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  overflow: hidden;
   position: relative;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
 }
 
-.project-capability-card:hover {
+.project-fresh-card:hover {
   background-color: var(--bg-card-hover);
+  border-color: var(--border-bold);
   box-shadow: inset 0 3px 0 0 var(--text-primary);
 }
 
-.project-capability-card:hover .project-img-zoom {
+.project-fresh-card:hover .project-img-zoom {
   transform: scale(1.04);
 }
 
-.project-capability-card:hover .project-number-accent {
-  color: var(--text-primary) !important;
-}
-
-.project-capability-card:hover .project-status-dot {
-  background-color: var(--text-primary) !important;
-}
-
 @media (max-width: 1024px) {
-  .projects-capabilities-grid {
+  .projects-fresh-grid {
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    gap: 12px;
   }
 }
 
 @media (max-width: 640px) {
-  .projects-capabilities-grid {
+  .projects-fresh-grid {
     grid-template-columns: 1fr;
+    gap: 8px;
   }
 }
 
