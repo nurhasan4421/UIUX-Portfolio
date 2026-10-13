@@ -134,48 +134,78 @@ export function ProjectsSection() {
         </div>
       </div>
 
-      {/* Projects Grid */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 360px), 1fr))",
-          gap: "clamp(1.5rem, 3vw, 2.5rem)",
-        }}
-      >
-        {filteredProjects.map((project) => {
+      {/* Projects Grid with Capabilities & Process Style */}
+      <div className="projects-capabilities-grid">
+        {filteredProjects.map((project, idx) => {
           return (
-            <article
-              key={project.id}
-              style={{
-                borderRadius: "20px",
-                border: "1px solid var(--border-subtle)",
-                backgroundColor: "var(--bg-card)",
-                overflow: "hidden",
-                display: "flex",
-                flexDirection: "column",
-                transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
-                position: "relative",
-                boxShadow: "0 10px 30px rgba(0,0,0,0.12)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "var(--border-bold)";
-                e.currentTarget.style.transform = "translateY(-4px)";
-                e.currentTarget.style.boxShadow = "0 18px 40px var(--glow-active)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "var(--border-subtle)";
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "0 10px 30px rgba(0,0,0,0.12)";
-              }}
-            >
-              {/* Image Thumbnail */}
+            <article key={project.id} className="project-capability-card">
+              {/* Card Top Header */}
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  padding: "1.1rem 1.4rem",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "0.65rem" }}>
+                  <span
+                    className="font-mono project-number-accent"
+                    style={{
+                      fontSize: "1.15rem",
+                      fontWeight: 800,
+                      color: "var(--text-muted)",
+                      transition: "color 0.25s ease",
+                    }}
+                  >
+                    {String(idx + 1).padStart(2, "0")}
+                  </span>
+                  <span
+                    className="font-mono"
+                    style={{
+                      fontSize: "0.72rem",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.06em",
+                      color: "var(--text-muted)",
+                    }}
+                  >
+                    // {project.category}
+                  </span>
+                </div>
+
+                <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
+                  <span
+                    className="font-mono"
+                    style={{
+                      fontSize: "0.75rem",
+                      color: "var(--text-muted)",
+                    }}
+                  >
+                    {project.year}
+                  </span>
+                  <span
+                    className="project-status-dot"
+                    style={{
+                      width: "8px",
+                      height: "8px",
+                      borderRadius: "50%",
+                      backgroundColor: "var(--border-bold)",
+                      transition: "background-color 0.25s ease",
+                    }}
+                  />
+                </div>
+              </div>
+
+              {/* Image Thumbnail with zero radius and dividers */}
               <div
                 style={{
                   position: "relative",
                   width: "100%",
-                  height: "clamp(220px, 28vw, 320px)",
+                  height: "clamp(200px, 22vw, 270px)",
                   backgroundColor: "var(--bg-tertiary)",
                   overflow: "hidden",
+                  borderTop: "1px solid var(--border-subtle)",
+                  borderBottom: "1px solid var(--border-subtle)",
                 }}
               >
                 <Image
@@ -193,23 +223,23 @@ export function ProjectsSection() {
                 <div
                   style={{
                     position: "absolute",
-                    top: "1rem",
-                    left: "1rem",
+                    top: "0.85rem",
+                    left: "0.85rem",
                     zIndex: 2,
                   }}
                 >
                   <span
                     className="font-mono"
                     style={{
-                      fontSize: "0.7rem",
+                      fontSize: "0.68rem",
                       textTransform: "uppercase",
-                      letterSpacing: "0.05em",
-                      backgroundColor: "rgba(0, 0, 0, 0.75)",
-                      backdropFilter: "blur(8px)",
+                      letterSpacing: "0.06em",
+                      backgroundColor: "rgba(0, 0, 0, 0.85)",
                       color: "#ffffff",
-                      padding: "0.3rem 0.75rem",
-                      borderRadius: "999px",
+                      padding: "0.25rem 0.6rem",
+                      borderRadius: 0,
                       border: "1px solid rgba(255, 255, 255, 0.2)",
+                      backdropFilter: "blur(6px)",
                     }}
                   >
                     {project.tag}
@@ -223,31 +253,37 @@ export function ProjectsSection() {
                     title="Play motion concept"
                     style={{
                       position: "absolute",
-                      bottom: "1rem",
-                      right: "1rem",
+                      bottom: "0.85rem",
+                      right: "0.85rem",
                       zIndex: 2,
-                      width: "44px",
-                      height: "44px",
-                      borderRadius: "50%",
-                      backgroundColor: "rgba(0, 0, 0, 0.8)",
-                      border: "1px solid rgba(255, 255, 255, 0.4)",
+                      width: "38px",
+                      height: "38px",
+                      borderRadius: 0,
+                      backgroundColor: "rgba(0, 0, 0, 0.85)",
+                      border: "1px solid rgba(255, 255, 255, 0.3)",
                       color: "#ffffff",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       backdropFilter: "blur(8px)",
                       cursor: "pointer",
-                      transition: "transform 0.2s ease",
+                      transition: "all 0.2s ease",
                     }}
-                    onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.1)")}
-                    onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = "scale(1.08)";
+                      e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.8)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = "scale(1)";
+                      e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.3)";
+                    }}
                   >
-                    <Play size={16} fill="#ffffff" />
+                    <Play size={14} fill="#ffffff" />
                   </button>
                 )}
               </div>
 
-              {/* Project Card Content */}
+              {/* Card Content & Deliverables */}
               <div
                 style={{
                   padding: "clamp(1.25rem, 2vw, 1.75rem)",
@@ -258,29 +294,6 @@ export function ProjectsSection() {
                 }}
               >
                 <div>
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "baseline",
-                      marginBottom: "0.5rem",
-                    }}
-                  >
-                    <span
-                      className="font-mono"
-                      style={{
-                        fontSize: "0.75rem",
-                        color: "var(--text-muted)",
-                        textTransform: "uppercase",
-                      }}
-                    >
-                      {project.category}
-                    </span>
-                    <span className="font-mono" style={{ fontSize: "0.78rem", color: "var(--text-muted)" }}>
-                      {project.year}
-                    </span>
-                  </div>
-
                   <h3
                     className="font-display"
                     style={{
@@ -288,7 +301,7 @@ export function ProjectsSection() {
                       fontWeight: 800,
                       letterSpacing: "-0.02em",
                       color: "var(--text-primary)",
-                      marginBottom: "0.5rem",
+                      marginBottom: "0.6rem",
                     }}
                   >
                     {project.title}
@@ -298,15 +311,34 @@ export function ProjectsSection() {
                     style={{
                       fontSize: "0.9rem",
                       color: "var(--text-secondary)",
-                      lineHeight: 1.55,
-                      marginBottom: "1rem",
+                      lineHeight: 1.6,
+                      marginBottom: "1.5rem",
                     }}
                   >
                     {project.description}
                   </p>
                 </div>
 
-                <div>
+                {/* Key Deliverables & Spec (matching Capabilities & Process!) */}
+                <div
+                  style={{
+                    borderTop: "1px solid var(--border-subtle)",
+                    paddingTop: "1.25rem",
+                  }}
+                >
+                  <p
+                    className="font-mono"
+                    style={{
+                      fontSize: "0.74rem",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.06em",
+                      color: "var(--text-muted)",
+                      marginBottom: "0.75rem",
+                    }}
+                  >
+                    Key Deliverables &amp; Stack
+                  </p>
+
                   <div
                     style={{
                       display: "flex",
@@ -321,8 +353,9 @@ export function ProjectsSection() {
                         className="font-mono"
                         style={{
                           fontSize: "0.7rem",
-                          padding: "0.2rem 0.55rem",
-                          borderRadius: "4px",
+                          padding: "0.22rem 0.55rem",
+                          borderRadius: 0,
+                          border: "1px solid var(--border-subtle)",
                           backgroundColor: "var(--bg-tertiary)",
                           color: "var(--text-secondary)",
                         }}
@@ -348,14 +381,15 @@ export function ProjectsSection() {
                       style={{
                         display: "inline-flex",
                         alignItems: "center",
-                        gap: "0.35rem",
+                        gap: "0.4rem",
                         fontSize: "0.85rem",
                         fontWeight: 700,
                         color: "var(--text-primary)",
                         minHeight: "36px",
+                        textDecoration: "none",
                       }}
                     >
-                      <span>Inspect on Dribbble</span>
+                      <span>Inspect Case Study</span>
                       <ArrowUpRight size={15} />
                     </a>
 
