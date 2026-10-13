@@ -106,70 +106,88 @@ export function FloatingThemeToggle() {
 
   return (
     <>
-      {/* Normal Website Logo on the Far Left Side of the Screen */}
+      {/* White Desk Floating Badge (Mobile: Circular icon mark | Desktop: Full logo with day/night icon like background) */}
       <a
         href="#hero"
         aria-label="White Desk"
         title="White Desk"
+        className="whitedesk-floating-badge"
         onTouchStart={(e) => e.stopPropagation()}
         onClick={(e) => {
           e.preventDefault();
           window.scrollTo({ top: 0, behavior: "smooth" });
         }}
         style={{
-          position: "fixed",
-          top: "max(14px, calc(env(safe-area-inset-top, 0px) + 8px))",
-          left: "max(16px, calc(env(safe-area-inset-left, 0px) + 16px))",
-          zIndex: 99999,
-          display: "inline-flex",
-          alignItems: "center",
-          height: "40px",
-          background: "transparent",
-          border: "none",
-          borderRadius: 0,
-          padding: 0,
-          cursor: "pointer",
-          pointerEvents: "auto",
-          transition: "opacity 0.2s ease, transform 0.2s ease",
-          WebkitTransform: "translateZ(0)",
-          transform: "translateZ(0)",
-          textDecoration: "none",
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.opacity = "0.75";
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.opacity = "1";
+          backgroundColor: isDark ? "rgba(24, 24, 27, 0.95)" : "rgba(255, 255, 255, 0.95)",
+          border: isDark ? "1.5px solid rgba(255, 255, 255, 0.22)" : "1.5px solid rgba(0, 0, 0, 0.18)",
+          boxShadow: isDark
+            ? "0 6px 20px rgba(0, 0, 0, 0.5)"
+            : "0 6px 18px rgba(0, 0, 0, 0.14)",
         }}
       >
-        <Image
-          src={getAssetPath("/images/whitedesk-white.png")}
-          alt="White Desk"
-          width={112}
-          height={24}
-          style={{
-            objectFit: "contain",
-            height: "22px",
-            width: "auto",
-            display: "block",
-          }}
-          className="whitedesk-logo-dark"
-          priority
-        />
-        <Image
-          src={getAssetPath("/images/whitedesk-black.png")}
-          alt="White Desk"
-          width={112}
-          height={24}
-          style={{
-            objectFit: "contain",
-            height: "22px",
-            width: "auto",
-            display: "block",
-          }}
-          className="whitedesk-logo-light"
-          priority
-        />
+        {/* Mobile: White Desk Icon only (< 768px) */}
+        <div className="whitedesk-badge-mobile-icon">
+          <Image
+            src={getAssetPath("/images/whitedesk-icon-white.png")}
+            alt="White Desk Icon"
+            width={35}
+            height={46}
+            style={{
+              objectFit: "contain",
+              height: "20px",
+              width: "auto",
+              display: "block",
+            }}
+            className="whitedesk-logo-dark"
+            priority
+          />
+          <Image
+            src={getAssetPath("/images/whitedesk-icon-black.png")}
+            alt="White Desk Icon"
+            width={35}
+            height={46}
+            style={{
+              objectFit: "contain",
+              height: "20px",
+              width: "auto",
+              display: "block",
+            }}
+            className="whitedesk-logo-light"
+            priority
+          />
+        </div>
+
+        {/* Website (Desktop): Full logo "as it is" (>= 768px) */}
+        <div className="whitedesk-badge-desktop-full">
+          <Image
+            src={getAssetPath("/images/whitedesk-white.png")}
+            alt="White Desk"
+            width={112}
+            height={24}
+            style={{
+              objectFit: "contain",
+              height: "17px",
+              width: "auto",
+              display: "block",
+            }}
+            className="whitedesk-logo-dark"
+            priority
+          />
+          <Image
+            src={getAssetPath("/images/whitedesk-black.png")}
+            alt="White Desk"
+            width={112}
+            height={24}
+            style={{
+              objectFit: "contain",
+              height: "17px",
+              width: "auto",
+              display: "block",
+            }}
+            className="whitedesk-logo-light"
+            priority
+          />
+        </div>
       </a>
 
       {/* Floating Top Right Controls (Hire Now + Day/Night Toggle) */}
