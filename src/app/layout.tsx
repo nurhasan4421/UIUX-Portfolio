@@ -4,14 +4,44 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://nurhasan.dev"),
   title: {
-    default: "Nur Hasan — Senior UI/UX & Product Designer | Fintech, Mobile Apps & SaaS",
+    default: "Nur Hasan (Designer Nur) — Senior UI/UX & Product Designer | Fintech, Apps & SaaS",
     template: "%s | Nur Hasan — UI/UX Product Designer",
   },
   description:
-    "Portfolio of Nur Hasan, Senior UI/UX & Product Designer with a BSc in Computer Science. Crafting high-converting mobile apps (iOS & Android), fintech interfaces, B2B SaaS dashboards & design systems for startups and enterprises across the USA, Europe, Middle East, and worldwide.",
+    "Official portfolio of Nur Hasan (Designer Nur • Techtrif Nur • Engineer Nur Hasan), Senior UI/UX Product Designer & CS Engineer. Designing high-converting mobile apps (iOS & Android), fintech platforms, B2B SaaS dashboards, and scalable design systems across USA, Europe, Middle East, and worldwide.",
   keywords: [
-    // Core Roles
+    // Core Personal Name Queries & Aliases (Exact search match)
+    "Nur",
+    "Hasan",
     "Nur Hasan",
+    "Hasan Nur",
+    "NurHasan",
+    "Nur Hasan Foysal",
+    "Nur uiux designer",
+    "Nur UIUX designer",
+    "Nur UI UX designer",
+    "Nur UI/UX designer",
+    "Nur designer",
+    "Nur Designer",
+    "Designer Nur",
+    "Designer Nur Hasan",
+    "Techtrif Nur",
+    "TechTrif Nur",
+    "Techtrif",
+    "Techtrif Nur Hasan",
+    "Engineer Nur Hasan",
+    "Engineer Nur",
+    "CS Engineer Nur Hasan",
+    "CS Engineer Nur",
+    "Nur Product Designer",
+    "Nur App Designer",
+    "Nur Web Designer",
+    "Nur Fintech Designer",
+    "Nur SaaS Designer",
+    "nurhasan.dev",
+    "nurhasan4421",
+
+    // Core Design Roles
     "UI/UX Designer",
     "Product Designer",
     "Senior Product Designer",
@@ -25,6 +55,7 @@ export const metadata: Metadata = {
     "SaaS Designer",
     "B2B SaaS Designer",
     "SaaS Dashboard Designer",
+
     // Industry Specializations
     "Fintech App Designer",
     "Fintech UI Designer",
@@ -36,7 +67,8 @@ export const metadata: Metadata = {
     "Design Systems Architect",
     "Figma Design Systems",
     "Token Architecture",
-    // Global & Regional Intent (USA, Europe, Middle East, Africa, Turkey)
+
+    // Global & Regional Intent (USA, Europe, Middle East, Africa, Turkey, Worldwide)
     "Product Designer USA",
     "UI UX Designer Europe",
     "Product Designer UK",
@@ -49,6 +81,7 @@ export const metadata: Metadata = {
     "UI UX Designer Turkey",
     "UI UX Designer Africa",
     "Worldwide Remote UI UX Designer",
+
     // Commercial Hiring Intent
     "Hire UI UX Designer",
     "Hire Senior Product Designer",
@@ -60,7 +93,7 @@ export const metadata: Metadata = {
     "Cellfin Redesign",
   ],
   authors: [{ name: "Nur Hasan", url: "https://nurhasan.dev" }],
-  creator: "Nur Hasan",
+  creator: "Nur Hasan (Designer Nur • Techtrif Nur)",
   publisher: "Nur Hasan",
   formatDetection: {
     email: false,
@@ -71,27 +104,27 @@ export const metadata: Metadata = {
     canonical: "https://nurhasan.dev",
   },
   openGraph: {
-    title: "Nur Hasan — Senior UI/UX Product Designer | Mobile, Fintech & SaaS",
+    title: "Nur Hasan (Designer Nur • Techtrif Nur) — Senior UI/UX & Product Designer",
     description:
-      "Crafting high-converting digital products, fintech platforms, B2B SaaS applications & scalable design systems for startups & global brands across USA, Europe, Middle East, and worldwide.",
+      "Official portfolio of Nur Hasan (Designer Nur / Techtrif Nur / Engineer Nur Hasan). High-converting Mobile Apps (iOS & Android), Fintech Platforms, B2B SaaS Dashboards & Scalable Design Systems across USA, Europe, Middle East, and worldwide.",
     url: "https://nurhasan.dev",
     siteName: "Nur Hasan — UI/UX Product Designer Portfolio",
     locale: "en_US",
-    type: "website",
+    type: "profile",
     images: [
       {
         url: "/images/nurhasan-portrait.jpg",
         width: 946,
         height: 1024,
-        alt: "Nur Hasan — Senior UI/UX Product Designer & CS Engineer",
+        alt: "Nur Hasan (Designer Nur • Techtrif Nur) — Senior UI/UX Product Designer & CS Engineer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nur Hasan — Senior UI/UX Product Designer | Fintech & SaaS",
+    title: "Nur Hasan (Designer Nur) — Senior UI/UX Product Designer",
     description:
-      "Crafting intuitive digital products, fintech apps, and scalable design systems for startups and enterprises worldwide.",
+      "Crafting intuitive digital products, fintech apps, and scalable design systems across USA, Europe, Middle East, and worldwide.",
     images: ["/images/nurhasan-portrait.jpg"],
     creator: "@nurhasan4421",
   },
@@ -148,15 +181,42 @@ export default function RootLayout({
                   "@type": "Person",
                   "@id": "https://nurhasan.dev/#person",
                   "name": "Nur Hasan",
-                  "alternateName": "Nur Hasan Foysal",
-                  "jobTitle": "Senior UI/UX & Product Designer",
-                  "description": "Senior UI/UX & Product Designer with a BSc in Computer Science, specialized in Mobile Apps, Fintech UI, B2B SaaS Platforms, and Design Systems.",
+                  "givenName": "Nur",
+                  "familyName": "Hasan",
+                  "additionalName": "Foysal",
+                  "alternateName": [
+                    "Nur",
+                    "Hasan",
+                    "Nur Hasan",
+                    "Hasan Nur",
+                    "NurHasan",
+                    "Nur Hasan Foysal",
+                    "Nur uiux designer",
+                    "Nur UIUX designer",
+                    "Nur UI/UX designer",
+                    "Nur designer",
+                    "Nur Designer",
+                    "Designer Nur",
+                    "Designer Nur Hasan",
+                    "Techtrif Nur",
+                    "TechTrif Nur",
+                    "Techtrif",
+                    "Techtrif Nur Hasan",
+                    "Engineer Nur Hasan",
+                    "Engineer Nur",
+                    "CS Engineer Nur Hasan",
+                    "CS Engineer Nur",
+                    "nurhasan4421"
+                  ],
+                  "jobTitle": "Senior UI/UX & Product Designer | Computer Science Engineer",
+                  "description": "Nur Hasan (also widely searched and recognized as Designer Nur, Techtrif Nur, and Engineer Nur Hasan) is a Senior UI/UX Product Designer with a BSc in Computer Science & Engineering. He specializes in designing high-converting mobile apps (iOS & Android), fintech interfaces, B2B SaaS platforms, and enterprise design systems for clients worldwide.",
                   "url": "https://nurhasan.dev",
                   "image": "https://nurhasan.dev/images/nurhasan-portrait.jpg",
                   "sameAs": [
                     "https://dribbble.com/nurhasan4421",
                     "https://github.com/nurhasan4421",
-                    "https://linkedin.com"
+                    "https://linkedin.com",
+                    "https://nurhasan.dev"
                   ],
                   "knowsAbout": [
                     "UI/UX Design",

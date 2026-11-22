@@ -40,13 +40,14 @@ export const PERSONAL_INFO = {
   name: "Nur Hasan",
   role: "Senior UI/UX Product Designer",
   degree: "BSc in Computer Science & Engineering",
+  aliases: ["Designer Nur", "Techtrif Nur", "Engineer Nur Hasan", "Nur UI/UX"],
   location: "Dhaka, Bangladesh • Available Worldwide (USA, Europe, Middle East, Africa, Turkey)",
   email: "nurhasan90446@gmail.com",
   dribbble: "https://dribbble.com/nurhasan4421",
   github: "https://github.com",
   agency: "White Desk",
   tagline: "Bridging human emotion with engineering precision across global digital products.",
-  bioShort: "Senior UI/UX & Product Designer crafting intuitive mobile apps (iOS & Android), high-trust fintech platforms, and scalable B2B SaaS web applications for fast-growing startups and enterprises across the USA, Europe, Middle East, and worldwide.",
+  bioShort: "Nur Hasan — widely recognized as Designer Nur, Techtrif Nur, and Engineer Nur Hasan — is a Senior UI/UX Product Designer with a BSc in Computer Science. Crafting intuitive mobile apps (iOS & Android), high-trust fintech platforms, and scalable B2B SaaS web applications for fast-growing startups and enterprises across the USA, Europe, Middle East, and worldwide.",
 };
 
 export const PROJECTS: Project[] = [
