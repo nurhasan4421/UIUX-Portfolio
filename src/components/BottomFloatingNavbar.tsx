@@ -25,6 +25,13 @@ export function BottomFloatingNavbar() {
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleNavClick = (sectionId: string, e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+    }
+    const el = document.getElementById(sectionId);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
     setActiveSection(sectionId);
     isProgrammaticScrollRef.current = true;
     if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);

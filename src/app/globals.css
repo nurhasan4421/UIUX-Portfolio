@@ -99,6 +99,20 @@ html {
   font-size: 16px;
   background-color: var(--bg-primary);
   color: var(--text-primary);
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Smooth anchor landing offset */
+section[id],
+header[id],
+div[id] {
+  scroll-margin-top: clamp(2rem, 5vh, 4rem);
 }
 
 body {
