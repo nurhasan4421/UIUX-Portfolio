@@ -208,18 +208,15 @@ export function PortraitScrollPinSection() {
           alignItems: "center",
           justifyContent: "center",
           overflow: isMobile ? "visible" : "hidden",
-          padding: isMobile
-            ? "0 1.25rem"
-            : "2rem clamp(1.5rem, 5vw, 5rem)",
+          padding: isMobile ? "0" : "2rem 0",
           boxSizing: "border-box",
         }}
       >
         {/* Responsive Content Container */}
         <div
+          className="site-container"
           style={{
             position: "relative",
-            width: "100%",
-            maxWidth: "1280px",
             height: isMobile ? "auto" : "100%",
             display: "flex",
             flexDirection: isMobile ? "column" : "row",

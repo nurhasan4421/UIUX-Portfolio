@@ -49,10 +49,10 @@ export function ContactSection() {
   return (
     <section
       id="contact"
+      className="site-container"
       style={{
-        padding: "clamp(3rem, 7vw, 7rem) clamp(1rem, 5vw, 3.5rem)",
-        maxWidth: "1500px",
-        margin: "0 auto",
+        paddingTop: "clamp(3rem, 7vw, 7rem)",
+        paddingBottom: "clamp(3rem, 7vw, 7rem)",
         position: "relative",
       }}
     >

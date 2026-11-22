@@ -13,10 +13,10 @@ export function InfoCardsSection() {
   return (
     <section
       id="about"
+      className="site-container"
       style={{
-        padding: "clamp(3rem, 7vw, 6.5rem) clamp(1rem, 4.5vw, 3.5rem)",
-        maxWidth: "1500px",
-        margin: "0 auto",
+        paddingTop: "clamp(3rem, 7vw, 6.5rem)",
+        paddingBottom: "clamp(3rem, 7vw, 6.5rem)",
         position: "relative",
       }}
     >

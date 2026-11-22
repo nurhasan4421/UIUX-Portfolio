@@ -68,11 +68,10 @@ export function ScrollGradientText({
   return (
     <div
       ref={containerRef}
-      className={`scroll-gradient-container ${className}`}
+      className={`site-container scroll-gradient-container ${className}`}
       style={{
-        padding: "clamp(3rem, 7vw, 6rem) clamp(1rem, 5vw, 4rem)",
-        maxWidth: "1400px",
-        margin: "0 auto",
+        paddingTop: "clamp(3rem, 7vw, 6rem)",
+        paddingBottom: "clamp(3rem, 7vw, 6rem)",
         position: "relative",
       }}
     >

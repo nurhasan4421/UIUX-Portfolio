@@ -11,10 +11,10 @@ export function ExperienceSection() {
   return (
     <section
       id="experience"
+      className="site-container"
       style={{
-        padding: "clamp(3.5rem, 8vw, 8rem) clamp(1rem, 5vw, 4rem)",
-        maxWidth: "1600px",
-        margin: "0 auto",
+        paddingTop: "clamp(3.5rem, 8vw, 8rem)",
+        paddingBottom: "clamp(3.5rem, 8vw, 8rem)",
         position: "relative",
       }}
     >

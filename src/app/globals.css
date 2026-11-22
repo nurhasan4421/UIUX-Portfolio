@@ -34,6 +34,11 @@
   
   --transition-smooth: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-bounce: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Unified Site Container System (Web & Mobile) */
+  --container-max-width: 1440px;
+  --container-padding-desktop: clamp(1.5rem, 3.5vw, 3rem);
+  --container-padding-mobile: clamp(1rem, 4vw, 1.5rem);
 }
 
 :root[data-theme="light"],
@@ -286,12 +291,47 @@ body[data-theme="light"] .whitedesk-logo-light {
   display: block !important;
 }
 
-/* White Desk Floating Badge (matches Day/Night Toggle aesthetic) */
-.whitedesk-floating-badge {
+/* Unified Site Container System (Web & Mobile) */
+.site-container {
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--container-padding-desktop);
+  padding-right: var(--container-padding-desktop);
+  box-sizing: border-box;
+}
+
+@media (max-width: 767px) {
+  .site-container {
+    padding-left: var(--container-padding-mobile);
+    padding-right: var(--container-padding-mobile);
+  }
+}
+
+/* Fixed Top Header (Pass-through container aligned with site grid) */
+.site-top-header {
   position: fixed;
   top: max(14px, calc(env(safe-area-inset-top, 0px) + 8px));
-  left: max(16px, calc(env(safe-area-inset-left, 0px) + 16px));
+  left: 0;
+  right: 0;
+  width: 100%;
   z-index: 99999;
+  pointer-events: none;
+}
+
+.site-top-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* White Desk Floating Badge (matches Day/Night Toggle aesthetic) */
+.whitedesk-floating-badge {
+  position: relative;
+  z-index: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -306,6 +346,16 @@ body[data-theme="light"] .whitedesk-logo-light {
   user-select: none;
   touch-action: manipulation;
   transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+.floating-top-controls {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  pointer-events: auto;
   transform: translateZ(0);
   -webkit-transform: translateZ(0);
 }

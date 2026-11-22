@@ -367,22 +367,22 @@ export function HeroSection() {
         flexDirection: "column",
         justifyContent: isMobile ? "flex-start" : "center",
         minHeight: isMobile ? "105vh" : "clamp(80vh, 88vh, 920px)",
-        padding: isMobile
-          ? "0 clamp(1rem, 4vw, 2rem) 0"
-          : "clamp(2rem, 4vw, 3rem) clamp(1rem, 5vw, 4rem)",
+        padding: isMobile ? "0" : "clamp(2rem, 4vw, 3rem) 0",
         background: "radial-gradient(ellipse 90% 50% at 50% 0%, var(--glow-active), transparent 75%)",
         boxSizing: "border-box",
+        width: "100%",
       }}
     >
       {/* Main Massive Typography Header (Placed in Middle on Load, then Scrolls to Top and Sticks below top buttons until Picture Arrives) */}
       <div
+        className="site-container"
         style={{
           position: isMobile ? "sticky" : "relative",
           top: isMobile ? "max(3.8rem, calc(env(safe-area-inset-top, 0px) + 2.8rem))" : "auto",
           zIndex: 4,
           paddingTop: isMobile ? "clamp(10vh, 14vh, 18vh)" : "clamp(1rem, 3vw, 2.5rem)",
           paddingBottom: isMobile ? "1rem" : "0",
-          margin: isMobile ? "0" : "auto 0",
+          margin: isMobile ? "0 auto" : "auto",
           display: "flex",
           flexDirection: "column",
           gap: "clamp(0.4rem, 1.2vw, 1rem)",
@@ -392,7 +392,7 @@ export function HeroSection() {
         <h1
           className="font-display"
           style={{
-            fontSize: "clamp(2.8rem, 11.5vw, 150px)",
+            fontSize: "clamp(2.8rem, 8.8vw, 132px)",
             fontWeight: 900,
             lineHeight: 0.86,
             letterSpacing: "-0.045em",
@@ -417,7 +417,7 @@ export function HeroSection() {
         <h2
           className="font-display"
           style={{
-            fontSize: "clamp(1.8rem, 7.5vw, 86px)",
+            fontSize: "clamp(1.8rem, 5.2vw, 76px)",
             fontWeight: 800,
             lineHeight: 0.9,
             letterSpacing: "-0.04em",

@@ -33,13 +33,14 @@ export function Footer() {
       style={{
         borderTop: "1px solid var(--border-divider)",
         backgroundColor: "var(--bg-secondary)",
-        padding: "clamp(3rem, 5vw, 5rem) clamp(1rem, 5vw, 4rem) 2rem",
+        paddingTop: "clamp(3rem, 5vw, 5rem)",
+        paddingBottom: "2rem",
+        width: "100%",
       }}
     >
       <div
+        className="site-container"
         style={{
-          maxWidth: "1600px",
-          margin: "0 auto",
           display: "flex",
           flexDirection: "column",
           gap: "3rem",
