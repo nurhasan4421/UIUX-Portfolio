@@ -10,6 +10,9 @@ const nextConfig: NextConfig = {
     NEXT_PUBLIC_BASE_PATH: "",
   },
   devIndicators: false,
+  experimental: {
+    agentUpgrade: "security" as any,
+  },
   images: {
     unoptimized: true,
     remotePatterns: [
