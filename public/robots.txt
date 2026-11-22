@@ -1,0 +1,13 @@
+# Robots.txt for Nur Hasan Portfolio (nurhasan.dev)
+User-agent: *
+Allow: /
+
+# Disallow build and metadata artifacts
+Disallow: /_next/
+Disallow: /api/
+
+# Host
+Host: https://nurhasan.dev
+
+# Sitemaps
+Sitemap: https://nurhasan.dev/sitemap.xml

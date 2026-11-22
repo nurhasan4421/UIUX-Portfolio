@@ -38,15 +38,15 @@ export interface ExperienceItem {
 
 export const PERSONAL_INFO = {
   name: "Nur Hasan",
-  role: "UI/UX Product Designer",
+  role: "Senior UI/UX Product Designer",
   degree: "BSc in Computer Science & Engineering",
-  location: "Dhaka, Bangladesh",
+  location: "Dhaka, Bangladesh • Available Worldwide (USA, Europe, Middle East, Africa, Turkey)",
   email: "nurhasan90446@gmail.com",
   dribbble: "https://dribbble.com/nurhasan4421",
   github: "https://github.com",
   agency: "White Desk",
-  tagline: "Bridging human emotion with engineering precision.",
-  bioShort: "I create clean, user-centered digital products that blend flawless functionality with high-contrast monochrome aesthetics. With a computer science background, I build scalable design systems that developers can ship effortlessly.",
+  tagline: "Bridging human emotion with engineering precision across global digital products.",
+  bioShort: "Senior UI/UX & Product Designer crafting intuitive mobile apps (iOS & Android), high-trust fintech platforms, and scalable B2B SaaS web applications for fast-growing startups and enterprises across the USA, Europe, Middle East, and worldwide.",
 };
 
 export const PROJECTS: Project[] = [
@@ -162,27 +162,27 @@ export const PHILOSOPHY_CARDS: PhilosophyCard[] = [
 export const SERVICES: Service[] = [
   {
     number: "01",
-    title: "Product UI/UX Design",
-    description: "End-to-end design for web applications, mobile apps (iOS & Android), and SaaS platforms from early wireframes to pixel-perfect delivery.",
-    deliverables: ["User Journey Maps", "High-Fidelity Figma Files", "Interactive Prototypes", "Developer Specifications"],
+    title: "Mobile App & Web UI/UX Design",
+    description: "End-to-end design for native iOS, Android, and modern web applications. From low-fidelity wireframing and user journey mapping to pixel-perfect Figma components ready for engineering handoff.",
+    deliverables: ["iOS & Android App UI", "Web Application UX", "Interactive Prototypes", "Developer Specifications"],
   },
   {
     number: "02",
-    title: "Design Systems & Token Architecture",
-    description: "Scalable component libraries built with Figma auto-layout, atomic design methodology, dark/light theme tokens, and documented style guides.",
-    deliverables: ["Tokenized Color & Typography", "Auto-Layout Components", "Interactive Variants", "Style Guide Documentation"],
+    title: "Fintech & Digital Banking Design",
+    description: "High-trust, security-conscious interfaces for neobanks, payment processors, digital wallets, and investment analytics platforms across USA, Europe, and Middle Eastern markets.",
+    deliverables: ["Biometric & Payment Flows", "Card Management & Dashboards", "Regulatory Compliance UX", "Micro-Interactions"],
   },
   {
     number: "03",
-    title: "UX Audit & Conversion Optimization",
-    description: "In-depth heuristic evaluation of your existing application to eliminate drop-offs, streamline onboarding funnels, and boost user engagement.",
-    deliverables: ["Friction Analysis", "Heuristic Scorecard", "Redesigned Key Flows", "A/B Testing Roadmap"],
+    title: "B2B SaaS & Analytics Dashboards",
+    description: "Simplifying dense data sets, complex administrative workflows, and multi-tenant cloud platforms into intuitive, conversion-optimized interfaces that increase user retention.",
+    deliverables: ["Data Visualization UI", "Permission & Role Architecture", "Onboarding Funnels", "Conversion Optimization"],
   },
   {
     number: "04",
-    title: "Motion & Interaction Design",
-    description: "Physics-calibrated micro-animations, scroll-driven narratives, and dynamic transitions that transform ordinary software into unforgettable digital craft.",
-    deliverables: ["Lottie / MP4 Animations", "Spring Curve Specs", "Micro-interaction Demos", "Component State Animations"],
+    title: "Design Systems & Token Architecture",
+    description: "Enterprise Figma component libraries engineered with auto-layout, atomic structure, semantic dark/light color tokens, and full code parity for seamless Next.js and Flutter builds.",
+    deliverables: ["Figma Design Tokens", "Auto-Layout Component Kits", "Accessible Color Contrast", "Design System Guidelines"],
   },
 ];
 
